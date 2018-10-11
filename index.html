@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<html lang="es">
 	<head>
-		<title>Lista de tareas</title>
+		<title>FaceBluff</title>
         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="style.css" rel="stylesheet" media="screen"/>
@@ -11,6 +11,28 @@
 	</head>
 
 	<body>
-      
+        <div class="contenedor">
+            <div class="panelIzquierdo">
+                <div class="titulo">
+                    <h1>FACEBLUFF</h1>
+                </div>
+
+                <div class="opcionesEntrarPanelIzq">
+                    <a href="">Entrar</a>
+                    <a href="">Nuevo usuario</a>
+                </div>
+            </div>
+
+            <div class="panelDerecho">
+               
+                    <h1>Entrar</h1>
+                    <form method="post">
+                        <input type="text" name="u" placeholder="Username" required="required" />
+                        <input type="password" name="p" placeholder="Password" required="required" />
+                        <button type="submit" class="boton botonAcceder">Acceder</button>
+                    </form>
+                
+            </div>
+        </div>
 	</body>
 </html>
