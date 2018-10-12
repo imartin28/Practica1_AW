@@ -49,6 +49,32 @@ body, html {
     background-position-y: -65px;
 }
 
+.nav{
+    background: rgba(35, 22, 39, 0.801);
+    height: 30px;
+    width: 100%;
+    position: relative;
+   
+    margin: 0 auto;
+    padding: 10px;
+    display: flex; 
+    justify-content: center; 
+
+}
+
+.nav > a {
+    text-decoration:none;
+    color:white;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.nav > a:hover{
+   
+    color:white;
+    text-decoration: underline;
+  }
+
 .panelInicioSesion {
     margin: auto;
     text-align: center;
@@ -142,3 +168,7 @@ input[type=text], input[type=password] {
     color:black;
     cursor: pointer;
 }
+
+
+
+
