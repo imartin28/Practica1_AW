@@ -1,6 +1,8 @@
+@import "https://fonts.googleapis.com/css?family=Quicksand";
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Quicksand';
 }
 
 body, html {
@@ -59,6 +61,34 @@ body, html {
     background: rgba(35, 22, 39, 0.801);
     border-radius: 8px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+
+
+.panelNuevoUsuario {
+    margin: auto;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 500px;
+    justify-content: space-around;
+    background: rgba(35, 22, 39, 0.801);
+    border-radius: 8px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    color: white;
+}
+
+.textoRegistro {
+    display: inline-block;
+    width: 180px;    
+}
+
+input{
+    border-radius: 8px;
+
+    border: 1px solid #000000;
 }
 
 .registro span {
