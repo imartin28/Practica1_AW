@@ -27,14 +27,28 @@ body, html {
     opacity: 0.8;
   }
 
-.titulo {
+  .header {
+    background: rgba(35, 22, 39, 0.801);
+    height: 70px;
+    width: 100%;
+    position: relative;
+   
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
+
+.logo {
     width: 200px;
-    background: url("imagenes/logo.png");
-    height: 200px;
+    background-image: url("imagenes/logo.png");
+    height: 100%;
+    margin: auto;
+    background-repeat:no-repeat;
+    background-position-y: -65px;
 }
 
 .panelInicioSesion {
-    margin-top: 10%;
+    margin: auto;
     text-align: center;
     display:flex;
     flex-direction: column;
@@ -43,7 +57,8 @@ body, html {
     height: 350px;
     justify-content: space-around;
     background: rgba(35, 22, 39, 0.801);
-    margin-bottom: 10%;
+    border-radius: 8px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 .registro span {
@@ -77,6 +92,10 @@ input[type=text], input[type=password] {
     background: rgba(116, 111, 111, 0.6);
     border: none;
     text-indent: 3%;
+}
+
+::placeholder {
+    color: rgb(175, 172, 172);
 }
 
 .botonAcceder {
