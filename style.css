@@ -32,7 +32,7 @@ body, html {
 
 
 .header{
-    background: rgba(37, 34, 54);
+    background: rgba(37, 34, 54, 0.801);
     height: 70px;
     width: 100%;
     position: relative;
@@ -56,7 +56,7 @@ body, html {
 }
 
 .nav{
-    background: rgba(37, 34, 54);
+    background: rgba(37, 34, 54, 0.801);
     height: 30px;
     width: 100%;
     position: relative;
@@ -76,7 +76,6 @@ body, html {
 }
 
 .nav > a:hover{
-   
     color:white;
     text-decoration: underline;
   }
@@ -94,8 +93,6 @@ body, html {
     border-radius: 8px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
-
-
 
 .panelNuevoUsuario {
     margin: auto;
@@ -117,9 +114,8 @@ body, html {
     width: 180px;    
 }
 
-input{
+input {
     border-radius: 8px;
-
     border: 1px solid #000000;
 }
 
@@ -239,3 +235,146 @@ input[type=text], input[type=password] {
   }
 
 
+/* -------- PAGINA AMIGOS --------- */
+
+.paginaAmigos {
+    content: "";
+    position: absolute;
+    z-index: -1;   
+    width: 100%;
+    height: 100%;
+    background-color: rgb(201, 198, 198);
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.panel-amigos {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 10%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 700px;
+    position: relative;
+}
+
+.solicitudesDeAmistad {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tituloPanelSolicitudesAmistad {
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 1%;
+}
+
+.solicitudDeAmistad {
+    display: grid;
+    grid-template-rows: 100%;     /* Una fila */
+    grid-template-columns: 10% 20% 30% 30%;   /* Cuatro columnas */
+    justify-items: center;
+    margin-bottom: 1%;
+    margin-left: 4%;
+    grid-column-gap: 10px;
+}
+
+.solicitudDeAmistad > span {
+    color: black;
+    margin-top: 10%;
+}
+
+.fotoPerfilAmigo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.botonAceptarSolicitudAmistad {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    border: 2px solid #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+    margin-left: 80%;
+}
+
+.botonAceptarSolicitudAmistad:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.botonRechazarSolicitudAmistad {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    border: 2px solid #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+    margin-left: 40%;
+}
+
+.botonRechazarSolicitudAmistad:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.busquedaDeAmigos form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  
+} 
+
+.busquedaDeAmigos input {
+    height: 15px;
+    width: 290px;
+    background: white;
+    border: 3px solid black;
+    margin-bottom: 5%;
+    text-indent: 3%;
+}
+
+.botonBuscarAmigo {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    border: 2px solid #A55BBE;
+    text-decoration: none;
+    text-align: center;
+}
+
+.botonBuscarAmigo:hover {
+    color:black;
+    cursor: pointer;
+}
+
+h1 {padding: 100px 0; font-weight: 400; text-align: center;}
+p {margin: 0 0 20px; line-height: 1.5;}
+
+.main {margin: 0 auto; min-width: 320px; max-width: 800px;}
+.content {background: #fff; color: #373737;}
+.content > div {display: none; padding: 20px 25px 5px;}
+
+input {display: none;}
+label {display: inline-block; padding: 15px 25px; font-weight: 600; text-align: center;}
+label:hover {color: #fff; cursor: pointer;}
+input:checked + label {background: #ed5a6a; color: #fff;}
+
+#tab1:checked ~ .content #content1,
+#tab2:checked ~ .content #content2,
+#tab3:checked ~ .content #content3,
+#tab4:checked ~ .content #content4 {
+  display: block;
+}
