@@ -31,42 +31,54 @@
                   <button type="submit" class="botonBuscarAmigo">Buscar</button>            
           </div>                          
 
-          <div class="misAmigos">              
-          </div>
+    
+          <ul class="tabs">
+    
+                <li class="tab">
+                    <input type="radio" name="tabs" checked="checked" id="tab1" />
+                    <label for="tab1">Solicitudes de amistad</label>
+                    <div id="tab-content1" class="content">
+                            <div class="solicitudesDeAmistad">
+                
+                                <div class="solicitudDeAmistad">
+                                    <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
+                                    <span>Miguel</span>
+                                    <a class="botonAceptarSolicitudAmistad"  href="">Aceptar</a>
+                                    <a class="botonRechazarSolicitudAmistad"  href="">Rechazar</a>
+                                </div>
         
-
-          <div id="tabs">
-              <ul>
-                <li  id="One"><a href="#One" id="first">Solicitudes de Amistad</a>  
-
-                      <!--<div class="solicitudesDeAmistad">-->
-                      
-                          <div class="solicitudDeAmistad">
-                              <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
-                              <span>Miguel</span>
-                              <a class="botonAceptarSolicitudAmistad"  href="">Aceptar</a>
-                              <a class="botonRechazarSolicitudAmistad"  href="">Rechazar</a>
-                          </div>
-
-                          <!--<div class="solicitudDeAmistad">
-                                  <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                                  <span>Hector</span>
-                                  <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                                  <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                          </div>-->
-                    
-                     <!-- </div>-->
-                    
-                
-                </li>
-                <li id="Two"><a href="#Two" id="sec">Mis amigos</a>
-                  <div>
-                    <p>Al leer m�s sobre HTML5 y CSS3 que acabo de encontrar un bot�n de incre�ble css3 estilo. Esta vez quer�a hacer algo que estaba haciendo desde los �ltimos 2 a�os utilizando JQuery. En este tutorial voy a ense�ar c�mo hacer una slideDown palanca y la funci�n slideUp usando CSS3 y HTML5.</p>
-                  </div>
+                                <div class="solicitudDeAmistad">
+                                        <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                                        <span>Hector</span>
+                                        <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                                        <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                                </div> 
+                            </div>
+                    </div>
                 </li>
                 
-              </ul>
-          </div> <!-- FINAL TABS -->
+                <li class="tab">
+                    <input type="radio" name="tabs" id="tab2" />
+                    <label for="tab2">Amigos</label>   
+                    <div id="tab-content2" class="content">
+
+                        <div class="misAmigos">              
+                            <div class="infoAmigo">
+                                <img class="fotoPerfilAmigo" src="imagenes/johnCoffey.jpg">
+                                <span>John Coffey</span>
+                            </div>
+
+                            <div class="infoAmigo">
+                                <img class="fotoPerfilAmigo" src="imagenes/drEvil.png">
+                                <span>Doctor maligno</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+            
           </div>
        </div> 
     </body>

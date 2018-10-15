@@ -248,7 +248,7 @@ input[type=text], input[type=password] {
     opacity: 0.8;
 }
 
-.panel-amigos {
+.panel-amigos:before {
     min-height: 460px;
     margin: auto;
     margin-top: 10%;
@@ -272,16 +272,18 @@ input[type=text], input[type=password] {
 }
 
 .solicitudDeAmistad {
-   
+    display: grid;
     justify-items: center;
     margin-bottom: 1%;
-    margin-left: 4%;
     grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr 2fr 2fr;
+    grid-template-rows: 1fr;
 }
 
 .solicitudDeAmistad > span {
     color: rgb(0, 0, 0);
     margin-top: 10%;
+    text-align: left;
 }
 
 .fotoPerfilAmigo {
@@ -300,13 +302,15 @@ input[type=text], input[type=password] {
     text-decoration: none;
     text-align: center;
     margin-top: 4%;
-    margin-left: 80%;
+    
 }
 
 .botonAceptarSolicitudAmistad:hover {
     color:black;
     cursor: pointer;
 }
+
+
 
 .botonRechazarSolicitudAmistad {
     width: 150px;
@@ -318,7 +322,6 @@ input[type=text], input[type=password] {
     text-decoration: none;
     text-align: center;
     margin-top: 4%;
-    margin-left: 40%;
 }
 
 .botonRechazarSolicitudAmistad:hover {
@@ -326,20 +329,21 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
-.busquedaDeAmigos form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  
-} 
+.busquedaDeAmigos {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding-top: 3%;
+}
 
 .busquedaDeAmigos input {
     height: 15px;
     width: 290px;
     background: white;
-    border: 3px solid black;
-    margin-bottom: 5%;
+    border: 2px solid black;
     text-indent: 3%;
+    margin: auto;
 }
 
 .botonBuscarAmigo {
@@ -358,83 +362,92 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
+.infoAmigos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.infoAmigo {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 2%;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.infoAmigo > span {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.infoAmigo > span, .botonAceptarSolicitudAmistad, .botonRechazarSolicitudAmistad {
+    /* Centrar vertical y horizontalmente dentro de su contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 /*PARTE NUEVA DEL TAB*/
 
+  .tabs{
+      width: 600px;
+      display: block;
+      margin: 40px auto;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+  }
+  
 
 
-
-li div p {
-	font-size: 13px;
-	line-height: 24px;
-	text-align: left;
-	color: #e60a0a;
+  .tabs .tab {
+      float: left;
+      display: block;
+  }
+  
+  .tabs .tab > input[type="radio"] {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  
+  .tabs .tab > label {
+      display: block;
+      padding: 6px 21px;
+      font-size: 12px;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: #FFF;
+      background: rgb(219, 181, 235);
 }
 
-a {
-	color: #2ddf1d;
-	text-decoration: none;
-	outline: none;
-}
-
-
-
-li div {
-   
-
-	transition: all 0.5s ease 0s;
-	border: 2px solid #ec8c0d;
-	float: left;
-	
-	
-	opacity: 0;
-	padding: 0 15px;
-	position: absolute;
-	visibility: hidden;
-	width: 100%;
-	left: 0;
-
-
-}
-
-#tabs {
-    
-	min-height: 250px;
-    width: 100%;
-    border:2px solid yellow;
-}
-
-ul {
-    border:2px solid rgb(30, 255, 0);
-    width: 100%;
-
-}
-
-#tabs li {
-    
-	float: left;
-	list-style-type: none;
-}
-
-#tabs li a {
-	background: linear-gradient(center top , #E3E3E3, #FFFFFF 18px) repeat scroll 0 0 transparent;
-	border: 1px solid #1b398b;
-	margin: 0 3px 0 0;
-	padding: 5px 25px;
-
-	z-index: 1;
-	font-size: 14px;	
-	border-radius: 10px 10px 0 0;	
-	top: 1px;
-}
-
-#One:target div,#Two:target div,#Three:target div {
-
-	filter: alpha(opacity=100);
-	opacity: 1;
-	visibility: visible;
-}
-
+.tabs .content {
+      z-index: 0;/* or display: none; */
+      overflow: hidden;
+      width: 600px;
+      padding-top: 25px;
+      position: absolute;
+      left: 0;
+      color: #DFDFDF;
+      opacity:0;
+      transition: opacity 400ms ease-out;
+  }
+  
+  .tabs > .tab > [id^="tab"]:checked + label {
+      top: 0;
+      background: #d381cf;
+      color: #F5F5F5;
+      text-decoration: underline;
+  }
+  
+  .tabs > .tab > [id^="tab"]:checked ~ [id^="tab-content"] {
+      z-index: 1;/* or display: block; */
+      opacity: 1;
+      transition: opacity 400ms ease-out;
+  }
 
 
 
