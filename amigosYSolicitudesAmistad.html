@@ -9,101 +9,65 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     </head>
-    <body>
-            <div class="paginaAmigos">
-                <div class="header">
-                    <div class="logo"> </div>  
-                </div>
-                
-                <div class ="nav">
-                    <a href="#">Perfil</a>
-                    <a href="#">Amigos</a>
-                    <a href="#">Preguntas</a>
-                    <a href="#">Desconectar</a>
-                    <div>Puntos: </div>
-                </div>
-                
-                <div class="panel-amigos">   
-                    <div class="busquedaDeAmigos">
-                        <form>                          
-                            <label class="textoBusquedaAmigos">Buscar por nombre: </label>                
-                            <input type="text">    
-                            <button type="submit" class="botonBuscarAmigo">Buscar</button>
-                        </form>
-                    </div>
+    <body> 
 
-                    <input id="tab1" type="radio" name="tabs" checked>
-		  <label for="tab1">New York</label>
-	
-		  <input id="tab2" type="radio" name="tabs">
-		  <label for="tab2">London</label>
-	
-		  <input id="tab3" type="radio" name="tabs">
-		  <label for="tab3">Mumbai</label>
-	
-		  <input id="tab4" type="radio" name="tabs">
-          <label for="tab4">Tokyo</label>
+     <div class="paginaAmigos">
+          <div class="header">
+              <div class="logo"> </div>  
+          </div>
           
-          <div class="content">  
-            <div id="content1">
-              <p>
-                New York – referred to as New York City or the City of New York to distinguish it from the State of New York, of which it is a part – is the most populous city in the United States and the center of the New York metropolitan area, the premier gateway for legal immigration to the United States and one of the most populous urban agglomerations in the world. A global power city, New York exerts a significant impact upon commerce, finance, media, art, fashion, research, technology, education, and entertainment.
-              <p>
-                Home to the headquarters of the United Nations, New York is an important center for international diplomacy and has been described as the cultural and financial capital of the world.
-              </p>
-            </div>
-  
-            <div id="content2">
-              <p>
-               London is the capital city of England and the United Kingdom. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants. Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.
-              </p>
-              <p>
-                London's ancient core, the City of London, largely retains its 1.12-square-mile (2.9 km2) mediaeval boundaries and in 2011 had a resident population of 7,375, making it the smallest city in England. Since at least the 19th century, the term London has also referred to the metropolis developed around this core.
-              </p>
-            </div>
-  
-            <div id="content3">
-              <p>
-                Mumbai is the capital city of the Indian state of Maharashtra. It is the most populous city in India, most populous metropolitan area in India, and the eighth most populous city in the world, with an estimated city population of 18.4 million and metropolitan area population of 20.7 million as of 2011. Along with the urban areas, including the cities of Navi Mumbai, Thane, Bhiwandi, Kalyan, it is one of the most populous urban regions in the world.
-              </p>
-              <p>
-                Mumbai lies on the west coast of India and has a deep natural harbour. In 2009, Mumbai was named an alpha world city. It is also the wealthiest city in India, and has the highest GDP of any city in South, West or Central Asia.
-              </p>
-            </div>
-  
-            <div id="content4">
-              <p>
-               Tokyo, officially Tokyo Metropolis, is one of the 47 prefectures of Japan. Tokyo is the capital of Japan, the center of the Greater Tokyo Area, and the most populous metropolitan area in the world. It is the seat of the Japanese government and the Imperial Palace, and the home of the Japanese Imperial Family.
-              </p>
-              <p>
-               Tokyo is in the Kantō region on the southeastern side of the main island Honshu and includes the Izu Islands and Ogasawara Islands. Tokyo Metropolis was formed in 1943 from the merger of the former Tokyo Prefecture and the city of Tokyo.
-              </p>
-            </div>
-        </div>
-	
+          <div class ="nav">
+              <a href="#">Perfil</a>
+              <a href="#">Amigos</a>
+              <a href="#">Preguntas</a>
+              <a href="#">Desconectar</a>
+              <div>Puntos: </div>
+          </div>                  
+        <div class="panel-perfil">     
+          <div class="busquedaDeAmigos">
+                                    
+                  <label class="textoBusquedaAmigos">Buscar por nombre: </label>                
+                  <input type="text">    
+                  <button type="submit" class="botonBuscarAmigo">Buscar</button>            
+          </div>                          
 
-                    <div class="solicitudesDeAmistad">
-                        <h2 class="tituloPanelSolicitudesAmistad">Solicitudes de amistad</h2>
-                        <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
-                            <span>Miguel</span>
-                            <a class="botonAceptarSolicitudAmistad"  href="">Aceptar</a>
-                            <a class="botonRechazarSolicitudAmistad"  href="">Rechazar</a>
-                        </div>
+          <div class="misAmigos">              
+          </div>
+        
 
-                        <div class="solicitudDeAmistad">
-                                <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                                <span>Hector</span>
-                                <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                                <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div>
+          <div id="tabs">
+              <ul>
+                <li  id="One"><a href="#One" id="first">Solicitudes de Amistad</a>  
 
-                    </div>
+                      <!--<div class="solicitudesDeAmistad">-->
+                      
+                          <div class="solicitudDeAmistad">
+                              <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
+                              <span>Miguel</span>
+                              <a class="botonAceptarSolicitudAmistad"  href="">Aceptar</a>
+                              <a class="botonRechazarSolicitudAmistad"  href="">Rechazar</a>
+                          </div>
 
-                    <div class="misAmigos">
-                        
-                    </div>
-                </div>              
-            </div>
+                          <!--<div class="solicitudDeAmistad">
+                                  <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                                  <span>Hector</span>
+                                  <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                                  <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                          </div>-->
+                    
+                     <!-- </div>-->
+                    
+                
+                </li>
+                <li id="Two"><a href="#Two" id="sec">Mis amigos</a>
+                  <div>
+                    <p>Al leer m�s sobre HTML5 y CSS3 que acabo de encontrar un bot�n de incre�ble css3 estilo. Esta vez quer�a hacer algo que estaba haciendo desde los �ltimos 2 a�os utilizando JQuery. En este tutorial voy a ense�ar c�mo hacer una slideDown palanca y la funci�n slideUp usando CSS3 y HTML5.</p>
+                  </div>
+                </li>
+                
+              </ul>
+          </div> <!-- FINAL TABS -->
+          </div>
+       </div> 
     </body>
  </html>

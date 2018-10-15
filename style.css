@@ -237,7 +237,7 @@ input[type=text], input[type=password] {
 
 /* -------- PAGINA AMIGOS --------- */
 
-.paginaAmigos {
+.paginaAmigos:before {
     content: "";
     position: absolute;
     z-index: -1;   
@@ -272,9 +272,7 @@ input[type=text], input[type=password] {
 }
 
 .solicitudDeAmistad {
-    display: grid;
-    grid-template-rows: 100%;     /* Una fila */
-    grid-template-columns: 10% 20% 30% 30%;   /* Cuatro columnas */
+   
     justify-items: center;
     margin-bottom: 1%;
     margin-left: 4%;
@@ -282,7 +280,7 @@ input[type=text], input[type=password] {
 }
 
 .solicitudDeAmistad > span {
-    color: black;
+    color: rgb(0, 0, 0);
     margin-top: 10%;
 }
 
@@ -360,21 +358,87 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
-h1 {padding: 100px 0; font-weight: 400; text-align: center;}
-p {margin: 0 0 20px; line-height: 1.5;}
 
-.main {margin: 0 auto; min-width: 320px; max-width: 800px;}
-.content {background: #fff; color: #373737;}
-.content > div {display: none; padding: 20px 25px 5px;}
+/*PARTE NUEVA DEL TAB*/
 
-input {display: none;}
-label {display: inline-block; padding: 15px 25px; font-weight: 600; text-align: center;}
-label:hover {color: #fff; cursor: pointer;}
-input:checked + label {background: #ed5a6a; color: #fff;}
 
-#tab1:checked ~ .content #content1,
-#tab2:checked ~ .content #content2,
-#tab3:checked ~ .content #content3,
-#tab4:checked ~ .content #content4 {
-  display: block;
+
+
+li div p {
+	font-size: 13px;
+	line-height: 24px;
+	text-align: left;
+	color: #e60a0a;
 }
+
+a {
+	color: #2ddf1d;
+	text-decoration: none;
+	outline: none;
+}
+
+
+
+li div {
+   
+
+	transition: all 0.5s ease 0s;
+	border: 2px solid #ec8c0d;
+	float: left;
+	
+	
+	opacity: 0;
+	padding: 0 15px;
+	position: absolute;
+	visibility: hidden;
+	width: 100%;
+	left: 0;
+
+
+}
+
+#tabs {
+    
+	min-height: 250px;
+    width: 100%;
+    border:2px solid yellow;
+}
+
+ul {
+    border:2px solid rgb(30, 255, 0);
+    width: 100%;
+
+}
+
+#tabs li {
+    
+	float: left;
+	list-style-type: none;
+}
+
+#tabs li a {
+	background: linear-gradient(center top , #E3E3E3, #FFFFFF 18px) repeat scroll 0 0 transparent;
+	border: 1px solid #1b398b;
+	margin: 0 3px 0 0;
+	padding: 5px 25px;
+
+	z-index: 1;
+	font-size: 14px;	
+	border-radius: 10px 10px 0 0;	
+	top: 1px;
+}
+
+#One:target div,#Two:target div,#Three:target div {
+
+	filter: alpha(opacity=100);
+	opacity: 1;
+	visibility: visible;
+}
+
+
+
+
+
+
+
+
