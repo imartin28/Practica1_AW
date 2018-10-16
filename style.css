@@ -236,13 +236,11 @@ input[type=text], input[type=password] {
 
 /* -------- PAGINA AMIGOS --------- */
 
-.busquedaDeAmigos {
-    display: grid;
-    justify-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    z-index: 2;
-    margin-top: 5%;
+.busquedaDeAmigos {  
+    display: flex;    
+    margin: auto;
+    margin-top:5%;    
+    width: 700px;    
 }
 
 .textoBusquedaAmigos {
@@ -292,7 +290,7 @@ input[type=text], input[type=password] {
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
     background: #fff;
     border-radius: 12px;
-    width: 700px;
+    width: 750px;
     position: relative;
   }
 
@@ -309,7 +307,7 @@ input[type=text], input[type=password] {
     grid-column-gap: 10px;
     grid-template-columns: 1fr 1fr 2fr 2fr;
     grid-template-rows: 1fr;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid grey;
     padding-bottom: 1%;
 }
 
@@ -317,6 +315,10 @@ input[type=text], input[type=password] {
     color: rgb(0, 0, 0);
     margin-top: 10%;
     text-align: left;
+}
+
+.solicitudDeAmistad > img {
+    box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
 }
 
 .fotoPerfilAmigo {
@@ -331,7 +333,6 @@ input[type=text], input[type=password] {
     height: 30px;
     border-radius: 8px;
     background: #A55BBE;
-    border: 2px solid #A55BBE;
     text-decoration: none;
     text-align: center;
     margin-top: 4%;
@@ -371,11 +372,17 @@ input[type=text], input[type=password] {
     grid-column-gap: 10px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
+    border-bottom: 1px solid grey;
+    padding-bottom: 1%;
 }
 
 .infoAmigo > span {
     color: rgb(0, 0, 0);
     text-align: center;
+}
+
+.infoAmigo > img {
+    box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
 }
 
 .infoAmigo > span, .botonAceptarSolicitudAmistad, .botonRechazarSolicitudAmistad, .botonBuscarAmigo {
@@ -390,7 +397,7 @@ input[type=text], input[type=password] {
 .tabs {
     width: 600px;
     display: block;
-    margin: 1% auto 40px auto;
+    margin: 2% auto 40px auto;
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -412,8 +419,7 @@ input[type=text], input[type=password] {
   
   .tabs .tab > label {
       display: block;
-      padding: 6px 21px;
-      font-size: 12px;
+      padding: 6px 21px;      
       text-transform: uppercase;
       cursor: pointer;
       color: black;
