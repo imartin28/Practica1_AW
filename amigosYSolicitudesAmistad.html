@@ -1,126 +1,113 @@
 <!DOCTYPE html>
-	<html lang="es">
-	<head>
-		<title>FaceBluff</title>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link href="style.css" rel="stylesheet" media="screen"/>
-        <link rel="icon" type="image/png" href="imagenes/logo.png"/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    </head>
-    <body class="fondo"> 
-
-     <div >
-          <div class="header">
-              <div class="logo"> </div>  
-          </div>
-          
-          <div class ="nav">
-              <a href="#">Perfil</a>
-              <a href="#">Amigos</a>
-              <a href="#">Preguntas</a>
-              <a href="#">Desconectar</a>
-              <div>Puntos: </div>
-          </div>    
-          
-          <div class="busquedaDeAmigos">                 
-            <label class="textoBusquedaAmigos">Buscar por nombre: </label>                
-            <input type="text">    
-            <a class="botonBuscarAmigo" href="">Buscar</a>            
-        </div>        
-        
-        
-        <div class="panel-amigos">     
-          <ul class="tabs">
-            <li class="tab">
-                <input type="radio" name="tabs" checked="checked" id="tab1" />
-                <label for="tab1">Solicitudes de amistad</label>
-                <div id="tab-content1" class="content">
-                    <div class="solicitudesDeAmistad">
-            
+<html lang="es">
+   <head>
+      <title>FaceBluff</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <link href="style.css" rel="stylesheet" media="screen"/>
+      <link rel="icon" type="image/png" href="imagenes/logo.png"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   </head>
+   <body class="fondo">
+      <div>
+         <div class="header">
+            <div class="logo">
+            </div>
+            <div class="informacion-nav">
+               <div class="panel-izq-nav-imagen">
+               </div>
+               <div class="panel-der-nav-datos">
+                  <span class="puntuacion">Puntos: </span>
+                  <a class="boton-desconectar" href="">Desconectar</a>
+               </div>
+            </div>
+         </div>
+         <div class ="nav">
+            <a href="#">Perfil</a>
+            <a href="#">Amigos</a>
+            <a href="#">Preguntas</a>
+         </div>
+         <div class="busquedaDeAmigos">                 
+                <input type="text" placeholder="Buscar amigo por nombre">    
+                <a class="botonBuscarAmigo" href=""><i class="material-icons">
+                        search
+                        </i></a>   
+         </div>
+         <div class="panel-amigos">
+            <ul class="tabs">
+               <li class="tab">
+                  <input type="radio" name="tabs" checked="checked" id="tab1" />
+                  <label for="tab1">Solicitudes de amistad</label>
+                  <div id="tab-content1" class="content">
+                     <div class="solicitudesDeAmistad">
                         <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
-                            <span>Miguel</span>
-                                <a class="botonAceptarSolicitudAmistad"  href="">Aceptar</a>
-                                <a class="botonRechazarSolicitudAmistad"  href="">Rechazar</a>
+                           <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
+                           <span>Miguel</span>
+                           <a class="botonAceptarSolicitudAmistad"  href="">Aceptar</a>
+                           <a class="botonRechazarSolicitudAmistad"  href="">Rechazar</a>
                         </div>
-        
                         <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div>  
-                                
-                        <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div>  
-
-                        <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div>  
-
-                        <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
                         </div>
-
                         <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div>  
-
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                        </div>
                         <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div> 
-
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                        </div>
                         <div class="solicitudDeAmistad">
-                            <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                            <span>Hector</span>
-                            <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
-                            <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
-                        </div>  
-                    </div>
-                </div>
-            </li>
-                
-            <li class="tab">
-                <input type="radio" name="tabs" id="tab2" />
-                <label for="tab2">Amigos</label>   
-                <div id="tab-content2" class="content">
-
-                    <div class="misAmigos">              
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                        </div>
+                        <div class="solicitudDeAmistad">
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                        </div>
+                        <div class="solicitudDeAmistad">
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                        </div>
+                        <div class="solicitudDeAmistad">
+                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
+                           <span>Hector</span>
+                           <a href="" class="botonAceptarSolicitudAmistad">Aceptar</a>
+                           <a href="" class="botonRechazarSolicitudAmistad">Rechazar</a>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li class="tab">
+                  <input type="radio" name="tabs" id="tab2" />
+                  <label for="tab2">Amigos</label>   
+                  <div id="tab-content2" class="content">
+                     <div class="misAmigos">
                         <div class="infoAmigo">
-                            <img class="fotoPerfilAmigo" src="imagenes/johnCoffey.jpg">
-                            <span>John Coffey</span>
+                           <img class="fotoPerfilAmigo" src="imagenes/johnCoffey.jpg">
+                           <span>John Coffey</span>
                         </div>
-
                         <div class="infoAmigo">
-                            <img class="fotoPerfilAmigo" src="imagenes/drEvil.png">
-                            <span>Doctor maligno</span>
+                           <img class="fotoPerfilAmigo" src="imagenes/drEvil.png">
+                           <span>Doctor maligno</span>
                         </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-
-            
-          </div>
-       </div> 
-    </body>
- </html>
+                     </div>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </body>
+</html>

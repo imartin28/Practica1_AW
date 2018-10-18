@@ -30,22 +30,15 @@ body, html {
     opacity: 0.8;
   }
 
-
-
 .header{
     background: rgba(37, 34, 54, 0.801);
     height: 70px;
     width: 100%;
-    position: relative;
-   
+    position: relative;    
     margin: 0 auto;
     padding: 10px;
-    position: relative;
+    display: flex;
 }
-
-
-
-
 
 .logo {
     width: 200px;
@@ -80,6 +73,30 @@ body, html {
     color:white;
     text-decoration: underline;
   }
+
+.informacion-nav {
+    display: flex;
+    border: 3px solid yellow;
+
+} 
+
+.panel-izq-nav-imagen {
+    border: 3px solid green;
+    background-image: url("imagenes/avatar.png");
+    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+    background-size: cover; 
+
+}
+
+.panel-der-nav-datos {
+    border: 3px solid blue;
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 .panelInicioSesion {
     margin: auto;
@@ -118,6 +135,10 @@ body, html {
 input {
     border-radius: 8px;
     border: 1px solid #000000;
+}
+
+input[type=text]:focus { /* Cambiar el color de resaltado al pulsar en un input */
+    outline: 2px solid #A55BBE;         
 }
 
 .registro span {
@@ -201,8 +222,6 @@ input[type=text], input[type=password] {
     position: relative;
   }
 
-
-
 .imagen-perfil {
     background-image: url("imagenes/avatar.png");
     width: 150px;
@@ -234,31 +253,31 @@ input[type=text], input[type=password] {
 
 .busquedaDeAmigos {  
     display: flex;    
-    margin: auto;
-    margin-top:5%;    
-    width: 700px;    
-}
-
-.textoBusquedaAmigos {
-    margin: auto;
+    justify-content: center;
+    flex-wrap: no-wrap;  
+    margin: 5%;
 }
 
 .busquedaDeAmigos input {
-    height: 15px;
+    height: 30px;
     width: 290px;
     background: white;
-    border: 2px solid black;
-    text-indent: 3%;
-    margin: auto;
+    border: 2px solid white;
+    border-radius: 8px 0px 0px 8px;
+    text-indent: 5%;
+    margin: 0px;
+    justify-content: center;
+    font-size: 15px;
+    text-decoration: black;
 }
 
 .botonBuscarAmigo {
-    width: 150px;
     color: white;
     height: 30px;
-    border-radius: 8px;
+    border-radius: 0px 8px 8px 0px;
     background: #A55BBE;
     border: 2px solid #A55BBE;
+    padding: 0px 10px;
     text-decoration: none;
     text-align: center;
 }
@@ -361,6 +380,8 @@ input[type=text], input[type=password] {
     justify-content: space-between;
 }
 
+
+
 .infoAmigo {
     display: grid;
     justify-items: center;
@@ -386,6 +407,11 @@ input[type=text], input[type=password] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Quitar el borde del último elemento */
+.infoAmigo:last-child, .solicitudDeAmistad:last-child {
+    border-bottom: none;
 }
 
 /*PARTE NUEVA DEL TAB*/
