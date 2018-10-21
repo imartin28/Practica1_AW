@@ -78,7 +78,7 @@ body, html {
 .informacion-nav {
     display: flex;
     align-items: center;
-    right: 3%;
+    padding-right: 3%;
     position: absolute;
     top: 15%;
 
