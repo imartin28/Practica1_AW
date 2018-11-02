@@ -246,8 +246,9 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
     background: #fff;
     border-radius: 12px;
-    width: 700px;
+    width: 900px;
     position: relative;
+    
   }
 
 .imagen-perfil {
@@ -276,6 +277,24 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     color: #A55BBE;
     margin-bottom: 15px;
 }
+
+
+.boton-modificar-perfil{
+    border: 2px solid rgb(112, 111, 111);
+    border-radius: 30px;
+    padding: 15px;
+    position: absolute;
+    left: 90%;
+    top: 5%;
+    background-color: rgb(201, 198, 198);
+    
+}
+.boton-modificar-perfil:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+
 
 /* -------- PAGINA AMIGOS --------- */
 
@@ -323,7 +342,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
     background: #fff;
     border-radius: 12px;
-    width: 750px;
+    width: 900px;
     position: relative;
   }
 
@@ -482,3 +501,73 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
       opacity: 1;
       transition: opacity 400ms ease-out;
   }
+
+  /*LISTADO ALEATORIO DE PREGUNTAS*/
+
+  .panel-listado-preguntas {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 5%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 1200px;
+    position: relative;
+  }
+
+  .listado-preguntas {
+    margin-top:15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .pregunta {
+    border: 1px solid rgb(85, 85, 85);
+    padding: 3px;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 20px;  
+    width: 70%;
+    text-align: center;
+  }
+  .pregunta:hover{
+      transform: scale(1.1);
+      cursor: pointer;
+      border-color: #A55BBE;
+      border: 2px solid #A55BBE;
+      
+  }
+
+  .panel-boton-crear-pregunta {    
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 2px solid grey;
+    padding-bottom: 20px;   
+
+  }
+
+  .boton-crear-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 6%;
+    margin-top: 2%;
+    font-size: 15px;   
+  
+  }
+
+  .boton-crear-pregunta:hover {
+    color:black;
+    cursor: pointer;
+}
+
+
+ 
+  
