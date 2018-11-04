@@ -569,5 +569,42 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 
- 
+ /*RESPONDER PREGUNTA POR UN AMIGO */
+
+ .listado-respuestas {
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    
+    align-items:  center;
+
+  }
+
+  .panel-superior-respuestas {    
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #A55BBE;
+    padding-bottom: 20px; 
+    padding-top:20px;  
+    font-size: 30px;
+  }
+
+  .boton-responder-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+   
+    margin-top: 2%;
+    font-size: 15px;   
+  
+  }
+
+  .boton-responder-pregunta:hover {
+    color:black;
+    cursor: pointer;
+}
   
