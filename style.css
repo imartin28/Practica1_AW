@@ -364,9 +364,8 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     padding-bottom: 1%;
 }
 
-.solicitudDeAmistad > span {
+.nombre-amigo {
     color: rgb(0, 0, 0);
-    margin-top: 10%;
     text-align: left;
 }
 
@@ -417,8 +416,6 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     flex-direction: column;
     justify-content: space-between;
 }
-
-
 
 .infoAmigo {
     display: grid;
@@ -472,12 +469,12 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
       left: -9999px;
   }
   
-  .tabs .tab > label {
-      display: block;
-      padding: 6px 21px;      
-      text-transform: uppercase;
-      cursor: pointer;
-      color: black;
+.tabs .tab > label {
+    display: block;
+    padding: 6px 21px;      
+    text-transform: uppercase;
+    cursor: pointer;
+    color: black;
 }
 
 .tabs .content {
@@ -709,11 +706,18 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     justify-content: center;
 }
 
-
-
-
-
 /* PAGINA VISTA DE PREGUNTA */
+
+.panel-respuestas-amigos {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 5%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 900px;
+    position: relative;
+}
 
 .panel-boton-contestar-pregunta {    
     display: flex;
@@ -745,4 +749,58 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 .boton-contestar-pregunta:hover {
     color:black;
     cursor: pointer;
+}
+
+.respuestas-amigos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.respuestas-amigos > p {
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.respuesta-amigo, .respuesta-amigo-fallada, .respuesta-amigo-acertada {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 1%;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid grey;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.respuesta-amigo > img, .respuesta-amigo-fallada > img, .respuesta-amigo-acertada > img {
+    box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
+}
+
+.boton-adivinar-respuesta-amigo {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+}
+
+.boton-adivinar-respuesta-amigo:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.span-respuesta-amigo-acertada {
+    font-weight: bold;
+    color: green;
+}
+
+.span-respuesta-amigo-fallada {
+    font-weight: bold;
+    color: red;
 }
