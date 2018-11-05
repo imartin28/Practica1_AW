@@ -232,7 +232,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 
-.paginaPerfil-titulo {
+.paginaPerfil-titulo, .titulo-pregunta {
     color:#A55BBE;
     font-size:50px;
     text-align: center;
@@ -503,7 +503,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
       transition: opacity 400ms ease-out;
   }
 
-  /*LISTADO ALEATORIO DE PREGUNTAS*/
+  /* LISTADO ALEATORIO DE PREGUNTAS */
 
   .panel-listado-preguntas {
     min-height: 460px;
@@ -525,7 +525,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 
   }
 
-  .pregunta {
+  .pregunta-aleatoria {
     border: 1px solid rgb(85, 85, 85);
     padding: 3px;
     border-radius: 10px;
@@ -534,7 +534,8 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     width: 70%;
     text-align: center;
   }
-  .pregunta:hover{
+
+  .pregunta-aleatoria:hover {
       transform: scale(1.1);
       cursor: pointer;
       border-color: #A55BBE;
@@ -570,7 +571,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 
- /*RESPONDER PREGUNTA POR UN AMIGO */
+ /* RESPONDER PREGUNTA POR UN AMIGO */
 
  .listado-respuestas {
     margin-top:20px;
@@ -673,4 +674,75 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     cursor: pointer;
 }
 
+.pregunta {
+    border: 1px solid rgb(85, 85, 85);
+    padding: 3px;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 20px;  
+    width: 70%;
+    text-align: center;
+    
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 5% 40%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.pregunta:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      border-color: #A55BBE;
+      border: 2px solid #A55BBE;
+}
 
+.pregunta > p {
+    text-align: left;
+}
+
+.otra-pregunta {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 2% 10% 33%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+/* PAGINA VISTA DE PREGUNTA */
+
+.panel-boton-contestar-pregunta {    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 2px solid grey;
+    padding-bottom: 20px;   
+}
+
+.panel-boton-contestar-pregunta > p {
+    padding-top: 20px;
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+.boton-contestar-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 6%;
+    margin-top: 2%;
+    font-size: 15px;   
+}
+
+.boton-contestar-pregunta:hover {
+    color:black;
+    cursor: pointer;
+}
