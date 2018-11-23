@@ -1,0 +1,812 @@
+@import "https://fonts.googleapis.com/css?family=Quicksand";
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand';
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.contenedor:before {
+    content: "";
+    position: absolute;
+    z-index: -1;   
+    width: 100%;
+    height: 100%;
+    background-image: url("/img/nuevayork.jpg");
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.header {
+    background: rgba(37, 34, 54, 0.801);
+    height: 70px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end; 
+
+    position: relative;
+}
+
+.logo {
+    width: 200px;
+    background-image: url("/img/logo.png");
+    height: 70px;
+    margin: auto;
+ 
+    background-repeat:no-repeat;
+    background-position-y: -65px;
+}
+
+.nav {
+    background: rgba(37, 34, 54, 0.801);
+    height: 30px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex; 
+    justify-content: center; 
+}
+
+.nav > a {
+    text-decoration:none;
+    color:white;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.nav > a:hover{
+    color:white;
+    text-decoration: underline;
+}
+
+.informacion-nav {
+    display: flex;
+    align-items: center;
+    padding-right: 3%;
+    position: absolute;
+    top: 15%;
+
+    /* Poniendolo position:absolute no descentra el logo porque informacion-nav 
+       sale del flujo de la página y se posiciona respecto a su padre, el header */
+} 
+
+.panel-izq-nav-imagen {
+    background-image: url("imagenes/avatar.png");
+    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+    background-size: cover; 
+    box-shadow: 0px 1px 25px 0px #A55BBE, 0px 0px 0px 4px #A55BBE;
+
+}
+
+.panel-der-nav-datos {
+    display: flex;
+    flex-direction: column;
+    padding-left: 7%;
+}
+
+.boton-desconectar {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+}
+
+
+.boton-desconectar:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.panelInicioSesion {
+    margin: auto;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    height: 350px;
+    justify-content: space-around;
+    background: rgba(35, 22, 39, 0.801);
+    border-radius: 8px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.panelInicioSesion > h4 {
+    color: red;
+}
+
+.panelNuevoUsuario {
+    margin: auto;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 500px;
+    justify-content: space-around;
+    background: rgba(35, 22, 39, 0.801);
+    border-radius: 8px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    color: white;
+}
+
+.textoRegistro {
+    display: inline-block;
+    width: 180px;    
+}
+
+.registro span {
+    color: grey;
+    font-size: 12px;
+}
+
+.registro a {
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.registro a:hover {
+    text-decoration: underline;
+}
+
+h1, span, a {
+    color: white;
+}
+
+form {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.input-inicio-sesion, .input-nuevo-usuario {
+    border-radius: 8px;
+    border: 1px solid #000000;
+    
+    margin-top: 5%;
+    height: 30px;
+    width: 220px;
+    background: rgba(116, 111, 111, 0.6);
+    border: none;
+    text-indent: 3%;
+
+}
+
+
+input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resaltado al pulsar en un input */
+    outline: 2px solid #A55BBE;         
+}
+
+::placeholder {
+    color: rgb(175, 172, 172);
+}
+
+.botonAcceder {
+    width: 220px;
+    color: white;
+    height: 30px;
+    margin-top: 5%;
+    border-radius: 8px;
+    background: #A55BBE;
+    border: 2px solid #A55BBE;
+}
+
+.botonAcceder:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.contenido-centrado {
+    /* Centrar vertical y horizontalmente dentro de su contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* -------- PAGINA PERFIL USUARIO ---------*/
+
+
+
+.fondo{
+    opacity: 0.8;  
+    background-color: rgb(201, 198, 198);
+}
+
+
+.paginaPerfil-titulo, .titulo-pregunta {
+    color:#A55BBE;
+    font-size:50px;
+    text-align: center;
+    margin-top: 4%;
+   
+}
+
+.panel-perfil {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 10%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 900px;
+    position: relative;
+    
+  }
+
+.imagen-perfil {
+    background-image: url("img/avatar.png");
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden; 
+    box-shadow: 0px 5px 50px 0px #A55BBE, 0px 0px 0px 7px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
+  }
+
+  .perfil-contenido {
+    margin-top: -35px;
+    text-align: center;
+    padding: 0 20px;
+    padding-bottom: 40px;
+    transition: all .3s;
+  }
+
+  .perfil-contendido-titulo {
+    font-weight: 700;
+    font-size: 24px;
+    color: #A55BBE;
+    margin-bottom: 15px;
+}
+
+
+.boton-modificar-perfil{
+    border: 2px solid rgb(112, 111, 111);
+    border-radius: 30px;
+    padding: 15px;
+    position: absolute;
+    left: 90%;
+    top: 5%;
+    background-color: rgb(201, 198, 198);
+    
+}
+.boton-modificar-perfil:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+
+
+/* -------- PAGINA AMIGOS --------- */
+
+.busquedaDeAmigos {  
+    display: flex;    
+    justify-content: center;
+    flex-wrap: no-wrap;  
+    margin: 5%;
+}
+
+.busquedaDeAmigos input {
+    height: 30px;
+    width: 290px;
+    background: white;
+    border: 2px solid white;
+    border-radius: 8px 0px 0px 8px;
+    text-indent: 5%;
+    margin: 0px;
+    justify-content: center;
+    font-size: 15px;
+    text-decoration: black;
+}
+
+.botonBuscarAmigo {
+    color: white;
+    height: 30px;
+    border-radius: 0px 8px 8px 0px;
+    background: #A55BBE;
+    border: 2px solid #A55BBE;
+    padding: 0px 10px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.botonBuscarAmigo:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.panel-amigos  {
+    min-height: 460px;
+    overflow: auto;
+    margin: auto;
+    margin-top: 5%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 900px;
+    position: relative;
+  }
+
+.solicitudesDeAmistad {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.solicitudDeAmistad {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 1%;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr 2fr 2fr;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid grey;
+    padding-bottom: 1%;
+}
+
+.nombre-amigo {
+    color: rgb(0, 0, 0);
+    text-align: left;
+}
+
+.solicitudDeAmistad > img {
+    box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
+}
+
+.fotoPerfilAmigo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.botonAceptarSolicitudAmistad {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+}
+
+.botonAceptarSolicitudAmistad:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.botonRechazarSolicitudAmistad {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(37, 34, 54, 0.801);
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+}
+
+.botonRechazarSolicitudAmistad:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.infoAmigos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.infoAmigo {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 2%;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid grey;
+    padding-bottom: 1%;
+}
+
+.infoAmigo > span {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.infoAmigo > img {
+    box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
+}
+
+
+
+/* Quitar el borde del último elemento */
+.infoAmigo:last-child, .solicitudDeAmistad:last-child {
+    border-bottom: none;
+}
+
+/*PARTE NUEVA DEL TAB*/
+
+.tabs {
+    width: 600px;
+    display: block;
+    margin: 2% auto 40px auto;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;      
+  
+}
+  
+.tabs .tab {
+    display: inline;
+    flex-basis: 292px;
+    text-align: center;
+  }
+  
+  .tabs .tab > input[type="radio"] {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  
+.tabs .tab > label {
+    display: block;
+    padding: 6px 21px;      
+    text-transform: uppercase;
+    cursor: pointer;
+    color: black;
+}
+
+.tabs .content {
+      z-index: 0;/* or display: none; */
+      overflow: hidden;
+      width: 600px;
+      padding-top: 25px;
+      position: absolute;
+      left: 0;
+      color: #DFDFDF;
+      opacity:0;
+      transition: opacity 400ms ease-out;
+  }
+  
+  .tabs > .tab > :checked + label {
+      top: 0;
+      border-bottom: 3px solid #A55BBE;
+  }
+  
+  .tabs > .tab > [id^="tab"]:checked ~ [id^="tab-content"] {
+      z-index: 1;/* or display: block; */
+      opacity: 1;
+      transition: opacity 400ms ease-out;
+  }
+
+  /* LISTADO ALEATORIO DE PREGUNTAS */
+
+  .panel-listado-preguntas {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 5%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 1200px;
+    position: relative;
+  }
+
+  .listado-preguntas {
+    margin-top:15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .pregunta-aleatoria {
+    border: 1px solid rgb(85, 85, 85);
+    padding: 3px;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 20px;  
+    width: 70%;
+    text-align: center;
+  }
+
+  .pregunta-aleatoria:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      border-color: #A55BBE;
+      border: 2px solid #A55BBE;
+      
+  }
+
+  .panel-boton-crear-pregunta {    
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 2px solid grey;
+    padding-bottom: 20px;   
+
+  }
+
+  .boton-crear-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 6%;
+    margin-top: 2%;
+    font-size: 15px;   
+  
+  }
+
+  .boton-crear-pregunta:hover {
+    color:black;
+    cursor: pointer;
+}
+
+
+ /* RESPONDER PREGUNTA POR UN AMIGO */
+
+ .listado-respuestas {
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    
+    align-items:  center;
+
+  }
+
+  .panel-superior-respuestas {    
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #A55BBE;
+    padding-bottom: 20px; 
+    padding-top:20px;  
+    font-size: 30px;
+  }
+
+  .boton-responder-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+   
+    margin-top: 2%;
+    font-size: 15px;   
+  
+  }
+
+  .boton-responder-pregunta:hover {
+    color:black;
+    cursor: pointer;
+}
+  
+
+/*RESPONDER PREGUNTA PARA SI MISMO */
+
+.listado-respuestas-propias {
+    margin-top:20px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:  center;
+}
+
+.otra-pregunta {
+    border: 1px solid rgb(85, 85, 85);
+    padding: 3px;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 20px;  
+    width: 70%;
+    text-align: center;
+    background-color: #A55BBE;
+}
+
+.otra-pregunta:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    border-color: #A55BBE;
+    border: 2px solid #A55BBE;
+}
+
+.input-nueva-respuesta {
+    border-radius: 8px;
+    border: 1px solid #000000;
+
+    font-size: 15px;
+    height: 25px;
+    width: 220px;
+    
+    text-indent: 3%;
+}
+
+.panel-inferior-botones {
+    display: flex;
+    margin-top:50px;
+}
+
+.boton-cancelar {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+   
+    text-decoration: none;
+    text-align: center;
+    margin-left:20px;
+    margin-top: 2%;
+    font-size: 15px;
+    background: rgba(37, 34, 54, 0.801);
+}
+
+.boton-cancelar:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.pregunta {
+    border: 1px solid rgb(85, 85, 85);
+    padding: 3px;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 20px;  
+    width: 70%;
+    text-align: center;
+    
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 5% 40%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.pregunta:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      border-color: #A55BBE;
+      border: 2px solid #A55BBE;
+}
+
+.pregunta > p {
+    text-align: left;
+}
+
+.otra-pregunta {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 2% 10% 33%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PAGINA VISTA DE PREGUNTA */
+
+.panel-respuestas-amigos {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 5%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 900px;
+    position: relative;
+}
+
+.panel-boton-contestar-pregunta {    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 2px solid grey;
+    padding-bottom: 20px;   
+}
+
+.panel-boton-contestar-pregunta > p {
+    padding-top: 20px;
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+.boton-contestar-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 6%;
+    margin-top: 2%;
+    font-size: 15px;   
+}
+
+.boton-contestar-pregunta:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.respuestas-amigos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.respuestas-amigos > p {
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.respuesta-amigo, .respuesta-amigo-fallada, .respuesta-amigo-acertada {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 1%;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid grey;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.respuesta-amigo > img, .respuesta-amigo-fallada > img, .respuesta-amigo-acertada > img {
+    box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
+}
+
+.boton-adivinar-respuesta-amigo {
+    width: 150px;
+    color: white;
+    height: 30px;
+    border-radius: 8px;
+    background: #A55BBE;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 4%;
+}
+
+.boton-adivinar-respuesta-amigo:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.span-respuesta-amigo-acertada {
+    font-weight: bold;
+    color: green;
+}
+
+.span-respuesta-amigo-fallada {
+    font-weight: bold;
+    color: red;
+}
+
+
