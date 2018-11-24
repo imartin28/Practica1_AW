@@ -15,6 +15,10 @@
                     <div class="logo"> </div>  
                     <div class="informacion-nav">
                         <div class="panel-izq-nav-imagen">
+                                <% if (profile_img) { %>                        
+                                    <img src="/users/profile_img/<%= profile_img %>">                  
+                              
+                                <% } %>
                         </div>
                         <div class="panel-der-nav-datos">
                            <span class="puntuacion">Puntos: <%= points %></span>
@@ -25,18 +29,26 @@
                 
                 <div class ="nav">
                     <a href="#">Perfil</a>
-                    <a href="#">Amigos</a>
+                    <a href="friends">Amigos</a>
                     <a href="#">Preguntas</a>
                 </div>
                 <div class="paginaPerfil-titulo">TU PERFIL</div>
 
                 <div class="panel-perfil">
-                    <div class="imagen-perfil"></div>                              
+                   
+                    <div class="imagen-perfil">
+                            <% if (profile_img) { %>                        
+                                <img src="/users/profile_img/<%= profile_img %>">                  
+                          
+                            <% } %>
+
+                    </div>                              
                     <button type="submit"></button> <i class="material-icons boton-modificar-perfil">edit</i>                      
                     <div class="perfil-contenido">
                         <div class="perfil-contendido-titulo"><%= name %></div>
+                        <div class="perfil-contendido-titulo"><%= age %> años</div>  
                         <div class="perfil-contendido-titulo"><%= gender %></div>       
-                        <div class="perfil-contendido-titulo"><%= points %></div>       
+                        <div class="perfil-contendido-titulo"><%= points %> puntos</div>         
                     </div>
                 </div>              
             </div>        

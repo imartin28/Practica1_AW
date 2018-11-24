@@ -87,7 +87,7 @@ body, html {
 } 
 
 .panel-izq-nav-imagen {
-    background-image: url("imagenes/avatar.png");
+   
     border-radius: 50px;
     width: 70px;
     height: 70px;
@@ -185,7 +185,7 @@ form {
 .input-inicio-sesion, .input-nuevo-usuario {
     border-radius: 8px;
     border: 1px solid #000000;
-    
+    color: white;
     margin-top: 5%;
     height: 30px;
     width: 220px;
@@ -257,7 +257,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
   }
 
 .imagen-perfil {
-    background-image: url("img/avatar.png");
+    
     width: 150px;
     height: 150px;
     margin-left: auto;

@@ -9,8 +9,10 @@ const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore(config.mysqlConfig);
 //Routers
-const login = require("./login");
-
+const login_router = require("./login_router");
+const my_profile_router = require("./my_profile_router");
+const new_user_router = require("./new_user_router");
+const friends_router = require("./friends_router");
 
 // Crear un servidor Express.js
 const app = express();
@@ -19,6 +21,7 @@ const ficherosEstaticos = path.join(__dirname, "public");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "public", "views"));
 
+
 const middlewareSession = session({
     saveUninitialized: false, //Que no se cree ninguna sesión para los clientes que no estén en la BBDD de sesiones
     secret: "foobar34", // Se utiliza firmar el SID que se envía al cliente
@@ -26,16 +29,33 @@ const middlewareSession = session({
     store: sessionStore
 });
 
-
-
-
 // Middlewares
 app.use(express.static(ficherosEstaticos));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(middlewareSession);
 //Routers
-app.use("/users", login);
-//app.use("/users", friends);
+app.use("/users", login_router);
+app.use("/users", new_user_router);
+app.use("/users", my_profile_router, middlewareControlDeAcceso);
+app.use("/users", friends_router, middlewareControlDeAcceso);
+
+
+function middlewareControlDeAcceso(request,  response, next) {
+    let email = request.session.currentUser;
+    let profile_img = request.session.profile_img;
+    let points = request.session.points;
+
+    if (email != null) {
+        response.locals.userEmail = email;
+        response.locals.profile_img = profile_img;
+        console.log(response.locals.profile_img);
+        response.locals.points = points;
+        next();
+    } else {
+        response.redirect("login");
+    }     
+}
+
 
 // Arrancar el servidor
 app.listen(config.port, function(err) {

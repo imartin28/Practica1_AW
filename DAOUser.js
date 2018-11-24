@@ -13,8 +13,15 @@ class DAOUser{
                 callback(err);
             }
             else{
-                connection.query("INSERT INTO USER VALUES (?,?,?,?,?,?)",
-                [user.email, user.password, user.name, user.gender, user.birth_date, user.profile_img],
+                let gender;
+                switch (user.gender) {
+                    case "Masculino" : gender = "Hombre"; break;
+                    case "Femenino" : gender = "Mujer"; break;
+                    case "Otro" : gender = "Otro"; break;
+                }
+                
+                connection.query("INSERT INTO USER VALUES (?,?,?,?,?,?, 0)",
+                [user.email, user.password, user.name, gender, user.birth_date, user.profile_img],
                 (err, resultado)=>{
                     connection.release();
                     if(err){
@@ -92,7 +99,9 @@ class DAOUser{
                         let user = {
                             name : result[0].name,                          
                             gender : result[0].gender,
-                            points : result[0].points
+                            points : result[0].points,
+                            birth_date : result[0].birth_date,
+                            profile_img : result[0].profile_img
                         }
                         callback(null, user);
                     }
