@@ -383,7 +383,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     border-radius: 50%;
 }
 
-.botonAceptarSolicitudAmistad {
+.botonAceptarSolicitudAmistad, .botonSolicitudAmistad {
     width: 150px;
     color: white;
     height: 30px;
@@ -394,7 +394,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     margin-top: 4%;
 }
 
-.botonAceptarSolicitudAmistad:hover {
+.botonAceptarSolicitudAmistad:hover, .botonSolicitudAmistad:hover {
     color:black;
     cursor: pointer;
 }

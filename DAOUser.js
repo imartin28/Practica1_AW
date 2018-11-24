@@ -81,6 +81,38 @@ class DAOUser{
         });
     }
 
+    searchUsersWithText(searchText, callback) {
+        this.pool.getConnection((err, connection) =>{
+            if(err){
+                callback(err, null);
+            }
+            else{
+                connection.query("SELECT name, profile_img FROM USER WHERE NAME LIKE %?%", 
+                [searchText], (err, results) =>{
+                    connection.release();
+                    if(err){
+                        callback(err, null);
+                    }
+                    else{
+                        console.log(results);
+                        let users = [];
+                        for (let i = 0; i < results.length; ++i) {
+                            let user = {
+                                name : result.name,
+                                profile_img : result.profile_img
+                            }
+                            users.push(user);
+                        }
+                        
+                        
+                        callback(null, users);
+                    }
+                });
+            }
+        });
+    
+    }
+
 
 
     readUser(email, callback){

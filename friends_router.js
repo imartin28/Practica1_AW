@@ -12,8 +12,22 @@ const daoUser = new DAOUser(pool);
 friends.get("/friends", function(request, response) {
     response.status(200);
 
+    
     response.render("friends", {mensajeDeError : null});
 });
+
+friends.get("/search", function(request, response) {
+    response.status(200);
+    daoUser.searchUsersWithText("S", (err, users) => {
+        if (err) {
+            console.log(err.message);
+        } else {
+            response.render("search", {searchText : "e", users : users});
+        }
+    });
+    
+});
+
 
 
 
