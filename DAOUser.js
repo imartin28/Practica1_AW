@@ -129,7 +129,8 @@ class DAOUser{
                     }
                     else{
                         let user = {
-                            name : result[0].name,                          
+                            name : result[0].name,   
+                            password: result[0].password,                       
                             gender : result[0].gender,
                             points : result[0].points,
                             birth_date : result[0].birth_date,

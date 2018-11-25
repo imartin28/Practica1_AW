@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+	<html lang="es">
+	<head>
+		<title>FaceBluff</title>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="/css/style.css" rel="stylesheet" media="screen"/>
+        <link rel="icon" type="image/png" href="imagenes/logo.png"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    </head>
+    <body class="fondo">
+            <div>
+                <div class="header">
+                    <div class="logo"> </div>  
+                    <div class="informacion-nav">
+                        <div class="panel-izq-nav-imagen">
+                                <% if (profile_img) { %>                        
+                                    <img class="imagen-perfil-header" src="/users/profile_img/<%= profile_img %>">                  
+                                <% } %>
+                        </div>
+                        <div class="panel-der-nav-datos">
+                           <span class="puntuacion">Puntos: <%= points %></span>
+                           <a class="boton-desconectar contenido-centrado" href="logout">Desconectar</a>
+                        </div>
+                     </div>
+                </div>
+                
+                <div class ="nav">
+                    <a href="#">Perfil</a>
+                    <a href="friends">Amigos</a>
+                    <a href="#">Preguntas</a>
+                </div>
+                <div class="pagina-modificar-perfil-titulo">MODIFICAR DATOS DE USUARIO</div>
+
+                <div class="panel-modificar-perfil">
+                   <form class="formulario-modificar-perfil" method="POST" action="modify-profile" enctype="multipart/form-data">
+                        <div class="campo-formulario-modificacion-perfil"> 
+                            <label class="label-formulario-modificacion-perfil">Email: </label>               
+                            <input class="input-modificar-perfil" type="text" name="email" value="<%= userEmail %>" disabled><br>    
+                        </div>  
+
+                        <div class="campo-formulario-modificacion-perfil">
+                            <label class="label-formulario-modificacion-perfil">Contraseña: </label>                    
+                            <input class="input-modificar-perfil" type="text" name="password" value="<%= password %>"><br>    
+                        </div>
+
+                        <div class="campo-formulario-modificacion-perfil">
+                            <label class="label-formulario-modificacion-perfil">Nombre Completo: </label>                   
+                            <input class="input-modificar-perfil" type="text" name="name" value="<%= name %>"><br><br>
+                        </div>
+
+                        <div class="campo-formulario-modificacion-perfil">
+                            <label class="label-formulario-modificacion-perfil">Género: </label>     
+                            <input type="radio" name="gender" value="Masculino"> Masculino
+                            <input type="radio" name="gender" value="Femenino"> Femenino
+                            <input type="radio" name="gender" value="Otro"> Otro <br>
+                        </div>
+
+                        <div class="campo-formulario-modificacion-perfil">
+                            <label class="label-formulario-modificacion-perfil">Fecha de Nacimiento: </label>   
+                            <input class="input-modificar-perfil" type="date" name="birth_date" value="<%= birth_date %>" ><br>
+                        </div>
+
+                        <div class="campo-formulario-modificacion-perfil">
+                            <label class="label-formulario-modificacion-perfil">Imagen de Perfil: </label> 
+                            
+                            <input  type="file" class="inputfile" name="profile_img" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png">
+                        </div>
+
+                        <div class="campo-formulario-modificacion-perfil">
+                            <button type="submit" class="boton-aceptar-modificacion-perfil">Modificar</button>
+                            <button type="button" class="boton-cancelar-modificacion-perfil">Cancelar</button>
+                        </div>
+                   </form>
+                </div>              
+            </div>        
+
+    </body>
+
+ </html>

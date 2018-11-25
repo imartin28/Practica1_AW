@@ -181,14 +181,9 @@ h1, span, a {
     color: white;
 }
 
-form {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
 
 .input-inicio-sesion, .input-nuevo-usuario {
+    font-size: 14px;
     border-radius: 8px;
     border: 1px solid #000000;
     color: white;
@@ -232,6 +227,25 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     align-items: center;
 }
 
+
+
+/*******            PAGINA NUEVO USUARIO              *******/
+
+.formulario-nuevo-usuario {
+    text-align: left;
+    padding-left: 100px;
+
+}
+
+.formulario-nuevo-usuario > input[type="file"] {
+    padding-top: 20px;
+}
+
+.formulario-nuevo-usuario > button[type="submit"] {
+    position: relative;
+    left: 100px;
+}
+
 /* -------- PAGINA PERFIL USUARIO ---------*/
 
 
@@ -242,7 +256,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 
-.paginaPerfil-titulo, .titulo-pregunta {
+.paginaPerfil-titulo, .titulo-pregunta, .pagina-modificar-perfil-titulo {
     color:#A55BBE;
     font-size:50px;
     text-align: center;
@@ -250,7 +264,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
    
 }
 
-.panel-perfil {
+.panel-perfil, .panel-modificar-perfil {
     min-height: 460px;
     margin: auto;
     margin-top: 10%;
@@ -288,7 +302,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     transition: all .3s;
   }
 
-  .perfil-contendido-titulo {
+  .perfil-contenido-titulo {
     font-weight: 700;
     font-size: 24px;
     color: #A55BBE;
@@ -832,3 +846,76 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 
+/*******   MODIFICAR PERFIL *********/
+
+
+.formulario-modificar-perfil {
+    text-align: left;
+}
+
+
+.label-formulario-modificacion-perfil {
+    display: block;
+    width: 200px;    
+}
+
+.campo-formulario-modificacion-perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px;
+}
+
+
+
+.input-modificar-perfil {
+    font-size: 14px;
+    border: none;
+    border-radius: 7px;
+    border-bottom: 4px solid #A55BBE;
+    color: black;
+    height: 30px;
+    width: 220px;
+    text-indent: 3%;
+}
+
+.input-modificar-perfil:disabled {
+    background: rgb(168, 168, 168);
+    border: none;
+}
+
+
+.boton-aceptar-modificacion-perfil {
+    width: 220px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    margin-top: 5%;
+    border-radius: 8px;
+    background: #A55BBE;
+    border: 2px solid #A55BBE;
+}
+
+.boton-aceptar-modificacion-perfil:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.boton-cancelar-modificacion-perfil {
+    position: relative;
+    top: 4px;
+    width: 220px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    border-radius: 8px;
+    background: rgba(37, 34, 54, 0.801);
+    border: 2px solid rgba(37, 34, 54, 0.801);;
+    margin-top: 4%;
+    margin-left: 4%;
+}
+
+.boton-cancelar-modificacion-perfil:hover {
+    color:black;
+    cursor: pointer;
+}

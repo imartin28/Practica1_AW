@@ -31,6 +31,22 @@ profile.get("/my_profile", function(request, response){
     });
 });
 
+profile.get("/modify_profile", function(request, response){
+    let email = request.session.currentUser;
+
+    daoUser.readUser(email, (err, user) => {
+        response.status(200);   
+
+        response.render("modify_profile", {
+            name : user.name, 
+            password : user.password,
+            gender: user.gender, 
+            points: user.points,
+            birth_date : JSON.stringify(user.birth_date).slice(1, 11), //Primero se convierte a string y después se recorta para quedarse solo con año, mes y día
+            profile_img : user.profile_img
+        });
+    });
+});
 
 
 module.exports = profile;
