@@ -20,7 +20,7 @@ class DAOUser{
                     case "Otro" : gender = "Otro"; break;
                 }
                 
-                connection.query("INSERT INTO USER VALUES (?,?,?,?,?,?, 0)",
+                connection.query("INSERT INTO USER VALUES (?,?,?,?,?,?,0)",
                 [user.email, user.password, user.name, gender, user.birth_date, user.profile_img],
                 (err, resultado)=>{
                     connection.release();
@@ -81,21 +81,21 @@ class DAOUser{
         });
     }
 
-    searchUsersWithText(searchText, callback) {
+    searchUsersWithText(searchText, currentUser, callback) {
         this.pool.getConnection((err, connection) =>{
-            if(err){
+            if (err) {
                 callback(err, null);
             }
-            else{
-                connection.query("SELECT email, name, profile_img FROM USER WHERE NAME LIKE ?", 
-                ['%' + searchText + '%'], (err, results) =>{
+            else {
+                connection.query("SELECT * FROM User WHERE Name LIKE ? AND email != ? AND email NOT IN (SELECT emailDestination FROM FriendRequest WHERE emailSender = ? AND state = ?)", 
+                ['%' + searchText + '%', currentUser, currentUser, "ACCEPTED"], (err, results) => {
                     connection.release();
-                    if(err){
+                    if(err) {
                         callback(err, null);
                     }
                     else{
                         let users = [];
-                        
+                    
                         results.forEach(result => {
                             let user = {
                                 email : result.email,
@@ -110,7 +110,6 @@ class DAOUser{
                 });
             }
         });
-    
     }
 
 
@@ -143,7 +142,5 @@ class DAOUser{
         });
     }
 }
-
-
 
 module.exports = DAOUser; 

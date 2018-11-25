@@ -38,13 +38,19 @@
                     <div class="perfil-contenido">
                             <% users.forEach(user => { %> 
                                 <% if (user.email != userEmail) { %>
-                                    <div class="info-amigo-busqueda">
+                                    
+                                      <form method="POST" action="new_friend_request" class="info-amigo-busqueda">
                                         <img class="fotoPerfilAmigo" src="/users/profile_img/<%= user.profile_img %>">
                                         <span class="nombre-amigo contenido-centrado"><%= user.name %></span>
-                                        <a href="" class="botonSolicitudAmistad contenido-centrado">Solicitar amistad</a> 
-                                    </div>
+                                        <input type="hidden" value="<%= user.email %>" name="emailDestination">
+                                        <button type="submit" class="botonSolicitudAmistad contenido-centrado">Solicitar amistad</button> 
+                                      </form>
+                                    
+                                <% } else if (users.length == 1) { // el caso en que devuelve solo el usuario de la sesion %>  
+                                    <h4 class="infoAmigo">No se han encontrado resultados</h4>
                                 <% } %> 
                             <% }); %>
+                            
 
                     </div>
                 </div>              

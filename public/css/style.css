@@ -329,10 +329,9 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 
 /* -------- PAGINA AMIGOS --------- */
 
-.busquedaDeAmigos {  
+.busquedaDeAmigos {
     display: flex;    
     justify-content: center;
-    flex-wrap: no-wrap;  
     margin: 5%;
 }
 
@@ -351,7 +350,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 
 .botonBuscarAmigo {
     color: white;
-    height: 30px;
+    height: 34px;
     border-radius: 0px 8px 8px 0px;
     background: #A55BBE;
     border: 2px solid #A55BBE;

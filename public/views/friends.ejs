@@ -30,11 +30,13 @@
             <a href="#">Amigos</a>
             <a href="#">Preguntas</a>
          </div>
-         <div class="busquedaDeAmigos">                 
-                <input type="text" placeholder="Buscar amigo por nombre">    
-                <a class="botonBuscarAmigo contenido-centrado" href="search"><i class="material-icons">
+         <div class="busquedaDeAmigos">    
+            <form method="POST" action="search">
+                <input type="text" placeholder="Buscar amigo por nombre" name="searchText">    
+                <button type="submit" class="botonBuscarAmigo contenido-centrado"><i class="material-icons">
                         search
-                        </i></a>   
+                        </i></button>
+               </form>              
          </div>
          <div class="panel-amigos">
             <ul class="tabs">
@@ -43,54 +45,15 @@
                   <label for="tab1">Solicitudes de amistad</label>
                   <div id="tab-content1" class="content">
                      <div class="solicitudesDeAmistad">
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
-                           <span class="nombre-amigo contenido-centrado">Miguel</span>
-                           <a class="botonAceptarSolicitudAmistad contenido-centrado"  href="">Aceptar</a>
-                           <a class="botonRechazarSolicitudAmistad contenido-centrado"  href="">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
-                        <div class="solicitudDeAmistad">
-                           <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                           <span class="nombre-amigo contenido-centrado">Hector</span>
-                           <a href="" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
-                           <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
-                        </div>
+                        <% friendRequests.forEach(friendRequest => { %>
+                           <div class="solicitudDeAmistad">
+                              <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendRequest.profile_img %>">
+                              <span class="nombre-amigo contenido-centrado"><%= friendRequest.name %></span>
+                              <a class="botonAceptarSolicitudAmistad contenido-centrado"  href="">Aceptar</a>
+                              <a class="botonRechazarSolicitudAmistad contenido-centrado"  href="">Rechazar</a>
+                           </div>
+                        <% }); %>
+                        
                      </div>
                   </div>
                </li>
