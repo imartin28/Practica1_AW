@@ -96,6 +96,12 @@ body, html {
 
 }
 
+.imagen-perfil-header {
+    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+}
+
 .panel-der-nav-datos {
     display: flex;
     flex-direction: column;
@@ -257,7 +263,6 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
   }
 
 .imagen-perfil {
-    
     width: 150px;
     height: 150px;
     margin-left: auto;
@@ -267,6 +272,13 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     overflow: hidden; 
     box-shadow: 0px 5px 50px 0px #A55BBE, 0px 0px 0px 7px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
   }
+
+  .imagen-perfil > img {
+    width: 150px;
+    height: 150px;
+  }
+
+
 
   .perfil-contenido {
     margin-top: -35px;
@@ -437,11 +449,21 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     text-align: center;
 }
 
-.infoAmigo > img {
+.infoAmigo > img, .info-amigo-busqueda > img {
     box-shadow: 0px 2px 30px 0px #A55BBE, 0px 0px 0px 3px #A55BBE/* rgba(107, 74, 255, 0.5)*/;
 }
 
-
+.info-amigo-busqueda {
+    display: grid;
+    justify-items: center;
+    
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid grey;
+    padding-bottom: 2%;
+    padding-top : 2%;
+}
 
 /* Quitar el borde del último elemento */
 .infoAmigo:last-child, .solicitudDeAmistad:last-child {

@@ -16,7 +16,7 @@
                     <div class="informacion-nav">
                         <div class="panel-izq-nav-imagen">
                                 <% if (profile_img) { %>                        
-                                    <img src="/users/profile_img/<%= profile_img %>">                  
+                                    <img class="imagen-perfil-header" src="/users/profile_img/<%= profile_img %>">                  
                               
                                 <% } %>
                         </div>
@@ -36,18 +36,16 @@
 
                 <div class="panel-perfil">           
                     <div class="perfil-contenido">
-                            <div class="misAmigos">
-                                    <% users.forEach(user => { %> 
-                                        <div class="infoAmigo">
-                                                <img class="fotoPerfilAmigo" src="/users/profile_img/<%= user.profile_img %>">
-                                                <span class="nombre-amigo contenido-centrado"><%= user.name %></span>
-                                                <a href="" class="botonSolicitudAmistad contenido-centrado">Solicitar amistad</a> 
-                                            </div>
-                            
-                                        <% }); %>
-                                   
-                            </div>
-                        
+                            <% users.forEach(user => { %> 
+                                <% if (user.email != userEmail) { %>
+                                    <div class="info-amigo-busqueda">
+                                        <img class="fotoPerfilAmigo" src="/users/profile_img/<%= user.profile_img %>">
+                                        <span class="nombre-amigo contenido-centrado"><%= user.name %></span>
+                                        <a href="" class="botonSolicitudAmistad contenido-centrado">Solicitar amistad</a> 
+                                    </div>
+                                <% } %> 
+                            <% }); %>
+
                     </div>
                 </div>              
             </div>        

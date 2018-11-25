@@ -5,6 +5,7 @@ const mysql = require("mysql");
 const new_user = express.Router();
 const config = require("./config");
 const DAOUser = require("./DAOUser");
+const utils = require("./utils.js");
 const multer = require("multer");
 const multerFactory = multer({ dest: path.join(__dirname, "profile_imgs")});
 
@@ -15,15 +16,6 @@ new_user.use(express.static(ficherosEstaticos));
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 
-function calcularEdad(fechaCumpleaños) {
-    let fechaActual = new Date();
-    let fechaNacimiento = new Date(fechaCumpleaños);
-
-    let edad = fechaActual - fechaNacimiento;
-    edad = Math.floor(edad / (1000*60*60*24*365));
-
-    return edad;
-}
 
 
 new_user.post("/new_user", multerFactory.single("profile_img"), function(request, response) {
@@ -37,7 +29,7 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
         points : 0
     };
    
-    let age = calcularEdad(user.birth_date);
+    let age = utils.calcularEdad(user.birth_date);
    
     if(request.file){
         user.profile_img = request.file.filename;       

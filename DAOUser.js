@@ -87,24 +87,24 @@ class DAOUser{
                 callback(err, null);
             }
             else{
-                connection.query("SELECT name, profile_img FROM USER WHERE NAME LIKE %?%", 
-                [searchText], (err, results) =>{
+                connection.query("SELECT email, name, profile_img FROM USER WHERE NAME LIKE ?", 
+                ['%' + searchText + '%'], (err, results) =>{
                     connection.release();
                     if(err){
                         callback(err, null);
                     }
                     else{
-                        console.log(results);
                         let users = [];
-                        for (let i = 0; i < results.length; ++i) {
+                        
+                        results.forEach(result => {
                             let user = {
+                                email : result.email,
                                 name : result.name,
                                 profile_img : result.profile_img
                             }
                             users.push(user);
-                        }
-                        
-                        
+                        });
+
                         callback(null, users);
                     }
                 });

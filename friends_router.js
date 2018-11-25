@@ -18,7 +18,7 @@ friends.get("/friends", function(request, response) {
 
 friends.get("/search", function(request, response) {
     response.status(200);
-    daoUser.searchUsersWithText("S", (err, users) => {
+    daoUser.searchUsersWithText("I", (err, users) => {
         if (err) {
             console.log(err.message);
         } else {
@@ -29,6 +29,7 @@ friends.get("/search", function(request, response) {
 });
 
 
+                                        
 
 
 module.exports = friends;

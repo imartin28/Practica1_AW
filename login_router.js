@@ -9,7 +9,6 @@ const DAOUser = require("./DAOUser");
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 
-
 login.get("/login", function(request, response) {
     response.status(200);
     response.render("login", {mensajeDeError : null});
@@ -17,8 +16,9 @@ login.get("/login", function(request, response) {
 
 login.post("/login", function(request, response) {
     let email = request.body.email;
-    let password = request.body.password;
+    let password = request.body.password;   
 
+    console.log(email + " " + password);
     daoUser.loginUser(email, password, (err, estaLogueado) => {
         if (estaLogueado) {
             request.session.currentUser = email;
