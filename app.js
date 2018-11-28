@@ -9,10 +9,11 @@ const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore(config.mysqlConfig);
 //Routers
-const login_router = require("./login_router");
-const my_profile_router = require("./my_profile_router");
-const new_user_router = require("./new_user_router");
-const friends_router = require("./friends_router");
+const login_router = require("./routers/login_router");
+const my_profile_router = require("./routers/my_profile_router");
+const new_user_router = require("./routers/new_user_router");
+const friends_router = require("./routers/friends_router");
+const questions_router = require("./routers/questions_router");
 
 // Crear un servidor Express.js
 const app = express();
@@ -38,6 +39,7 @@ app.use("/users", login_router);
 app.use("/users", new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);
+app.use("/users", middlewareControlDeAcceso, questions_router);
 
 function middlewareControlDeAcceso(request,  response, next) {
     let email = request.session.currentUser;

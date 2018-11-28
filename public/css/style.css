@@ -181,7 +181,6 @@ h1, span, a {
     color: white;
 }
 
-
 .input-inicio-sesion, .input-nuevo-usuario {
     font-size: 14px;
     border-radius: 8px;
@@ -196,9 +195,9 @@ h1, span, a {
 
 }
 
-
-input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resaltado al pulsar en un input */
-    outline: 2px solid #A55BBE;         
+input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* Cambiar el color de resaltado al pulsar en un input */
+    outline: none;
+    box-shadow: 0 0 0 1pt #A55BBE;    
 }
 
 ::placeholder {
@@ -264,7 +263,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
    
 }
 
-.panel-perfil, .panel-modificar-perfil {
+.panel-perfil {
     min-height: 460px;
     margin: auto;
     margin-top: 10%;
@@ -310,6 +309,19 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 
+/******** MODIFICAR PERFIL *********/
+
+.panel-modificar-perfil {
+    min-height: 560px;
+    margin: auto;
+    margin-top: 8%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 900px;
+    position: relative;  
+}
+
 .boton-modificar-perfil{
     border: 2px solid rgb(112, 111, 111);
     border-radius: 30px;
@@ -318,8 +330,8 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     left: 90%;
     top: 5%;
     background-color: rgb(201, 198, 198);
-    
 }
+
 .boton-modificar-perfil:hover{
     transform: scale(1.2);
     cursor: pointer;
@@ -329,7 +341,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 
 /* -------- PAGINA AMIGOS --------- */
 
-.busquedaDeAmigos {
+.busquedaDeAmigos > form {
     display: flex;    
     justify-content: center;
     margin: 5%;
@@ -478,6 +490,12 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     padding-top : 2%;
 }
 
+.no-resultados-busqueda-amigos {
+    color: #A55BBE;
+    position: relative;
+    top: 80px;
+}
+
 /* Quitar el borde del último elemento */
 .infoAmigo:last-child, .solicitudDeAmistad:last-child {
     border-bottom: none;
@@ -500,13 +518,13 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     display: inline;
     flex-basis: 292px;
     text-align: center;
-  }
+}
   
-  .tabs .tab > input[type="radio"] {
+.tabs .tab > input[type="radio"] {
       position: absolute;
       top: -9999px;
       left: -9999px;
-  }
+}
   
 .tabs .tab > label {
     display: block;
@@ -517,27 +535,27 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 }
 
 .tabs .content {
-      z-index: 0;/* or display: none; */
-      overflow: hidden;
-      width: 600px;
-      padding-top: 25px;
-      position: absolute;
-      left: 0;
-      color: #DFDFDF;
-      opacity:0;
-      transition: opacity 400ms ease-out;
-  }
+    z-index: 0;/* or display: none; */
+    overflow: hidden;
+    width: 600px;
+    padding-top: 25px;
+    position: absolute;
+    left: 0;
+    color: #DFDFDF;
+    opacity:0;
+    transition: opacity 400ms ease-out;
+}
   
-  .tabs > .tab > :checked + label {
-      top: 0;
-      border-bottom: 3px solid #A55BBE;
-  }
+.tabs > .tab > :checked + label {
+    top: 0;
+    border-bottom: 3px solid #A55BBE;
+}
   
   .tabs > .tab > [id^="tab"]:checked ~ [id^="tab-content"] {
-      z-index: 1;/* or display: block; */
-      opacity: 1;
-      transition: opacity 400ms ease-out;
-  }
+    z-index: 1;/* or display: block; */
+    opacity: 1;
+    transition: opacity 400ms ease-out;
+}
 
   /* LISTADO ALEATORIO DE PREGUNTAS */
 
@@ -550,18 +568,18 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     border-radius: 12px;
     width: 1200px;
     position: relative;
-  }
+}
 
-  .listado-preguntas {
+.listado-preguntas {
     margin-top:15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-  }
+}
 
-  .pregunta-aleatoria {
+.pregunta-aleatoria {
     border: 1px solid rgb(85, 85, 85);
     padding: 3px;
     border-radius: 10px;
@@ -569,15 +587,15 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     margin-top: 20px;  
     width: 70%;
     text-align: center;
-  }
+}
 
-  .pregunta-aleatoria:hover {
-      transform: scale(1.1);
-      cursor: pointer;
-      border-color: #A55BBE;
-      border: 2px solid #A55BBE;
+.pregunta-aleatoria:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    border-color: #A55BBE;
+    border: 2px solid #A55BBE;
       
-  }
+}
 
   .panel-boton-crear-pregunta {    
     display: flex;
@@ -587,7 +605,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
 
   }
 
-  .boton-crear-pregunta {
+.boton-crear-pregunta {
     width: 200px;
     color: white;
     height: 40px;
@@ -599,9 +617,9 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     margin-top: 2%;
     font-size: 15px;   
   
-  }
+}
 
-  .boton-crear-pregunta:hover {
+.boton-crear-pregunta:hover {
     color:black;
     cursor: pointer;
 }
@@ -862,10 +880,8 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25px;
+    padding-top: 22px;
 }
-
-
 
 .input-modificar-perfil {
     font-size: 14px;
@@ -889,7 +905,7 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     height: 30px;
     color: white;
     font-size: 15px;
-    margin-top: 5%;
+    margin-top: 2%;
     border-radius: 8px;
     background: #A55BBE;
     border: 2px solid #A55BBE;
@@ -910,11 +926,20 @@ input[type=text]:focus, input[type=password]:focus { /* Cambiar el color de resa
     border-radius: 8px;
     background: rgba(37, 34, 54, 0.801);
     border: 2px solid rgba(37, 34, 54, 0.801);;
-    margin-top: 4%;
+    margin-top: 1%;
     margin-left: 4%;
 }
 
 .boton-cancelar-modificacion-perfil:hover {
     color:black;
     cursor: pointer;
+}
+
+
+/*******    CREAR NUEVA PREGUNTA    **********/
+
+#formulario-crear-nueva-pregunta {
+    display: flex;
+    flex-direction: column;
+    
 }

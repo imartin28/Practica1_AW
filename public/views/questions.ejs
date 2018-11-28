@@ -11,30 +11,14 @@
     </head>
     <body class="fondo">
             <div>
-                <div class="header">
-                    <div class="logo"> </div>  
-                    <div class="informacion-nav">
-                        <div class="panel-izq-nav-imagen">
-
-                        </div>
-                        <div class="panel-der-nav-datos">
-                           <span class="puntuacion">Puntos: 678</span>
-                           <a class="boton-desconectar contenido-centrado" href="">Desconectar</a>
-                        </div>
-                     </div>
-                </div>
+                <%- include("header") %>
+                <%- include("nav") %>
                 
-                <div class ="nav">
-                    <a href="#">Perfil</a>
-                    <a href="#">Amigos</a>
-                    <a href="#">Preguntas</a>
-                </div>
                 <div class="paginaPerfil-titulo">Preguntas seleccionadas aleatoriamente</div>
 
                 <div class="panel-listado-preguntas">
                     <div class= "panel-boton-crear-pregunta">
-                     
-                        <button class="boton-crear-pregunta contenido-centrado"> Crear nueva pregunta</button>
+                        <a href="create_new_question" class="boton-crear-pregunta contenido-centrado"> Crear nueva pregunta</a>
                     </div>
                     <div class="listado-preguntas">
                         <div class="pregunta-aleatoria">

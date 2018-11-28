@@ -1,15 +1,16 @@
 "use strict";
+
 const express = require("express");
 const path = require("path");
 const mysql = require("mysql");
 const new_user = express.Router();
-const config = require("./config");
-const DAOUser = require("./DAOUser");
-const utils = require("./utils.js");
+const config = require("../config");
+const DAOUser = require("../integracion/DAOUser");
+const utils = require("../utils.js");
 const multer = require("multer");
-const multerFactory = multer({ dest: path.join(__dirname, "profile_imgs")});
+const multerFactory = multer({ dest: path.join(__dirname, ".." ,"profile_imgs")});
 
-const ficherosEstaticos = path.join(__dirname, "public");
+const ficherosEstaticos = path.join(__dirname, "..", "public");
 new_user.use(express.static(ficherosEstaticos));
 
 // Crear un pool de conexiones a la base de datos de MySQL
@@ -31,7 +32,7 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
    
     let age = utils.calcularEdad(user.birth_date);
    
-    if(request.file){
+    if(request.file) {
         user.profile_img = request.file.filename;       
     }
 
@@ -54,9 +55,8 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     });
 });
 
-
 new_user.get("/profile_img/:id", function(request, response)  {
-    let pathImg = path.join(__dirname, "profile_imgs", request.params.id);
+    let pathImg = path.join(__dirname, "..", "profile_imgs", request.params.id);
     response.sendFile(pathImg);
 });
 

@@ -2,8 +2,8 @@
 const express = require("express");
 const mysql = require("mysql");
 const login = express.Router();
-const config = require("./config");
-const DAOUser = require("./DAOUser");
+const config = require("../config");
+const DAOUser = require("../integracion/DAOUser");
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
@@ -18,7 +18,6 @@ login.post("/login", function(request, response) {
     let email = request.body.email;
     let password = request.body.password;   
 
-    console.log(email + " " + password);
     daoUser.loginUser(email, password, (err, estaLogueado) => {
         if (estaLogueado) {
             request.session.currentUser = email;

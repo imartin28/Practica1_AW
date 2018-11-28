@@ -141,6 +141,42 @@ class DAOUser{
             }
         });
     }
+
+
+    updateUser(user, callback){
+        this.pool.getConnection((err, connection) =>{
+            if(err){
+                callback(err);
+            }
+            else{
+                let query = "";
+                let parameters = [ user.password, user.name, user.gender, user.birth_date];
+
+                if(user.profile_img == undefined){
+                    query = "UPDATE USER SET password = ?, name = ?, gender = ?, birth_date = ? WHERE email = ?";
+                }else{
+                    query = "UPDATE USER SET password = ?, name = ?, gender = ?, birth_date = ?, profile_img = ? WHERE email = ?";
+                    parameters.push(user.profile_img);
+                }                    
+              
+                parameters.push(user.email);
+                connection.query(query, parameters, (err, result) =>{
+                    connection.release();
+                    if(err){
+                        callback(err);
+                    }
+                    else{
+                       
+                        callback(null);
+                    }
+                });
+            }
+        });
+    }
+
 }
+
+
+
 
 module.exports = DAOUser; 

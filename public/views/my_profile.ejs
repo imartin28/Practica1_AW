@@ -11,34 +11,14 @@
     </head>
     <body class="fondo">
             <div>
-                <div class="header">
-                    <div class="logo"> </div>  
-                    <div class="informacion-nav">
-                        <div class="panel-izq-nav-imagen">
-                                <% if (profile_img) { %>                        
-                                    <img class="imagen-perfil-header" src="/users/profile_img/<%= profile_img %>">                  
-                                <% } %>
-                        </div>
-                        <div class="panel-der-nav-datos">
-                           <span class="puntuacion">Puntos: <%= points %></span>
-                           <a class="boton-desconectar contenido-centrado" href="logout">Desconectar</a>
-                        </div>
-                     </div>
-                </div>
+                <%- include("header") %>
+                <%- include("nav") %>
                 
-                <div class ="nav">
-                    <a href="#">Perfil</a>
-                    <a href="friends">Amigos</a>
-                    <a href="#">Preguntas</a>
-                </div>
                 <div class="paginaPerfil-titulo">TU PERFIL</div>
 
                 <div class="panel-perfil">
-                   
-                    <div class="imagen-perfil">
-                            <% if (profile_img) { %>                        
-                                <img  src="/users/profile_img/<%= profile_img %>">                  
-                            <% } %>
+                    <div class="imagen-perfil">                                           
+                        <img  src="/users/profile_img/<%= profile_img %>">                  
                     </div>   
 
                     <a href="modify_profile"><i class="material-icons boton-modificar-perfil">edit</i></a>                       

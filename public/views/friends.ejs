@@ -9,27 +9,9 @@
    </head>
    <body class="fondo">
       <div>
-         <div class="header">
-            <div class="logo">
-            </div>
-            <div class="informacion-nav">
-               <div class="panel-izq-nav-imagen">
-                     <% if (profile_img) { %>                        
-                        <img class="imagen-perfil-header" src="/users/profile_img/<%= profile_img %>">                  
-                  
-                    <% } %>
-               </div>
-               <div class="panel-der-nav-datos">
-                  <span class="puntuacion">Puntos: <%= points %></span>
-                  <a class="boton-desconectar contenido-centrado" href="logout">Desconectar</a>
-               </div>
-            </div>
-         </div>
-         <div class ="nav">
-            <a href="my_profile">Perfil</a>
-            <a href="#">Amigos</a>
-            <a href="#">Preguntas</a>
-         </div>
+         <%- include("header") %>
+         <%- include("nav") %>
+
          <div class="busquedaDeAmigos">    
             <form method="POST" action="search">
                 <input type="text" placeholder="Buscar amigo por nombre" name="searchText">    
@@ -46,11 +28,13 @@
                   <div id="tab-content1" class="content">
                      <div class="solicitudesDeAmistad">
                         <% friendRequests.forEach(friendRequest => { %>
+                           
                            <div class="solicitudDeAmistad">
                               <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendRequest.profile_img %>">
-                              <span class="nombre-amigo contenido-centrado"><%= friendRequest.name %></span>
-                              <a class="botonAceptarSolicitudAmistad contenido-centrado"  href="">Aceptar</a>
-                              <a class="botonRechazarSolicitudAmistad contenido-centrado"  href="">Rechazar</a>
+                              <a href="my_friend_profile" class="nombre-amigo contenido-centrado"><%= friendRequest.name %></a>
+                              <a href="request_accepted" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</a>
+                              
+                              <a href="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>
                            </div>
                         <% }); %>
                         
@@ -60,16 +44,15 @@
                <li class="tab">
                   <input type="radio" name="tabs" id="tab2" />
                   <label for="tab2">Amigos</label>   
-                  <div id="tab-content2" class="content">
+                  <div id="tab-content2" class="content">                     
                      <div class="misAmigos">
-                        <div class="infoAmigo">
-                           <img class="fotoPerfilAmigo" src="imagenes/johnCoffey.jpg">
-                           <span class="nombre-amigo contenido-centrado">John Coffey</span>
-                        </div>
-                        <div class="infoAmigo">
-                           <img class="fotoPerfilAmigo" src="imagenes/drEvil.png">
-                           <span class="nombre-amigo contenido-centrado">Doctor maligno</span>
-                        </div>
+                        <% friends.forEach(friend => { %>  
+                           <div class="infoAmigo">
+                              <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friend.profile_img %>">
+                              <a href="my_friend_profile" class="nombre-amigo contenido-centrado"><%= friend.name %></a>
+                           </div>
+                        <% }); %>
+                     
                      </div>
                   </div>
                </li>

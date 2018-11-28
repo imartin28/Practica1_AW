@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS User (
   );
 
 
-
 CREATE TABLE IF NOT EXISTS Friend (
     emailFriend1 VARCHAR(200) not null,
     emailFriend2 VARCHAR(200) not null,
