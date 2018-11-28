@@ -6,6 +6,7 @@ const friends = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
 const DAOFriend = require("../integracion/DAOFriend");
+const utils = require("../utils");
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
@@ -13,7 +14,6 @@ const daoUser = new DAOUser(pool);
 const daoFriend = new DAOFriend(pool);
 
 friends.get("/friends", function(request, response) {
-    response.status(200);
     let email = request.session.currentUser;
 
     daoFriend.getAllFriendRequestsTo(email, (err, friendRequests) => {
@@ -53,7 +53,7 @@ friends.post("/search", function(request, response) {
 });
 
 
-  friends.post("/new_friend_request", function(request, response) {
+friends.post("/new_friend_request", function(request, response) {
     let emailSender = request.session.currentUser;
     let emailDestination = request.body.emailDestination;
    
@@ -67,13 +67,31 @@ friends.post("/search", function(request, response) {
   
 });   
 
-/*
 friends.get("/my_friend_profile", function(request, response){
-    response.status(200);
-    let email = ;
-    daoUser.readUser()
-    response.render("my_profile");
-});*/
+
+    let email = request.body.emailDestination;
+    console.log(email);
+    daoUser.readUser(email, (err, user) => {
+        if (err) {
+            console.log(err);
+        } else {
+            response.status(200);
+        
+            let age = utils.calcularEdad(user.birth_date);
+            
+            request.session.profile_img = user.profile_img;
+            request.session.points = user.points;
+            
+            response.render("my_profile", {name : user.name, 
+                gender: user.gender, 
+                points: user.points,
+                age : age,
+                profile_img : user.profile_img
+            });
+        }
+    });
+    
+});
 
 friends.get("/request_accepted", function(request, response) {
     response.status(200);
@@ -81,6 +99,8 @@ friends.get("/request_accepted", function(request, response) {
     daoFriend.requestAccepted();
 
 });
+
+
 
 
 module.exports = friends;

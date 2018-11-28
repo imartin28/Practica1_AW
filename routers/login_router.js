@@ -10,7 +10,6 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 
 login.get("/login", function(request, response) {
-    response.status(200);
     response.render("login", {mensajeDeError : null});
 });
 

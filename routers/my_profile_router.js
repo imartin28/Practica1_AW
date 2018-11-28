@@ -37,8 +37,6 @@ profile.get("/modify_profile", function(request, response){
     let email = request.session.currentUser;
 
     daoUser.readUser(email, (err, user) => {
-        response.status(200);   
-
         response.render("modify_profile", {
             name : user.name, 
             password : user.password,

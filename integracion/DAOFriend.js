@@ -36,7 +36,7 @@ class DAOFriend{
                 callback(err, null);
             }
             else {
-                connection.query("SELECT name, profile_img FROM User WHERE email IN (SELECT emailSender FROM FriendRequest WHERE emailDestination = ? AND state = ?) ",
+                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailSender FROM FriendRequest WHERE emailDestination = ? AND state = ?) ",
                 [emailCurrentUser, "PENDING"],
                 (err, results) => {
                     connection.release();
@@ -67,7 +67,7 @@ class DAOFriend{
                 callback(err, null);
             }
             else {
-                connection.query("SELECT name, profile_img FROM User WHERE email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) ",
+                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) ",
                 [emailCurrentUser],
                 (err, results) => {
                     connection.release();
