@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(middlewareSession);
 //Routers
 app.use("/users", login_router);
-app.use("/users", new_user_router);
+app.use("/users", middlewareControlDeAcceso, new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);
 app.use("/users", middlewareControlDeAcceso, questions_router);
