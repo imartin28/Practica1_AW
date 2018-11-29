@@ -21,7 +21,10 @@
                         <img  src="/users/profile_img/<%= profile_img %>">                  
                     </div>   
 
-                    <a href="modify_profile"><i class="material-icons boton-modificar-perfil">edit</i></a>                       
+                    <% if (profile_modifiable) { %>
+                        <a href="modify_profile"><i class="material-icons boton-modificar-perfil">edit</i></a>      
+                    <% } %>                 
+                    
                     <div class="perfil-contenido">
                         <div class="perfil-contenido-titulo"><%= name %></div>
                         <div class="perfil-contenido-titulo"><%= age %> años</div>  

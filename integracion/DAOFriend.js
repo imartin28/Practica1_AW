@@ -48,6 +48,7 @@ class DAOFriend{
                         
                         results.forEach(result => {
                             let user = {
+                                email : result.email,
                                 name : result.name,
                                 profile_img : result.profile_img 
                             };
@@ -67,8 +68,8 @@ class DAOFriend{
                 callback(err, null);
             }
             else {
-                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) ",
-                [emailCurrentUser],
+                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) OR email IN (SELECT emailFriend1 FROM Friend WHERE emailFriend2 = ?)",
+                [emailCurrentUser, emailCurrentUser],
                 (err, results) => {
                     connection.release();
                     if (err) {
@@ -79,6 +80,7 @@ class DAOFriend{
                         
                         results.forEach(result => {
                             let user = {
+                                email : result.email,
                                 name : result.name,
                                 profile_img : result.profile_img 
                             };
@@ -103,6 +105,29 @@ class DAOFriend{
                 let query = "DELETE FROM FriendRequest WHERE emailDestination = ? AND emailSender = ? ;";
                 query += "INSERT INTO Friend VALUES (? , ?)"
                 connection.query(query, [emailCurrentUser, emailSender, emailCurrentUser, emailSender],
+                (err, results) => {
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    }
+                    else{  
+                        callback(null);
+                       
+                    }
+                });
+            }
+        });
+    }
+
+    requestRejected(emailCurrentUser, emailSender, callback){
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err);
+            }
+            else {
+                let query = "DELETE FROM FriendRequest WHERE emailDestination = ? AND emailSender = ?";
+                connection.query("DELETE FROM FriendRequest WHERE emailDestination = ? AND emailSender = ?",
+                    [emailCurrentUser, emailSender],
                 (err, results) => {
                     connection.release();
                     if (err) {

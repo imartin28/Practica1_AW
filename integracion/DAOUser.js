@@ -87,8 +87,8 @@ class DAOUser{
                 callback(err, null);
             }
             else {
-                connection.query("SELECT * FROM User WHERE Name LIKE ? AND email != ? AND email NOT IN (SELECT emailDestination FROM FriendRequest WHERE emailSender = ? AND state = ?)", 
-                ['%' + searchText + '%', currentUser, currentUser, "ACCEPTED"], (err, results) => {
+                connection.query("SELECT * FROM User WHERE Name LIKE ? AND email != ? AND email NOT IN (SELECT emailDestination FROM FriendRequest WHERE emailSender = ? AND state = ?) AND email NOT IN (SELECT emailSender FROM FriendRequest WHERE emailDestination = ? AND state = ?) AND email NOT IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) AND email NOT IN (SELECT emailFriend1 FROM Friend WHERE emailFriend2 = ?) ", 
+                ['%' + searchText + '%', currentUser, currentUser, "PENDING", currentUser, "PENDING", currentUser, currentUser], (err, results) => {
                     connection.release();
                     if(err) {
                         callback(err, null);

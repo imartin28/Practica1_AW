@@ -26,19 +26,17 @@
                   <input type="radio" name="tabs" checked="checked" id="tab1" />
                   <label for="tab1">Solicitudes de amistad</label>
                   <div id="tab-content1" class="content">
-                  
                      <div class="solicitudesDeAmistad">
                         <% friendRequests.forEach(friendRequest => { %>
                            <form method="POST" action="accept_or_decline_friend_request" class="solicitudDeAmistad">
-                              <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendRequest.profile_img %>">
-                              <a href="my_friend_profile" class="nombre-amigo contenido-centrado"><%= friendRequest.name %></a>
+                              <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendRequest.profile_img %>">                              
+                              
                               <input type="hidden" value="<%= friendRequest.email %>" name="emailDestination">
-
-                              <button type="submit" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</button>
-                              <button type="" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</a>  
+                              <button type="submit" value="profile_link" name="request_button" class="nombre-amigo contenido-centrado"><%= friendRequest.name %></button>
+                              <button type="submit" value="request_accepted" name="request_button" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</button>
+                              <button type="submit" value="request_rejected" name="request_button" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</button>  
                            </form> 
                         <% }); %>
-                        
                      </div>
                   </div>
                </li>
@@ -50,8 +48,8 @@
                         <% friends.forEach(friend => { %>  
                            <form method="POST" action="my_friend_profile" class="infoAmigo">
                               <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friend.profile_img %>">
-                              <input type="hidden" value="<%= friend.email %>" name="emailDestination">
-                              <a href="my_friend_profile" class="nombre-amigo contenido-centrado"><%= friend.name %></a>
+                              <input type="hidden" name="emailDestination" value="<%= friend.email %>"> 
+                              <button type="submit" class="nombre-amigo contenido-centrado"><%= friend.name %></button>
                            </form>
                         <% }); %>
                      </div>

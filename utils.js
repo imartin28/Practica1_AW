@@ -13,5 +13,4 @@ function calcularEdad(fechaCumpleaños) {
 
 module.exports = {
     calcularEdad : calcularEdad
-    
 };

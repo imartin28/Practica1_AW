@@ -4,6 +4,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const morgan = require("morgan");
 const session = require("express-session");
 const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(session);
@@ -22,7 +23,6 @@ const ficherosEstaticos = path.join(__dirname, "public");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "public", "views"));
 
-
 const middlewareSession = session({
     saveUninitialized: false, //Que no se cree ninguna sesión para los clientes que no estén en la BBDD de sesiones
     secret: "foobar34", // Se utiliza firmar el SID que se envía al cliente
@@ -33,13 +33,42 @@ const middlewareSession = session({
 // Middlewares
 app.use(express.static(ficherosEstaticos));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan("dev"));
 app.use(middlewareSession);
+
 //Routers
 app.use("/users", login_router);
 app.use("/users", middlewareControlDeAcceso, new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);
 app.use("/users", middlewareControlDeAcceso, questions_router);
+app.use(middlewareError404);
+app.use(middlewareError500);
+
+
+
+function middlewareError404(request, response, next) {
+    response.status(404);
+    response.render("error", {
+        nombreError : "404 - Page not found",
+        mensaje : "Page not found",
+        pila: null
+    
+    });
+}
+
+function middlewareError500(error, request, response, next) {
+    //Código 500: Internal server error
+    response.status(500);
+    response.render("error", {
+        nombreError : "500 - Internal server error",
+        mensaje : error.message,
+        pila : error.stack
+    });
+}
+
+
+
 
 function middlewareControlDeAcceso(request,  response, next) {
     let email = request.session.currentUser;

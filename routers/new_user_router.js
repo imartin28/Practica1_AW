@@ -9,7 +9,6 @@ const DAOUser = require("../integracion/DAOUser");
 const utils = require("../utils.js");
 const multer = require("multer");
 const multerFactory = multer({ dest: path.join(__dirname, ".." ,"profile_imgs")});
-
 const ficherosEstaticos = path.join(__dirname, "..", "public");
 new_user.use(express.static(ficherosEstaticos));
 
@@ -18,8 +17,8 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 
 
-
-new_user.post("/new_user", multerFactory.single("profile_img"), function(request, response) {
+/* Crea un nuevo usuario y mete en la sesión los datos del nuevo usuario */
+new_user.post("/new_user", multerFactory.single("profile_img"), function(request, response, next) {
     let user  = {
         email : request.body.email,
         password : request.body.password,
@@ -40,21 +39,33 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     request.session.profile_img = user.profile_img;
     request.session.points = user.points;
     
-    //HAY QUE COMPROBAR QUE EL EMAIL EXISTE EN LA BD
-    daoUser.insertUser(user, (err) =>{
-        if(!err){        
-            response.render("my_profile", {name : user.name, 
-            gender: user.gender, 
-            points: user.points,
-            age : age,
-            profile_img : user.profile_img,
-            
+    daoUser.readUser(user.email, (err, user) => {
+        if(err){
+            next(err);
+        } else if(user == null) {
+            daoUser.insertUser(user, (err) =>{
+                if(err){
+                    next(err);
+                }else{        
+                    response.render("my_profile", {
+                        name : user.name, 
+                        gender: user.gender, 
+                        points: user.points,
+                        age : age,
+                        profile_img : user.profile_img,            
+                    });
+                }                 
             });
-        } 
-                
+        } else{
+            console.log("error, ya existe el usuario");
+        }
     });
+
+    
 });
 
+
+/* Ruta paramétrica de la imagen de perfil */
 new_user.get("/profile_img/:id", function(request, response)  {
     let pathImg = path.join(__dirname, "..", "profile_imgs", request.params.id);
     response.sendFile(pathImg);
