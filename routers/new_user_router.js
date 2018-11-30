@@ -17,6 +17,29 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 
 
+new_user.get("/new_user", function(request, response)  {    
+   
+    response.render("new_user", {errores : null});
+});
+
+
+
+function camposDeFormularioValidos(request) {
+    request.checkBody("email", "Debe introducir un email").notEmpty();
+    request.checkBody("email", "Dirección de correo no válida").isEmail();
+
+    request.checkBody("password", "Debe introducir una contraseña").notEmpty();
+    request.checkBody("password", "Introduzca una contraseña correcta").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/);
+
+    request.checkBody("name", "Debe añadir un nombre").notEmpty();
+    request.checkBody("name", "El nombre debe contener solo letras y/o números").matches(/^[A-Za-z0-9_-]+$/);
+
+    request.checkBody("gender", "Debe elegir una opción").notEmpty();
+
+    request.checkBody("birth_date", "Debe introducir una fecha válida").isBefore();
+}
+
+
 /* Crea un nuevo usuario y mete en la sesión los datos del nuevo usuario */
 new_user.post("/new_user", multerFactory.single("profile_img"), function(request, response, next) {
     let user  = {
@@ -28,41 +51,59 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
         profile_img: "noPerfil.jpg", 
         points : 0
     };
-   
-    let age = utils.calcularEdad(user.birth_date);
-   
-    if(request.file) {
-        user.profile_img = request.file.filename;       
-    }
 
-    request.session.currentUser = user.email;
-    request.session.profile_img = user.profile_img;
-    request.session.points = user.points;
-    
-    daoUser.readUser(user.email, (err, user) => {
-        if(err){
-            next(err);
-        } else if(user == null) {
-            daoUser.insertUser(user, (err) =>{
-                if(err){
-                    next(err);
-                }else{        
-                    response.render("my_profile", {
-                        name : user.name, 
-                        gender: user.gender, 
-                        points: user.points,
-                        age : age,
-                        profile_img : user.profile_img,            
-                    });
-                }                 
-            });
-        } else{
-            console.log("error, ya existe el usuario");
+   
+    console.log(user);
+        camposDeFormularioValidos(request);
+      
+
+        let age = utils.calcularEdad(user.birth_date);
+   
+        if(request.file) {
+            user.profile_img = request.file.filename;       
         }
-    });
 
+        request.session.currentUser = user.email;
+        request.session.profile_img = user.profile_img;
+        request.session.points = user.points;
+        
+        request.getValidationResult().then(function(result) {
+         
+            if (!result.isEmpty()) {
+                response.render("new_user", {errores : result.mapped()});
+                
+            } else {
+                console.log("holasssssss");
+                daoUser.readUser(user.email, (err, user) => {
+                    if(err){
+                        next(err);
+                    } else if(user == null) {
+                        daoUser.insertUser(user, (err) =>{
+                            if(err){
+                                
+                                next(err);
+                            }else{     
+                                console.log("estoy en el readUser");   
+                                response.render("my_profile", {
+                                    name : user.name, 
+                                    gender: user.gender, 
+                                    points: user.points,
+                                    age : age,
+                                    profile_img : user.profile_img,            
+                                });
+                            }                 
+                        });
+                    } else{
+                        console.log("Error, ya existe el usuario");
+                    }
+                }); 
+            }
+        });
+    
+          
     
 });
+
 
 
 /* Ruta paramétrica de la imagen de perfil */

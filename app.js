@@ -9,12 +9,14 @@ const session = require("express-session");
 const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore(config.mysqlConfig);
+const expressValidator = require("express-validator");
 //Routers
 const login_router = require("./routers/login_router");
 const my_profile_router = require("./routers/my_profile_router");
 const new_user_router = require("./routers/new_user_router");
 const friends_router = require("./routers/friends_router");
 const questions_router = require("./routers/questions_router");
+
 
 // Crear un servidor Express.js
 const app = express();
@@ -35,10 +37,11 @@ app.use(express.static(ficherosEstaticos));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(middlewareSession);
+app.use(expressValidator());
 
 //Routers
 app.use("/users", login_router);
-app.use("/users", middlewareControlDeAcceso, new_user_router);
+app.use("/users", new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);
 app.use("/users", middlewareControlDeAcceso, questions_router);
@@ -49,12 +52,7 @@ app.use(middlewareError500);
 
 function middlewareError404(request, response, next) {
     response.status(404);
-    response.render("error", {
-        nombreError : "404 - Page not found",
-        mensaje : "Page not found",
-        pila: null
-    
-    });
+    response.render("error404");
 }
 
 function middlewareError500(error, request, response, next) {
@@ -66,9 +64,6 @@ function middlewareError500(error, request, response, next) {
         pila : error.stack
     });
 }
-
-
-
 
 function middlewareControlDeAcceso(request,  response, next) {
     let email = request.session.currentUser;

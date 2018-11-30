@@ -5,7 +5,7 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="/css/style.css" rel="stylesheet" media="screen"/>
-        <link rel="icon" type="image/png" href="imagenes/favicon.png"/>
+       <!-- <link rel="icon" type="image/png" href="imagenes/favicon.png"/> -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	</head>
@@ -27,12 +27,12 @@
                     <button type="submit" class="botonAcceder">Acceder</button>
                 </form>
                 <% if (mensajeDeError != null) { %>
-                    <h4><%= mensajeDeError %></h4>
+                    <h4 class="mensajes-error"><%= mensajeDeError %></h4>
                 <% } %>
 
                 <div class="registro">
                     <span>¿No tienes una cuenta?</span>
-                    <a href="/new_user.html">Crear nueva cuenta</a>
+                    <a href="/users/new_user">Crear nueva cuenta</a>
                 </div>
 
                 

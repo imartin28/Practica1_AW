@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+	<html lang="es">
+	<head>
+		<title>FaceBluff</title>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="/css/style.css" rel="stylesheet" media="screen"/>
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="contenedor">
+            <div class="header">
+                <div class="logo">
+                
+                </div>
+            </div>
+            
+            <div class="panelNuevoUsuario">
+              <h1>Nuevo Usuario</h1>    
+                           
+                <form method="POST" action="new_user" class="formulario-nuevo-usuario" enctype="multipart/form-data">              
+                    
+                    <label class="textoRegistro">Email: </label>               
+                    <input class="input-nuevo-usuario" type="text" name="email" placeholder="example@facebluff.com"><br>
+                    <% if (errores != null && errores.email) { %>
+                        <span class="mensajes-error"><%= errores.email.msg %></span>
+                    <% } %>                  
+
+                    <label class="textoRegistro">Contraseña: </label>                    
+                    <input class="input-nuevo-usuario" type="password" name="password" placeholder="Min. 5 letras y un número al final"><br>
+                    <% if (errores != null && errores.password) { %>
+                        <span class="mensajes-error"><%= errores.password.msg %></span>
+                    <% } %>  
+
+                    <label class="textoRegistro">Nombre Completo: </label>                   
+                    <input class="input-nuevo-usuario" type="text" name="name" placeholder="Nombre Completo" ><br><br>
+                    <% if (errores != null && errores.name) { %>
+                        <span class="mensajes-error"><%= errores.name.msg %></span>
+                    <% } %>  
+
+
+                    <label class="textoRegistro">Género: </label>     
+                    <input type="radio" name="gender" value="Masculino"> Masculino
+                    <input type="radio" name="gender" value="Femenino"> Femenino
+                    <input type="radio" name="gender" value="Otro"> Otro <br>
+                    <% if (errores != null && errores.gender) { %>
+                        <span class="mensajes-error"><%= errores.gender.msg %></span>
+                    <% } %> 
+                    
+                    <label class="textoRegistro">Fecha de Nacimiento: </label>   
+                    <input class="input-nuevo-usuario" type="date" name="birth_date" placeholder="dd/mm/aaaa" ><br>
+                    <% if (errores != null && errores.birth_date) { %>
+                        <span class="mensajes-error"><%= errores.birth_date.msg %></span>
+                    <% } %> 
+                    
+                    <label class="textoRegistro">Imagen de Perfil: </label> 
+                    <input  type="file" name="profile_img" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png" >
+                   
+                    <button type="submit" class="botonAcceder">Crear Usuario</button>
+                  </form>
+                  <div class="registro">
+                        
+                        <a href="/users/login">Volver a iniciar sesión</a>
+                    </div>
+            </div>
+        </div>    
+
+    </body>
+</html>

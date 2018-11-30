@@ -12,6 +12,7 @@ const daoUser = new DAOUser(pool);
 
 /* Muestra página principal de login */
 login.get("/login", function(request, response) {
+   
     response.render("login", {mensajeDeError : null});
 });
 

@@ -5,6 +5,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <link href="/css/style.css" rel="stylesheet" media="screen"/>
       <link rel="icon" type="image/png" href="imagenes/logo.png"/>
+   
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    </head>
    <body class="fondo">
@@ -33,8 +34,8 @@
                               
                               <input type="hidden" value="<%= friendRequest.email %>" name="emailDestination">
                               <button type="submit" value="profile_link" name="request_button" class="nombre-amigo contenido-centrado"><%= friendRequest.name %></button>
-                              <button type="submit" value="request_accepted" name="request_button" class="botonAceptarSolicitudAmistad contenido-centrado">Aceptar</button>
-                              <button type="submit" value="request_rejected" name="request_button" class="botonRechazarSolicitudAmistad contenido-centrado">Rechazar</button>  
+                              <button type="submit" value="request_accepted" name="request_button" class="boton-aceptar-amistad contenido-centrado">Aceptar</button>
+                              <button type="submit" value="request_rejected" name="request_button" class="boton-rechazar-amistad contenido-centrado">Rechazar</button>  
                            </form> 
                         <% }); %>
                      </div>
