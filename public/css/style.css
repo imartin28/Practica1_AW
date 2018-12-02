@@ -134,6 +134,14 @@ button {
     margin-top: 4%;
 }
 
+.mensajes-error-nuevo-usuario {
+    color: red;
+    position: relative;
+    left: 213px;
+}
+
+
+
 
 /************ PAGINA LOGIN *************/
 
@@ -151,18 +159,21 @@ button {
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
-.mensajes-error {
+.mensajes-error-login {
     color: red;
 }
 
 .panelNuevoUsuario {
     margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 600px;
-    height: 500px;
+    
+    height: fit-content;
     justify-content: space-around;
     background: rgba(35, 22, 39, 0.801);
     border-radius: 8px;
@@ -193,7 +204,7 @@ h1, span, a {
     color: white;
 }
 
-.input-inicio-sesion, .input-nuevo-usuario {
+.input-inicio-sesion {
     font-size: 14px;
     border-radius: 8px;
     border: 1px solid #000000;
@@ -243,17 +254,48 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 .formulario-nuevo-usuario {
     text-align: left;
-    padding-left: 100px;
-
 }
 
-.formulario-nuevo-usuario > input[type="file"] {
-    padding-top: 20px;
+.formulario-nuevo-usuario  input[type="file"] {
+    position: relative;
+    left: 25px;
 }
 
 .formulario-nuevo-usuario > button[type="submit"] {
     position: relative;
     left: 100px;
+    margin-bottom: 15px;
+}
+
+.campo-formulario-nuevo-usuario {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-imagen-perfil {
+    position: relative;
+    left: 25px;
+}
+
+.input-nuevo-usuario {
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    color: white;
+
+    height: 30px;
+    width: 220px;
+    background: rgba(116, 111, 111, 0.6);
+    border: none;
+    text-indent: 3%;
+}
+
+.mensajes-error-nuevo-usuario {
+    color: red;
+    position: relative;
+    left: 213px;
 }
 
 /* -------- PAGINA PERFIL USUARIO ---------*/
@@ -979,7 +1021,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     width: 300px;
     height: 150px;
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
-    
 }
 
 #formulario-crear-nueva-pregunta input[type="text"] {
