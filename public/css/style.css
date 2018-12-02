@@ -97,7 +97,6 @@ button {
     height: 70px;
     background-size: cover; 
     box-shadow: 0px 1px 25px 0px #A55BBE, 0px 0px 0px 4px #A55BBE;
-
 }
 
 .imagen-perfil-header {
@@ -123,11 +122,20 @@ button {
     margin-top: 4%;
 }
 
-
 .boton-desconectar:hover {
     color:black;
     cursor: pointer;
 }
+
+.titulo-pagina {
+    color:#A55BBE;
+    font-size:50px;
+    text-align: center;
+    margin-top: 4%;
+}
+
+
+/************ PAGINA LOGIN *************/
 
 .panelInicioSesion {
     margin: auto;
@@ -196,7 +204,6 @@ h1, span, a {
     background: rgba(116, 111, 111, 0.6);
     border: none;
     text-indent: 3%;
-
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* Cambiar el color de resaltado al pulsar en un input */
@@ -208,7 +215,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     color: rgb(175, 172, 172);
 }
 
-.botonAcceder {
+.botonAcceder, .boton-crear-usuario {
     width: 220px;
     color: white;
     height: 30px;
@@ -218,7 +225,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     border: 2px solid #A55BBE;
 }
 
-.botonAcceder:hover {
+.botonAcceder:hover, .boton-crear-usuario:hover {
     color:black;
     cursor: pointer;
 }
@@ -256,15 +263,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 .fondo{
     opacity: 0.8;  
     background-color: rgb(201, 198, 198);
-}
-
-
-.paginaPerfil-titulo, .titulo-pregunta, .pagina-modificar-perfil-titulo {
-    color:#A55BBE;
-    font-size:50px;
-    text-align: center;
-    margin-top: 4%;
-   
 }
 
 .panel-perfil {
@@ -628,12 +626,24 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     margin-right: 6%;
     margin-top: 2%;
     font-size: 15px;   
-  
 }
 
 .boton-crear-pregunta:hover {
     color:black;
     cursor: pointer;
+}
+
+.boton-cancelar-crear-pregunta {
+    width: 200px;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(37, 34, 54, 0.801);
+    text-decoration: none;
+    text-align: center;
+    margin-right: 6%;
+    margin-top: 2%;
+    font-size: 15px;  
 }
 
 
@@ -928,7 +938,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     cursor: pointer;
 }
 
-.boton-cancelar-modificacion-perfil {
+.boton-cancelar-modificacion-perfil{
     position: relative;
     top: 4px;
     width: 220px;
@@ -936,8 +946,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     color: white;
     font-size: 15px;
     border-radius: 8px;
+    text-decoration: none;
     background: rgba(37, 34, 54, 0.801);
-    border: 2px solid rgba(37, 34, 54, 0.801);;
     margin-top: 1%;
     margin-left: 4%;
 }
@@ -953,6 +963,58 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 #formulario-crear-nueva-pregunta {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.campo-formulario-crear-nueva-pregunta {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.textarea-respuestas {
+    resize: none;
+    width: 300px;
+    height: 150px;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
     
 }
+
+#formulario-crear-nueva-pregunta input[type="text"] {
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    color: white;
+    height: 30px;
+    width: 420px;
+    background: rgba(0, 0, 0, 0.07);
+    border: none;
+    text-indent: 3%;
+}
+
+.textarea-respuestas:focus {
+    outline: none;
+    box-shadow: 0 0 0 1pt #A55BBE;
+} 
+
+.panel-crear-nueva-pregunta {
+    min-height: 460px;
+    margin: auto;
+    margin-top: 8%;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: #fff;
+    border-radius: 12px;
+    width: 900px;
+    position: relative;  
+}
+
+.label-formulario-nueva-pregunta {
+    height: fit-content;
+    padding-right: 10px; 
+}
+    
+
+
 

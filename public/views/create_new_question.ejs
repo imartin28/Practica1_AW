@@ -13,9 +13,9 @@
             <div>
                 <%- include("header") %>
                 <%- include("nav") %>
-                <div class="pagina-modificar-perfil-titulo">CREAR NUEVA PREGUNTA</div>
+                <div class="titulo-pagina">CREAR NUEVA PREGUNTA</div>
                 
-                <div class="panel-modificar-perfil">        
+                <div class="panel-crear-nueva-pregunta">        
                    <form method="POST" action="create_new_question" id="formulario-crear-nueva-pregunta" enctype="multipart/form-data">
                         <div class="campo-formulario-crear-nueva-pregunta"> 
                             <label class="label-formulario-nueva-pregunta"> Título de la pregunta: </label>
@@ -26,11 +26,11 @@
                             <label class="label-formulario-crear-nueva-pregunta">Introduzca una respuesta por linea: </label>                        
                         </div>
 
-                        <textarea name="comment" form="usrform">  </textarea>
+                        <textarea class="textarea-respuestas" name="comment" form="usrform">  </textarea>
 
-                        <div class="campo-formulario-modificacion-perfil">
-                            <button type="submit" class="boton-aceptar-modificacion-perfil"> Crear nueva pregunta </button>
-                            <a href="my_profile" class="boton-cancelar-modificacion-perfil"> Cancelar </a>
+                        <div class="campo-formulario-crear-nueva-pregunta">
+                            <button type="submit" class="boton-crear-pregunta"> Crear nueva pregunta </button>
+                            <a href="my_profile" class="boton-cancelar-crear-pregunta contenido-centrado"> Cancelar </a>
                         </div>
                    </form>
                 </div>              
