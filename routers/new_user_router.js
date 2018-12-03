@@ -35,8 +35,10 @@ function camposDeFormularioValidos(request) {
     request.checkBody("name", "El nombre debe contener solo letras y/o números").matches(/^[A-Za-z0-9_-]+$/);
 
     request.checkBody("gender", "Debe elegir una opción").notEmpty();
-
-    request.checkBody("birth_date", "Debe introducir una fecha válida").isBefore();
+    
+    if(request.body.birth_date != ""){
+        request.checkBody("birth_date", "Debe introducir una fecha válida").isBefore();
+    }
 }
 
 
@@ -73,7 +75,7 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
                 response.render("new_user", {errores : result.mapped()});
                 
             } else {
-                console.log("holasssssss");
+                
                 daoUser.readUser(user.email, (err, user) => {
                     if(err){
                         next(err);
@@ -83,7 +85,7 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
                                 
                                 next(err);
                             }else{     
-                                console.log("estoy en el readUser");   
+                                  
                                 response.render("my_profile", {
                                     name : user.name, 
                                     gender: user.gender, 

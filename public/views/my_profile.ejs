@@ -30,10 +30,23 @@
                     <% } %>                 
                     
                     <div class="perfil-contenido">
-                        <div class="perfil-contenido-titulo"><%= name %></div>
-                        <div class="perfil-contenido-titulo"><%= age %> años</div>  
-                        <div class="perfil-contenido-titulo"><%= gender %></div>       
-                        <div class="perfil-contenido-titulo"><%= points %> puntos</div>         
+                        <div class="centrar-datos-perfil">
+                            <div class="perfil-contenido-titulo"><i class="material-icons">bubble_chart</i> Nombre: </div>
+                            <p class="perfil-contenido-datos"><%= name %></p>
+                         </div>
+                        
+                         <div class="centrar-datos-perfil">
+                            <div class="perfil-contenido-titulo"><i class="material-icons">bubble_chart</i> Edad:</div>  
+                            <p class="perfil-contenido-datos"><%= age %> años</p>
+                        </div>
+                        <div class="centrar-datos-perfil">
+                            <div class="perfil-contenido-titulo"><i class="material-icons">bubble_chart</i> Género: </div>  
+                            <p class="perfil-contenido-datos"><%= gender %> </p>
+                        </div>
+                        <div class="centrar-datos-perfil">
+                            <div class="perfil-contenido-titulo"><i class="material-icons">bubble_chart</i> Puntos: </div> 
+                            <p class="perfil-contenido-datos"><%= points %> </p>
+                        </div>  
                     </div>
                 </div>              
             </div>        

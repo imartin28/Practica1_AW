@@ -136,8 +136,9 @@ button {
 
 .mensajes-error-nuevo-usuario {
     color: red;
-    position: relative;
-    left: 213px;
+    position: relative;   
+    font-size:12px;
+    
 }
 
 
@@ -316,6 +317,9 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     border-radius: 12px;
     width: 900px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
     
   }
 
@@ -339,18 +343,38 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
   .perfil-contenido {
     margin-top: -35px;
-    text-align: center;
     padding: 0 20px;
     padding-bottom: 40px;
     transition: all .3s;
+    padding-top:30px;
+    display:inline-block;
+   
   }
 
+  .centrar-datos-perfil{
+    
+    display: flex;
+    justify-content: center;
+    margin-top:10px;
+    width: fit-content;   
+    
+}
   .perfil-contenido-titulo {
     font-weight: 700;
     font-size: 24px;
     color: #A55BBE;
     margin-bottom: 15px;
+    align-items: center;
+    
 }
+  .perfil-contenido-datos{
+    font-size: 20px;
+    padding-left:15px;
+    padding-top:3px;
+
+}
+
+
 
 
 /******** MODIFICAR PERFIL *********/
