@@ -195,6 +195,7 @@ button {
 .registro a {
     text-decoration: none;
     font-size: 12px;
+    
 }
 
 .registro a:hover {
@@ -264,7 +265,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 .formulario-nuevo-usuario > button[type="submit"] {
     position: relative;
-    left: 100px;
+    left: 130px;
     margin-bottom: 15px;
 }
 
@@ -273,6 +274,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     display: flex;
     justify-content: center;
     align-items: center;
+    /*border: 1px solid red;*/
 }
 
 .label-imagen-perfil {
@@ -297,6 +299,18 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     color: red;
     position: relative;
     left: 213px;
+}
+
+.div-nuevo-usuario-genero{
+    width: 250px;
+    /*border: 1px solid white;*/
+}
+
+.div-texto-genero{
+   /* border:1px solid yellow;*/
+    width: 190px;
+    margin-left:40px;
+    
 }
 
 /* -------- PAGINA PERFIL USUARIO ---------*/
@@ -391,13 +405,15 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 }
 
 .boton-modificar-perfil{
-    border: 2px solid rgb(112, 111, 111);
+    border: 2px solid rgb(179, 38, 226);
+   /* border: 2px solid rgb(112, 111, 111);*/
     border-radius: 30px;
     padding: 15px;
     position: absolute;
     left: 90%;
     top: 5%;
-    background-color: rgb(201, 198, 198);
+    background-color: #A55BBE;
+   /* background-color: rgb(201, 198, 198);*/
 }
 
 .boton-modificar-perfil:hover{

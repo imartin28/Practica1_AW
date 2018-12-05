@@ -51,10 +51,20 @@
                     <% } %>  
 
                     <div class="campo-formulario-nuevo-usuario">
-                        <label class="textoRegistro">Género: </label>     
-                        <input type="radio" name="gender" value="Masculino"> Masculino
-                        <input type="radio" name="gender" value="Femenino"> Femenino
-                        <input type="radio" name="gender" value="Otro"> Otro 
+                        <div class="div-texto-genero">
+                            <label class="textoRegistro">Género: </label>
+                         </div>
+                        <div class="div-nuevo-usuario-genero"> 
+                            <div>
+                                <input type="radio" name="gender" value="Masculino"> Masculino
+                            </div>  
+                            <div>
+                                <input type="radio" name="gender" value="Femenino"> Femenino
+                            </div>  
+                            <div>
+                             <input type="radio" name="gender" value="Otro"> Otro 
+                            </div>  
+                        </div> 
                     </div>
 
                     <% if (errores != null && errores.gender) { %>

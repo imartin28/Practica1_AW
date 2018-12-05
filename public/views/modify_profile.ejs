@@ -25,17 +25,17 @@
                    <form method="POST" action="modify_profile" enctype="multipart/form-data" class="formulario-modificar-perfil">
                         <div class="campo-formulario-modificacion-perfil"> 
                             <label class="label-formulario-modificacion-perfil">Email: </label>               
-                            <input class="input-modificar-perfil" type="text" name="email" value="<%= userEmail %>" disabled><br>    
+                            <input class="input-modificar-perfil" type="text" name="email" value="<%= userEmail %>" disabled>    
                         </div>  
 
                         <div class="campo-formulario-modificacion-perfil">
                             <label class="label-formulario-modificacion-perfil">Contraseña: </label>                    
-                            <input class="input-modificar-perfil" type="text" name="password" value="<%= password %>"><br>    
+                            <input class="input-modificar-perfil" type="text" name="password" value="<%= password %>">  
                         </div>
 
                         <div class="campo-formulario-modificacion-perfil">
                             <label class="label-formulario-modificacion-perfil">Nombre Completo: </label>                   
-                            <input class="input-modificar-perfil" type="text" name="name" value="<%= name %>"><br><br>
+                            <input class="input-modificar-perfil" type="text" name="name" value="<%= name %>">
                         </div>
 
                         <div class="campo-formulario-modificacion-perfil">
@@ -43,21 +43,21 @@
                             <% if (gender == 'Hombre') {%>
                                 <input type="radio" name="gender" value="Masculino" checked> Masculino
                                 <input type="radio" name="gender" value="Femenino"> Femenino
-                                <input type="radio" name="gender" value="Otro"> Otro <br>
+                                <input type="radio" name="gender" value="Otro"> Otro
                             <% } else if(gender == 'Mujer') { %>  
                                 <input type="radio" name="gender" value="Masculino" > Masculino
                                 <input type="radio" name="gender" value="Femenino" checked> Femenino
-                                <input type="radio" name="gender" value="Otro"> Otro <br> 
+                                <input type="radio" name="gender" value="Otro"> Otro 
                             <% } else { %>
                                 <input type="radio" name="gender" value="Masculino"> Masculino
                                 <input type="radio" name="gender" value="Femenino"> Femenino
-                                <input type="radio" name="gender" value="Otro" checked> Otro <br> 
+                                <input type="radio" name="gender" value="Otro" checked> Otro 
                             <% } %>
                         </div>
 
                         <div class="campo-formulario-modificacion-perfil">
                             <label class="label-formulario-modificacion-perfil">Fecha de Nacimiento: </label>   
-                            <input class="input-modificar-perfil" type="date" name="birth_date" value="<%= birth_date %>" ><br>
+                            <input class="input-modificar-perfil" type="date" name="birth_date" value="<%= birth_date %>" >
                         </div>
 
                         <div class="campo-formulario-modificacion-perfil">
