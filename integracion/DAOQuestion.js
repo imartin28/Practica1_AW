@@ -1,29 +1,34 @@
+
 "use strict";
 
-class DAOFriend{
+class DAOQuestion{
 
     constructor(pool){
         this.pool = pool;
     }
 
     
-    insertFriendRequest(emailSender, emailDestination, callback){
+    readFiveRandomQuestions(callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
-                callback(err);
+                callback(err, null);
             }
             else{
-                let state = "PENDING";
-                
-                connection.query("INSERT INTO FriendRequest VALUES (?,?,?)",
-                [emailSender, emailDestination, state],
-                (err, resultado)=>{
+                           
+                connection.query("SELECT * FROM Question ORDER BY RAND() LIMIT 5 ",
+                   (err, rows)=>{
                     connection.release();
                     if(err){
-                        callback(err);
+                        callback(err, null);
                     }
-                    else{                     
-                        callback(null);
+                    else{           
+                        let questions = [];
+                        rows.forEach(question =>{
+                            questions.push(question.text_question);
+
+                        });
+                        callback(null, questions);
+                        
                     }
                 });
             }
@@ -31,8 +36,43 @@ class DAOFriend{
     }
 
 
-    
-    getAllFriendRequestsTo(emailCurrentUser, callback){
+    insertQuestion(question, callback){
+        this.pool.getConnection((err, connection) =>{
+            if(err){
+                callback(err);
+            }
+            else{
+                           
+                connection.query("INSERT INTO Question (text_question) VALUES (?)",
+                [question.text], 
+                (err, resultado)=>{
+                    connection.release();
+                    if(err){
+                        callback(err);
+                    }
+                    else{       
+                        let values = [];
+                        question.answers.forEach(answer =>{
+                            values.push([resultado.insertId, answer]);
+                        });
+                        
+                        connection.query("INSERT INTO Answer (id_question, text_answer) VALUES  ?",
+                        [values], 
+                        (err, resultado) => {
+                            if(err){
+                                callback(err);
+                            }else{
+                                callback(null);
+                            }
+                        });  
+                        
+                    }
+                });
+            }
+        });
+    }
+
+   /* getAllFriendRequestsTo(emailCurrentUser, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
                 callback(err, null);
@@ -142,7 +182,7 @@ class DAOFriend{
                 });
             }
         });
-    }
+    }*/
 }
 
-module.exports = DAOFriend; 
+module.exports = DAOQuestion; 

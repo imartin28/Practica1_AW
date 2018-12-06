@@ -21,25 +21,15 @@
                         <a href="create_new_question" class="boton-crear-pregunta contenido-centrado"> Crear nueva pregunta</a>
                     </div>
                     <div class="listado-preguntas">
-                        <div class="pregunta-aleatoria">
-                            <p>¿Cuál es la peor pelicula de la historia?</p>
-                        </div>
-
-                        <div class="pregunta-aleatoria">
-                            <p>¿En que escuela primaria estudiaste?</p>
-                        </div>
-
-                        <div class="pregunta-aleatoria">
-                            <p>¿Nintendo Switch, PS4, o Xbox One?</p>
-                        </div>
-
-                        <div class="pregunta-aleatoria">
-                            <p>¿Cuál es tu plato favorito?</p>
-                        </div>
-
-                        <div class="pregunta-aleatoria">
-                            <p>¿Cuál es el personaje más irritante de Juego de Tronos?</p>
-                        </div>
+                        <%  if(questions.length != 0){ %>
+                            <% questions.forEach(question =>{ %>
+                                <div class="pregunta-aleatoria">
+                                    <p><%= question %></p>
+                                </div>
+                            <% }); %>    
+                        <% }else{ %>
+                            <p>No hay preguntas!</p>
+                        <% } %>
                     </div>
                     
                 </div>              

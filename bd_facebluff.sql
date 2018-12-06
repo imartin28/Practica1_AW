@@ -36,6 +36,19 @@ CREATE TABLE IF NOT EXISTS Friend (
  
 );
 
+/********* PREGUNTAS *********/
+
+CREATE TABLE IF NOT EXISTS Question (
+  id_question INT NOT NULL AUTO_INCREMENT,
+  text_question VARCHAR(500) NOT NULL,
+  CONSTRAINT pk_question PRIMARY KEY (id_question)
+);
 
 
-
+CREATE TABLE IF NOT EXISTS Answer(
+  id_answer INT NOT NULL AUTO_INCREMENT,
+  id_question INT NOT NULL,
+  text_answer VARCHAR(500) NOT NULL,
+  CONSTRAINT pk_answer PRIMARY KEY (id_answer),
+  CONSTRAINT fk_answer_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
+);

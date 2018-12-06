@@ -16,17 +16,17 @@
                 <div class="titulo-pagina">CREAR NUEVA PREGUNTA</div>
                 
                 <div class="panel-crear-nueva-pregunta">        
-                   <form method="POST" action="create_new_question" id="formulario-crear-nueva-pregunta" enctype="multipart/form-data">
+                   <form method="POST" action="create_new_question" id="formulario-crear-nueva-pregunta">
                         <div class="campo-formulario-crear-nueva-pregunta"> 
-                            <label class="label-formulario-nueva-pregunta"> Título de la pregunta: </label>
-                            <input class="input-nueva-pregunta" type="text" name="tituloPregunta"><br>    
+                            <label class="label-formulario-nueva-pregunta">Título de la pregunta: </label>
+                            <input class="input-nueva-pregunta" type="text" name="tituloPregunta"> 
                         </div>  
                         
                         <div class="campo-formulario-crear-nueva-pregunta">
                             <label class="label-formulario-crear-nueva-pregunta">Introduzca una respuesta por linea: </label>                        
                         </div>
 
-                        <textarea class="textarea-respuestas" name="comment" form="usrform">  </textarea>
+                        <textarea class="textarea-respuestas" name="respuestas" form="formulario-crear-nueva-pregunta">  </textarea>
 
                         <div class="campo-formulario-crear-nueva-pregunta">
                             <button type="submit" class="boton-crear-pregunta"> Crear nueva pregunta </button>
