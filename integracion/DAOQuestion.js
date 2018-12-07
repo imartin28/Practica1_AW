@@ -2,12 +2,10 @@
 "use strict";
 
 class DAOQuestion{
-
     constructor(pool){
         this.pool = pool;
     }
 
-    
     readFiveRandomQuestions(callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -67,6 +65,31 @@ class DAOQuestion{
         });
     }
 
+
+    readOneAnswer(idAnswer, callback){
+        this.pool.getConnection((err, connection) =>{
+            if(err){
+                callback(err, null);
+            }
+            else{
+                connection.query("SELECT text_answer FROM Answer WHERE id_answer = ? ",
+                    [idAnswer],
+                   (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        callback(err, null);
+                    } else {           
+                        let textAnswer;
+                        if(rows.length != 0){
+                            textAnswer = rows[0].text_answer;
+                        }
+                        callback(null, textAnswer); 
+                    }
+                });
+            }
+        });
+    }
+
     answerOfTheUser(userEmail, idQuestion, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -102,8 +125,6 @@ class DAOQuestion{
         });
     };
 
-    
-
 
     insertQuestion(question, callback){
         this.pool.getConnection((err, connection) =>{
@@ -134,14 +155,72 @@ class DAOQuestion{
                                 callback(null);
                             }
                         });  
-                        
                     }
                 });
             }
         });
     }
 
-   
+    answerQuestion(idQuestion, idAnswer, userEmail, callback) {
+        this.pool.getConnection((err, connection) =>{
+            if(err){
+                callback(err);
+            } else {
+
+                connection.query("INSERT INTO QuestionAnsweredByUser (emailUser, id_answer, id_question) VALUES (?, ?, ?)",
+                [userEmail, idAnswer, idQuestion], 
+                (err, resultado) => {
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    } else {       
+                        callback(null);
+                    }
+                });
+            }
+        });
+    }   
+
+    insertOtherAnswer(answerText, idQuestion, callback) {
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err, null);
+            } else {
+                connection.query("INSERT INTO Answer (id_question, text_answer) VALUES (?, ?)",
+                [idQuestion, answerText], 
+                (err, resultado) => {
+                    connection.release();
+                    if (err) {
+                        callback(err, null);
+                    } else {       
+                        callback(null, resultado.insertId);
+                    }
+                });
+            }
+        });
+    }
+
+
+
+    deleteAnswer(emailUser, idQuestion, callback){
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err);
+            } else {
+                
+                connection.query("DELETE FROM QuestionAnsweredByUser WHERE emailUser = ? AND id_question = ?",
+                [emailUser, idQuestion], 
+                (err, resultado) => {
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    } else {       
+                        callback(null);
+                    }
+                });
+            }
+        });
+    }
 }
 
 module.exports = DAOQuestion; 

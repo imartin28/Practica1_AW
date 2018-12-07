@@ -44,7 +44,7 @@ app.use("/users", login_router);
 app.use("/users", new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);
-app.use("/users", middlewareControlDeAcceso, questions_router);
+app.use("/users", middlewareControlDeAcceso, middlewareDatosPreguntas, questions_router);
 app.use(middlewareError404);
 app.use(middlewareError500);
 
@@ -80,6 +80,14 @@ function middlewareControlDeAcceso(request,  response, next) {
     }     
 }
 
+
+function middlewareDatosPreguntas(request, response, next){
+    response.locals.id_question = request.session.id_question;
+    response.locals.text_question = request.session.text_question;
+    response.locals.textAnswer = request.session.textAnswer;
+
+    next();
+}
 // Arrancar el servidor
 app.listen(config.port, function(err) {
     if (err) {

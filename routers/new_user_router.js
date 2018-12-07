@@ -23,7 +23,6 @@ new_user.get("/new_user", function(request, response)  {
 });
 
 
-
 function camposDeFormularioValidos(request) {
     request.checkBody("email", "Debe introducir un email").notEmpty();
     request.checkBody("email", "Dirección de correo no válida").isEmail();
@@ -55,52 +54,52 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     };
 
    
-    console.log(user);
-        camposDeFormularioValidos(request);
-      
+    
+    camposDeFormularioValidos(request);
+    
 
-        let age = utils.calcularEdad(user.birth_date);
-   
-        if(request.file) {
-            user.profile_img = request.file.filename;       
-        }
+    let age = utils.calcularEdad(user.birth_date);
 
-        request.session.currentUser = user.email;
-        request.session.profile_img = user.profile_img;
-        request.session.points = user.points;
+    if(request.file) {
+        user.profile_img = request.file.filename;       
+    }
+
+    request.session.currentUser = user.email;
+    request.session.profile_img = user.profile_img;
+    request.session.points = user.points;
+    
+    request.getValidationResult().then(function(result) {
         
-        request.getValidationResult().then(function(result) {
-         
-            if (!result.isEmpty()) {
-                response.render("new_user", {errores : result.mapped()});
-                
-            } else {
-                
-                daoUser.readUser(user.email, (err, user) => {
-                    if(err){
-                        next(err);
-                    } else if(user == null) {
-                        daoUser.insertUser(user, (err) =>{
-                            if(err){
+        if (!result.isEmpty()) {
+            response.render("new_user", {errores : result.mapped()});
+            
+        } else {
+            
+            daoUser.readUser(user.email, (err, user) => {
+                if(err){
+                    next(err);
+                } else if(user == null) {
+                    daoUser.insertUser(user, (err) =>{
+                        if(err){
+                            
+                            next(err);
+                        }else{     
                                 
-                                next(err);
-                            }else{     
-                                  
-                                response.render("my_profile", {
-                                    name : user.name, 
-                                    gender: user.gender, 
-                                    points: user.points,
-                                    age : age,
-                                    profile_img : user.profile_img,            
-                                });
-                            }                 
-                        });
-                    } else{
-                        console.log("Error, ya existe el usuario");
-                    }
-                }); 
-            }
-        });
+                            response.render("my_profile", {
+                                name : user.name, 
+                                gender: user.gender, 
+                                points: user.points,
+                                age : age,
+                                profile_img : user.profile_img,            
+                            });
+                        }                 
+                    });
+                } else{
+                    console.log("Error, ya existe el usuario");
+                }
+            }); 
+        }
+    });
     
           
     

@@ -17,16 +17,18 @@
                 <div class="titulo-pagina"><%= text_question %></div>
 
                 <div class="panel-respuestas-amigos">
-                    <% if (answer == null) { %>
+                    <% if (textAnswer == null) { %>
                         <form method="POST" action="answer_question_for_myself" class= "panel-boton-contestar-pregunta">
                             <p>No has contestado a esta pregunta.</p>
+                            <input type="hidden" name="delete" value="false">
                             <input type="hidden" name="id_question" value="<%= id_question %>">
                             <input type="hidden" name="text_question" value="<%= text_question %>">
                             <button type="submit" class="boton-contestar-pregunta contenido-centrado"> Contestar pregunta</button>
                         </form>
                     <% } else { %>
-                        <p>Tu respuesta a esta pregunta es:  <%= answer %>.</p>
+                        <p>Tu respuesta a esta pregunta es:  <%= textAnswer %>.</p>
                         <form method="POST" action="answer_question_for_myself" class= "panel-boton-contestar-pregunta">
+                                <input type="hidden" name="delete" value="true">
                             <input type="hidden" name="id_question" value="<%= id_question %>">
                             <input type="hidden" name="text_question" value="<%= text_question %>">
                             <button type="submit" class="boton-contestar-pregunta contenido-centrado"> Cambiar respuesta</button>
@@ -36,30 +38,19 @@
 
                     <div class="respuestas-amigos">
                             <p>Los siguientes amigos han contestado a esta pregunta:</p>
+                            <% if(listOfFriendsThatHaveAnswered.length != 0) %>
+                                <% listOfFriendsThatHaveAnswered.forEach( %>
+                                <div class="respuesta-amigo">
+                                    <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
+                                    <span class="nombre-amigo contenido-centrado"><%= name %></span>
+                                    <a class="boton-adivinar-respuesta-amigo contenido-centrado"  href="">Adivinar</a>  
+                                </div>
+                                <% ); %>
+                            <% } else { %>
+                                <p> Aun no ha contestado ningun amigo tuyo!</p>
+                            <% } %>    
+
                             
-                            <div class="respuesta-amigo">
-                                <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
-                                <span class="nombre-amigo contenido-centrado">Miguel</span>
-                                <a class="boton-adivinar-respuesta-amigo contenido-centrado"  href="">Adivinar</a>  
-                            </div>
-
-                            <div class="respuesta-amigo">
-                                <img class="fotoPerfilAmigo" src="imagenes/hector.jpg">
-                                <span class="nombre-amigo contenido-centrado">Hector</span>
-                                <a href="" class="boton-adivinar-respuesta-amigo contenido-centrado">Adivinar</a>
-                            </div>
-
-                            <div class="respuesta-amigo-acertada">
-                                <img class="fotoPerfilAmigo" src="imagenes/johnCoffey.jpg">
-                                <span class="nombre-amigo contenido-centrado">John Coffey</span>
-                                <span class="span-respuesta-amigo-acertada contenido-centrado">Has acertado</span>
-                            </div>
-
-                            <div class="respuesta-amigo-fallada">
-                                <img class="fotoPerfilAmigo" src="imagenes/drEvil.png">
-                                <span class="nombre-amigo contenido-centrado">Doctor maligno</span>
-                                <span class="span-respuesta-amigo-fallada contenido-centrado">Has fallado</span>
-                            </div>
                     </div>
                 </div>    
             </div>        

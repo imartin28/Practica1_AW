@@ -21,21 +21,28 @@
                             <label class="label-formulario-nueva-pregunta">Título de la pregunta: </label>
                             <input class="input-nueva-pregunta" type="text" name="tituloPregunta"> 
                         </div>  
+
+                        <% if (errores != null && errores.tituloPregunta) { %>
+                            <span class="mensajes-error-nuevo-usuario"><%= errores.tituloPregunta.msg %></span>
+                        <% } %> 
                         
                         <div class="campo-formulario-crear-nueva-pregunta">
                             <label class="label-formulario-crear-nueva-pregunta">Introduzca una respuesta por linea: </label>                        
                         </div>
 
-                        <textarea class="textarea-respuestas" name="respuestas" form="formulario-crear-nueva-pregunta">  </textarea>
+                        <textarea class="textarea-respuestas" name="respuestas" form="formulario-crear-nueva-pregunta"></textarea>
+                        
+                        <% if (errores != null && errores.respuestas) { %>
+                            <span class="mensajes-error-nuevo-usuario"><%= errores.respuestas.msg %></span>
+                        <% } %> 
 
                         <div class="campo-formulario-crear-nueva-pregunta">
                             <button type="submit" class="boton-crear-pregunta"> Crear nueva pregunta </button>
-                            <a href="my_profile" class="boton-cancelar-crear-pregunta contenido-centrado"> Cancelar </a>
+                            <a href="questions" class="boton-cancelar-crear-pregunta contenido-centrado"> Cancelar </a>
                         </div>
                    </form>
                 </div>              
             </div>        
-
     </body>
 
  </html>

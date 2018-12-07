@@ -19,21 +19,24 @@
                 <div class="panel-listado-preguntas">
                     
                     <div class="listado-respuestas-propias">
-                        <% question.answers.forEach( answer => { %>
-                            <form class="pregunta">
-                                <input type="hidden" name="id_answer" value="answer.id">
-                                <input class="radio-input-pregunta" type="radio"><%= answer.text %>
-                            </form>
-                        <% }); %>
-                        <div class="otra-pregunta">
-                                <input class="radio-input-pregunta" type="radio" name="gender"> <p>Otra:</p>
-                                <input class="input-nueva-respuesta" type="text">              
-                        </div> 
+                            <% question.answers.forEach( answer => { %>
+                        <form method="POST" action="answer_question">
+                            
+                                <div class="pregunta">
+                                    <input type="hidden" name="id_answer" value="<%= answer.id %>">
+                                    <input class="radio-input-pregunta" type="radio" name="answer" value="<%= answer.id %>"><%= answer.text %>
+                                </div>
+                            <% }); %>
+                        
+                            <div class="otra-pregunta">
+                                <input class="radio-input-pregunta" type="radio" name="answer" value="other"> <p>Otra:</p>
+                                <input class="input-nueva-respuesta" type="text" name="other_answer">              
+                            </div> 
+
                         <div class="panel-inferior-botones">
-                            <form method="POST" action="">
-                                <input type="hidden" value="<%= answer.text %>">
-                                <button type="submit" class="boton-responder-pregunta contenido-centrado"> Responder</button>
-                            </form>
+                            <input type="hidden" name="deleteAnswer" value="<%= deleteAnswer %>">
+                            <button type="submit" class="boton-responder-pregunta contenido-centrado"> Responder</button>
+                        </form>
                             <a href="one_question" class="boton-cancelar contenido-centrado"> Cancelar</a>
                          </div>
                     </div>
