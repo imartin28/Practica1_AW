@@ -14,13 +14,25 @@
                 <%- include("header") %>
                 <%- include("nav") %>
                 
-                <div class="titulo-pagina">¿Nintendo Switch, PS4 o Xbox One?</div>
+                <div class="titulo-pagina"><%= text_question %></div>
 
                 <div class="panel-respuestas-amigos">
-                    <div class= "panel-boton-contestar-pregunta">
-                        <p>No has contestado a esta pregunta.</p>
-                        <button class="boton-contestar-pregunta contenido-centrado"> Contestar pregunta</button>
-                    </div>
+                    <% if (answer == null) { %>
+                        <form method="POST" action="answer_question_for_myself" class= "panel-boton-contestar-pregunta">
+                            <p>No has contestado a esta pregunta.</p>
+                            <input type="hidden" name="id_question" value="<%= id_question %>">
+                            <input type="hidden" name="text_question" value="<%= text_question %>">
+                            <button type="submit" class="boton-contestar-pregunta contenido-centrado"> Contestar pregunta</button>
+                        </form>
+                    <% } else { %>
+                        <p>Tu respuesta a esta pregunta es:  <%= answer %>.</p>
+                        <form method="POST" action="answer_question_for_myself" class= "panel-boton-contestar-pregunta">
+                            <input type="hidden" name="id_question" value="<%= id_question %>">
+                            <input type="hidden" name="text_question" value="<%= text_question %>">
+                            <button type="submit" class="boton-contestar-pregunta contenido-centrado"> Cambiar respuesta</button>
+                        </form>
+                    <% } %>
+
 
                     <div class="respuestas-amigos">
                             <p>Los siguientes amigos han contestado a esta pregunta:</p>

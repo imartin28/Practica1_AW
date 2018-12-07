@@ -52,3 +52,13 @@ CREATE TABLE IF NOT EXISTS Answer(
   CONSTRAINT pk_answer PRIMARY KEY (id_answer),
   CONSTRAINT fk_answer_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS QuestionAnsweredByUser (
+  emailUser VARCHAR(200) NOT NULL,
+  id_answer INT NOT NULL,
+  id_question INT NOT NULL,
+  CONSTRAINT pk_questionAnsweredByUser PRIMARY KEY (emailUser, id_question),
+  CONSTRAINT fk_questionAnsweredByUser_user FOREIGN KEY(emailUser) REFERENCES User(email) ON DELETE CASCADE,
+  CONSTRAINT fk_questionAnsweredByUser_answer FOREIGN KEY(id_answer) REFERENCES Answer(id_answer) ON DELETE CASCADE,
+  CONSTRAINT fk_questionAnsweredByUser_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
+);

@@ -23,9 +23,12 @@ class DAOQuestion{
                     }
                     else{           
                         let questions = [];
-                        rows.forEach(question =>{
-                            questions.push(question.text_question);
-
+                        rows.forEach(row =>{
+                            let question = {
+                                id : row.id_question,
+                                text : row.text_question
+                            };
+                            questions.push(question);
                         });
                         callback(null, questions);
                         
@@ -34,6 +37,72 @@ class DAOQuestion{
             }
         });
     }
+
+    readAnswers(id, callback){
+        this.pool.getConnection((err, connection) =>{
+            if(err){
+                callback(err, null);
+            }
+            else{
+                connection.query("SELECT id_answer, text_answer FROM Answer WHERE id_question = ? ",
+                    [id],
+                   (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        callback(err, null);
+                    } else {           
+                        let answers = [];
+                        rows.forEach(row =>{
+                            let answer = {
+                                id : row.id_answer,
+                                text : row.text_answer 
+                            };
+
+                            answers.push(answer);
+                        });
+                        callback(null, answers); 
+                    }
+                });
+            }
+        });
+    }
+
+    answerOfTheUser(userEmail, idQuestion, callback) {
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err, null);
+            } else {
+            
+                connection.query("SELECT id_answer FROM QuestionAnsweredByUser WHERE id_question = ? AND emailUser = ? ",
+                    [idQuestion, userEmail],
+                   (err, rows) => {
+                    if (err) {
+                        connection.release();
+                        callback(err, null);
+                    } else {   
+                        if (rows.length == 0) {
+                            connection.release();        
+                            callback(null, null); 
+                        } else {
+                            connection.query("SELECT text_answer FROM Answer WHERE id_answer = ?", 
+                            [rows[0].id_answer],
+                            (err, rows) => {
+                                connection.release();
+                                if (err) {
+                                    callback(err, null);
+                                } else {
+                                    callback(null, rows[0].text_answer);
+                                }
+                            });
+                        }
+                        
+                    }
+                });
+            }
+        });
+    };
+
+    
 
 
     insertQuestion(question, callback){
@@ -46,7 +115,6 @@ class DAOQuestion{
                 connection.query("INSERT INTO Question (text_question) VALUES (?)",
                 [question.text], 
                 (err, resultado)=>{
-                    connection.release();
                     if(err){
                         callback(err);
                     }
@@ -59,6 +127,7 @@ class DAOQuestion{
                         connection.query("INSERT INTO Answer (id_question, text_answer) VALUES  ?",
                         [values], 
                         (err, resultado) => {
+                            connection.release();
                             if(err){
                                 callback(err);
                             }else{
@@ -72,117 +141,7 @@ class DAOQuestion{
         });
     }
 
-   /* getAllFriendRequestsTo(emailCurrentUser, callback){
-        this.pool.getConnection((err, connection) =>{
-            if (err) {
-                callback(err, null);
-            }
-            else {
-                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailSender FROM FriendRequest WHERE emailDestination = ? AND state = ?) ",
-                [emailCurrentUser, "PENDING"],
-                (err, results) => {
-                    connection.release();
-                    if (err) {
-                        callback(err, null);
-                    }
-                    else{   
-                        let users = [];
-                        
-                        results.forEach(result => {
-                            let user = {
-                                email : result.email,
-                                name : result.name,
-                                profile_img : result.profile_img 
-                            };
-                            users.push(user);
-                        });
-                        callback(null, users);
-                    }
-                });
-            }
-        });
-    }
-
-
-    getAllFriends(emailCurrentUser, callback){
-        this.pool.getConnection((err, connection) =>{
-            if (err) {
-                callback(err, null);
-            }
-            else {
-                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) OR email IN (SELECT emailFriend1 FROM Friend WHERE emailFriend2 = ?)",
-                [emailCurrentUser, emailCurrentUser],
-                (err, results) => {
-                    connection.release();
-                    if (err) {
-                        callback(err, null);
-                    }
-                    else{   
-                        let users = [];
-                        
-                        results.forEach(result => {
-                            let user = {
-                                email : result.email,
-                                name : result.name,
-                                profile_img : result.profile_img 
-                            };
-                            users.push(user);
-                        });
-                        callback(null, users);
-                    }
-                });
-            }
-        });
-    }
-
-
-
-
-    requestAccepted(emailCurrentUser, emailSender, callback){
-        this.pool.getConnection((err, connection) =>{
-            if (err) {
-                callback(err);
-            }
-            else {
-                let query = "DELETE FROM FriendRequest WHERE emailDestination = ? AND emailSender = ? ;";
-                query += "INSERT INTO Friend VALUES (? , ?)"
-                connection.query(query, [emailCurrentUser, emailSender, emailCurrentUser, emailSender],
-                (err, results) => {
-                    connection.release();
-                    if (err) {
-                        callback(err);
-                    }
-                    else{  
-                        callback(null);
-                       
-                    }
-                });
-            }
-        });
-    }
-
-    requestRejected(emailCurrentUser, emailSender, callback){
-        this.pool.getConnection((err, connection) =>{
-            if (err) {
-                callback(err);
-            }
-            else {
-                let query = "DELETE FROM FriendRequest WHERE emailDestination = ? AND emailSender = ?";
-                connection.query("DELETE FROM FriendRequest WHERE emailDestination = ? AND emailSender = ?",
-                    [emailCurrentUser, emailSender],
-                (err, results) => {
-                    connection.release();
-                    if (err) {
-                        callback(err);
-                    }
-                    else{  
-                        callback(null);
-                       
-                    }
-                });
-            }
-        });
-    }*/
+   
 }
 
 module.exports = DAOQuestion; 

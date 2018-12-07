@@ -23,9 +23,10 @@
                     <div class="listado-preguntas">
                         <%  if(questions.length != 0){ %>
                             <% questions.forEach(question =>{ %>
-                                <div class="pregunta-aleatoria">
-                                    <p><%= question %></p>
-                                </div>
+                                <form method="POST" action="one_question" class="pregunta-aleatoria">
+                                    <input type="hidden" value="<%= question.id %>" name="id_question">
+                                    <button type="submit" name="text_question" value="<%= question.text %>"><%= question.text %></button>
+                                </form>
                             <% }); %>    
                         <% }else{ %>
                             <p>No hay preguntas!</p>

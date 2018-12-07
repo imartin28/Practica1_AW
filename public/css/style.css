@@ -799,7 +799,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 }
 
 .otra-pregunta:hover {
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
     cursor: pointer;
     border-color: #A55BBE;
     border: 2px solid #A55BBE;
@@ -857,7 +857,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
   }
   
 .pregunta:hover {
-      transform: scale(1.1);
+     /* transform: scale(1.1);*/
       cursor: pointer;
       border-color: #A55BBE;
       border: 2px solid #A55BBE;
@@ -1102,6 +1102,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 .label-formulario-nueva-pregunta {
     height: fit-content;
     padding-right: 10px; 
+    color: black;
 }
     
 
