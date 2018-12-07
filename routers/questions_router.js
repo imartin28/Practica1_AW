@@ -78,9 +78,16 @@ questions.post("/one_question", function(request, response, next) {
             next(err);
         } else {
             request.session.textAnswer = textAnswer;
-            
-            response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer});
-        }
+            daoQuestion.friendsAnswerQuestion(userEmail, null, (err, friends) => {
+                if(err){
+                    next(err);
+                    
+                }else{
+                
+                    response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer, listOfFriendsThatHaveAnswered: friends});
+                }
+            })
+        }  
     });
     
 });
@@ -187,7 +194,7 @@ function typeAnswer(typeOfAnswer, request, response, next){
 
 
 
-    
+
 }
 
 

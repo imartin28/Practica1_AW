@@ -37,15 +37,17 @@
 
 
                     <div class="respuestas-amigos">
-                            <p>Los siguientes amigos han contestado a esta pregunta:</p>
-                            <% if(listOfFriendsThatHaveAnswered.length != 0) %>
-                                <% listOfFriendsThatHaveAnswered.forEach( %>
+                            
+                            <% if(listOfFriendsThatHaveAnswered.length != 0){ %>
+                                <p>Los siguientes amigos han contestado a esta pregunta:</p>
+                                <% listOfFriendsThatHaveAnswered.forEach(friendData => { %>
                                 <div class="respuesta-amigo">
-                                    <img class="fotoPerfilAmigo" src="imagenes/miguel.png">
-                                    <span class="nombre-amigo contenido-centrado"><%= name %></span>
+                                    <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendData.profile_img %>">
+                                    <span class="nombre-amigo contenido-centrado"><%= friendData.name %></span>
                                     <a class="boton-adivinar-respuesta-amigo contenido-centrado"  href="">Adivinar</a>  
                                 </div>
-                                <% ); %>
+                              
+                                <% }); %>
                             <% } else { %>
                                 <p> Aun no ha contestado ningun amigo tuyo!</p>
                             <% } %>    

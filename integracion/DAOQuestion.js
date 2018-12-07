@@ -221,6 +221,38 @@ class DAOQuestion{
             }
         });
     }
+
+
+
+    friendsAnswerQuestion(emailUser, idQuestion, callback){
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err, null);
+            } else {
+                
+                connection.query("SELECT name, profile_img, email FROM User WHERE email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ?) OR email IN (SELECT emailFriend1 FROM Friend WHERE emailFriend2 = ?)",
+                [emailUser, emailUser], 
+                (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        callback(err, null);
+                    } else {       
+                        let friends = [];
+                        
+                        rows.forEach(row => {
+                            let friend = {
+                                email : row.email,
+                                name : row.name,
+                                profile_img : row.profile_img 
+                            };
+                            friends.push(friend);
+                        });
+                        callback(null, friends);
+                    }
+                });
+            }
+        });
+    }
 }
 
 module.exports = DAOQuestion; 
