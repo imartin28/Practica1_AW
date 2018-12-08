@@ -39,20 +39,50 @@
                         </div>
 
                         <div class="campo-formulario-modificacion-perfil">
-                            <label class="label-formulario-modificacion-perfil">Género: </label>  
+                                <div class="label-genero-modificar-perfil">
+                                    <label class="textoRegistro">Género: </label>
+                                </div> 
+                            <div class="div-modificar-perfil-genero"> 
                             <% if (gender == 'Hombre') {%>
-                                <input type="radio" name="gender" value="Masculino" checked> Masculino
-                                <input type="radio" name="gender" value="Femenino"> Femenino
-                                <input type="radio" name="gender" value="Otro"> Otro
+                                
+                                <div>
+                                    <input type="radio" name="gender" value="Masculino" checked> Masculino
+                                </div>  
+
+                                <div>
+                                    <input type="radio" name="gender" value="Femenino"> Femenino
+                                </div>  
+
+                                <div>
+                                    <input type="radio" name="gender" value="Otro"> Otro 
+                                </div>  
+                                 
                             <% } else if(gender == 'Mujer') { %>  
-                                <input type="radio" name="gender" value="Masculino" > Masculino
-                                <input type="radio" name="gender" value="Femenino" checked> Femenino
-                                <input type="radio" name="gender" value="Otro"> Otro 
+                                <div>
+                                    <input type="radio" name="gender" value="Masculino"> Masculino
+                                </div>  
+
+                                <div>
+                                    <input type="radio" name="gender" value="Femenino" checked> Femenino
+                                </div>  
+
+                                <div>
+                                    <input type="radio" name="gender" value="Otro"> Otro 
+                                </div>  
                             <% } else { %>
-                                <input type="radio" name="gender" value="Masculino"> Masculino
-                                <input type="radio" name="gender" value="Femenino"> Femenino
-                                <input type="radio" name="gender" value="Otro" checked> Otro 
+                                <div>
+                                    <input type="radio" name="gender" value="Masculino"> Masculino
+                                </div>  
+
+                                <div>
+                                    <input type="radio" name="gender" value="Femenino"> Femenino
+                                </div>  
+
+                                <div>
+                                    <input type="radio" name="gender" value="Otro" checked> Otro 
+                                </div> 
                             <% } %>
+                            </div>
                         </div>
 
                         <div class="campo-formulario-modificacion-perfil">

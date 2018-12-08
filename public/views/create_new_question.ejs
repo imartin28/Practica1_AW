@@ -17,13 +17,13 @@
                 
                 <div class="panel-crear-nueva-pregunta">        
                    <form method="POST" action="create_new_question" id="formulario-crear-nueva-pregunta">
-                        <div class="campo-formulario-crear-nueva-pregunta"> 
+                        <div class="campo-formulario-crear-nueva-pregunta titulo-pregunta"> 
                             <label class="label-formulario-nueva-pregunta">Título de la pregunta: </label>
                             <input class="input-nueva-pregunta" type="text" name="tituloPregunta"> 
                         </div>  
 
                         <% if (errores != null && errores.tituloPregunta) { %>
-                            <span class="mensajes-error-nuevo-usuario"><%= errores.tituloPregunta.msg %></span>
+                            <span class="mensaje-error-titulo-nueva-pregunta"><%= errores.tituloPregunta.msg %></span>
                         <% } %> 
                         
                         <div class="campo-formulario-crear-nueva-pregunta">
@@ -33,7 +33,7 @@
                         <textarea class="textarea-respuestas" name="respuestas" form="formulario-crear-nueva-pregunta"></textarea>
                         
                         <% if (errores != null && errores.respuestas) { %>
-                            <span class="mensajes-error-nuevo-usuario"><%= errores.respuestas.msg %></span>
+                            <span class="mensajes-error-nueva-pregunta"><%= errores.respuestas.msg %></span>
                         <% } %> 
 
                         <div class="campo-formulario-crear-nueva-pregunta">

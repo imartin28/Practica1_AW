@@ -301,7 +301,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     left: 213px;
 }
 
-.div-nuevo-usuario-genero{
+.div-usuario-genero{
     width: 250px;
     /*border: 1px solid white;*/
 }
@@ -394,7 +394,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 /******** MODIFICAR PERFIL *********/
 
 .panel-modificar-perfil {
-    min-height: 560px;
+    min-height: 600px;
     margin: auto;
     margin-top: 8%;
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
@@ -419,6 +419,16 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 .boton-modificar-perfil:hover{
     transform: scale(1.2);
     cursor: pointer;
+}
+
+.label-genero-modificar-perfil {
+    position: relative;
+    right: 75px;
+}
+
+.div-modificar-perfil-genero {
+    position: relative;
+    right: 50px;
 }
 
 
@@ -1084,6 +1094,11 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     text-indent: 3%;
 }
 
+.titulo-pregunta {
+    position: relative;
+    right: 30px;
+}
+
 .textarea-respuestas:focus {
     outline: none;
     box-shadow: 0 0 0 1pt #A55BBE;
@@ -1107,6 +1122,16 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 .input-nueva-pregunta {
     color: black;
+}
+
+.mensaje-error-titulo-nueva-pregunta {
+    color: red;
+    position: relative;
+    right : 60px;
+}
+
+.mensajes-error-nueva-pregunta {
+    color: red;
 }
     
 
