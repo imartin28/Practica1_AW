@@ -12,13 +12,12 @@ const daoUser = new DAOUser(pool);
 
 /* Muestra página principal de login */
 login.get("/login", function(request, response) {
-   
     response.render("login", {mensajeDeError : null});
 });
 
 
 
-/* Recibe el email y la contraseña del usuario, redireccionando al perfil o mostrando un mensaje de error*/
+/* Recibe el email y la contraseña del usuario, redireccionando al perfil o mostrando un mensaje de error */
 login.post("/login", function(request, response, next) {
     let email = request.body.email;
     let password = request.body.password;   

@@ -53,6 +53,8 @@ questions.post("/create_new_question", function(request, response, next) {
     });
 });
 
+
+
 questions.get("/questions", function(request, response, next) {
     daoQuestion.readFiveRandomQuestions((err, questions)=>{
         if(err){
@@ -63,38 +65,21 @@ questions.get("/questions", function(request, response, next) {
     });    
 });
 
-// TODO
+
+
 questions.post("/one_question", function(request, response, next) {
     let idQuestion = request.body.id_question;
     let textQuestion = request.body.text_question;
     let userEmail = request.session.currentUser;
    
-
     request.session.id_question = idQuestion;
     request.session.text_question = textQuestion;
     
-    daoQuestion.answerOfTheUser(userEmail, idQuestion, (err, textAnswer) => {
-        if (err) {
-            next(err);
-        } else {
-            request.session.textAnswer = textAnswer;
-            daoQuestion.friendsAnswerQuestion(userEmail, null, (err, friends) => {
-                if(err){
-                    next(err);
-                    
-                }else{
-                
-                    response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer, listOfFriendsThatHaveAnswered: friends});
-                }
-            })
-        }  
-    });
-    
+    renderOneQuestion(request, response, next);
 });
 
 questions.get("/one_question", function(request, response) {
-
-    response.render("one_question");
+    renderOneQuestion(request, response, next);
 });
 
 questions.post("/answer_question_for_myself", function(request, response, next) {
@@ -141,10 +126,29 @@ questions.post("/answer_question", function(request, response, next) {
     } else {
         typeAnswer(typeOfAnswer, request, response, next);  
     }
-
-    
 });
 
+
+function renderOneQuestion(request, response, next) {
+    let userEmail = request.session.currentUser;
+    let idQuestion = request.session.id_question;
+    let textQuestion = request.session.text_question;
+    
+    daoQuestion.answerOfTheUser(userEmail, idQuestion, (err, textAnswer) => {
+        if (err) {
+            next(err);
+        } else {
+            request.session.textAnswer = textAnswer;
+            daoQuestion.friendsAnswerQuestion(userEmail, null, (err, friends) => {
+                if(err){
+                    next(err);
+                }else{
+                    response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer, listOfFriendsThatHaveAnswered: friends});
+                }
+            });
+        }
+    });
+}
 
 function typeAnswer(typeOfAnswer, request, response, next){
     let userEmail = request.session.currentUser;
@@ -166,7 +170,7 @@ function typeAnswer(typeOfAnswer, request, response, next){
                         next(err);
                     } else {
                         request.session.textAnswer = textAnswer;
-                        response.redirect("one_question");
+                        renderOneQuestion(request, response, next);
                     }
                 });
             }
@@ -184,17 +188,14 @@ function typeAnswer(typeOfAnswer, request, response, next){
                         next(err);
                     }else{
                         request.session.textAnswer = textAnswer;
-                        
-                        response.redirect("one_question");
+                        renderOneQuestion(request, response, next);
                     }
                 });
             }
         });
     }
 
-
-
-
+    
 }
 
 
