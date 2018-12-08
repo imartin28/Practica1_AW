@@ -59,7 +59,7 @@ friends.post("/new_friend_request", function(request, response, next) {
     let emailDestination = request.body.emailDestination;
     let buttonPulsed = request.body.request_friendship_button;
     
-    if(buttonPulsed == "profile_link"){
+    if (buttonPulsed == "profile_link") {
         daoUser.readUser(emailDestination, (err, user) => {
             if (err) {
                 next(err);
@@ -76,7 +76,7 @@ friends.post("/new_friend_request", function(request, response, next) {
                 });
             }
         });
-    }else{
+    } else {
         daoFriend.insertFriendRequest(emailSender, emailDestination, (err) =>{
             if (err) {
                 next(err);
@@ -118,7 +118,7 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
     let currentUserEmail = request.session.currentUser;
     let buttonPulsed = request.body.request_button;
     
-    if(buttonPulsed == "profile_link"){
+    if (buttonPulsed == "profile_link") {
         daoUser.readUser(emailFriend, (err, user) => {
             if (err) {
                 next(err);
@@ -135,7 +135,7 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
                 });
             }
         });
-    } else if(buttonPulsed == "request_accepted"){
+    } else if (buttonPulsed == "request_accepted") {
         daoFriend.requestAccepted(currentUserEmail, emailFriend, (err) =>{
             if(err){
                 next(err);
@@ -154,16 +154,6 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
     }
 
 });
-
-/*
-friends.get("/request_accepted", function(request, response, next) {
-    response.status(200);
-
-    daoFriend.requestAccepted();
-
-});*/
-
-
 
 
 module.exports = friends;

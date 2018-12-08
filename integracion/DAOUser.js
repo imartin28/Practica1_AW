@@ -7,7 +7,7 @@ class DAOUser{
     }
 
     
-    insertUser(user, callback){
+    insertUser(user, callback) {
         this.pool.getConnection((err, connection) =>{
             if(err){
                 callback(err);
@@ -20,6 +20,7 @@ class DAOUser{
                     case "Otro" : gender = "Otro"; break;
                 }
                 
+                console.log(user.birth_date);
                 connection.query("INSERT INTO USER VALUES (?,?,?,?,?,?,0)",
                 [user.email, user.password, user.name, gender, user.birth_date, user.profile_img],
                 (err, resultado)=>{
@@ -28,7 +29,6 @@ class DAOUser{
                         callback(err);
                     }
                     else{
-                     
                         callback(null);
                     }
                 });
@@ -121,20 +121,25 @@ class DAOUser{
             }
             else{
                 connection.query("SELECT * FROM USER WHERE EMAIL = ?", 
-                [email], (err, result) =>{
+                [email], (err, rows) =>{
                     connection.release();
                     if(err){
                         callback(err, null);
                     }
                     else{
-                        let user = {
-                            name : result[0].name,   
-                            password: result[0].password,                       
-                            gender : result[0].gender,
-                            points : result[0].points,
-                            birth_date : result[0].birth_date,
-                            profile_img : result[0].profile_img
+                        let user = null;
+
+                        if (rows.length > 0) {
+                            user = {
+                                name : rows[0].name,   
+                                password: rows[0].password,                       
+                                gender : rows[0].gender,
+                                points : rows[0].points,
+                                birth_date : rows[0].birth_date,
+                                profile_img : rows[0].profile_img
+                            }
                         }
+                        
                         callback(null, user);
                     }
                 });

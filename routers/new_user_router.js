@@ -53,8 +53,6 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
         points : 0
     };
 
-   
-    
     camposDeFormularioValidos(request);
     
 
@@ -69,42 +67,35 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     request.session.points = user.points;
     
     request.getValidationResult().then(function(result) {
-        
         if (!result.isEmpty()) {
-            response.render("new_user", {errores : result.mapped()});
-            
+            response.render("new_user", {errores : result.mapped()});     
         } else {
-            
-            daoUser.readUser(user.email, (err, user) => {
-                if(err){
+            daoUser.readUser(user.email, (err, userBBDD) => {
+                if (err) {
                     next(err);
-                } else if(user == null) {
+                } else if (userBBDD == null) {
                     daoUser.insertUser(user, (err) =>{
-                        if(err){
-                            
+                        if (err) {
                             next(err);
-                        }else{     
-                                
+                        } else {
                             response.render("my_profile", {
                                 name : user.name, 
                                 gender: user.gender, 
                                 points: user.points,
                                 age : age,
-                                profile_img : user.profile_img,            
+                                profile_img : user.profile_img,   
+                                userEmail : user.email,
+                                profile_modifiable : true         
                             });
                         }                 
                     });
-                } else{
+                } else { 
                     console.log("Error, ya existe el usuario");
                 }
             }); 
         }
     });
-    
-          
-    
 });
-
 
 
 /* Ruta paramétrica de la imagen de perfil */

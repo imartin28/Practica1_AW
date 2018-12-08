@@ -65,8 +65,6 @@ questions.get("/questions", function(request, response, next) {
     });    
 });
 
-
-
 questions.post("/one_question", function(request, response, next) {
     let idQuestion = request.body.id_question;
     let textQuestion = request.body.text_question;
@@ -78,7 +76,7 @@ questions.post("/one_question", function(request, response, next) {
     renderOneQuestion(request, response, next);
 });
 
-questions.get("/one_question", function(request, response) {
+questions.get("/one_question", function(request, response, next) {
     renderOneQuestion(request, response, next);
 });
 
@@ -129,6 +127,7 @@ questions.post("/answer_question", function(request, response, next) {
 });
 
 
+/* Lee los datos necesarios de la base de datos para renderizar la vista one_question y si no hay ningún error la renderiza. */
 function renderOneQuestion(request, response, next) {
     let userEmail = request.session.currentUser;
     let idQuestion = request.session.id_question;
@@ -139,7 +138,7 @@ function renderOneQuestion(request, response, next) {
             next(err);
         } else {
             request.session.textAnswer = textAnswer;
-            daoQuestion.friendsAnswerQuestion(userEmail, null, (err, friends) => {
+            daoQuestion.friendsAnswerQuestion(userEmail, idQuestion, (err, friends) => {
                 if(err){
                     next(err);
                 }else{
@@ -155,10 +154,9 @@ function typeAnswer(typeOfAnswer, request, response, next){
     let idQuestion = request.session.id_question;
 
     if (typeOfAnswer == undefined) {
-        console.log(typeOfAnswer);
         response.redirect("answer_question_for_myself");
 
-    }else if (typeOfAnswer == "other") {
+    } else if (typeOfAnswer == "other") {
         let textAnswer = request.body.other_answer;
 
         daoQuestion.insertOtherAnswer(textAnswer, idQuestion, (err, idAnswer) => {
