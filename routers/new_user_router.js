@@ -35,7 +35,7 @@ function camposDeFormularioValidos(request) {
 
     request.checkBody("gender", "Debe elegir una opción").notEmpty();
     
-    if(request.body.birth_date != ""){
+    if(request.body.birth_date != "") {
         request.checkBody("birth_date", "Debe introducir una fecha válida").isBefore();
     }
 }

@@ -157,9 +157,9 @@ class DAOUser{
                 let query = "";
                 let parameters = [ user.password, user.name, user.gender, user.birth_date];
 
-                if(user.profile_img == undefined){
+                if (user.profile_img == undefined) {
                     query = "UPDATE USER SET password = ?, name = ?, gender = ?, birth_date = ? WHERE email = ?";
-                }else{
+                } else {
                     query = "UPDATE USER SET password = ?, name = ?, gender = ?, birth_date = ?, profile_img = ? WHERE email = ?";
                     parameters.push(user.profile_img);
                 }                    
@@ -167,11 +167,9 @@ class DAOUser{
                 parameters.push(user.email);
                 connection.query(query, parameters, (err, result) =>{
                     connection.release();
-                    if(err){
+                    if (err) {
                         callback(err);
-                    }
-                    else{
-                       
+                    } else {       
                         callback(null);
                     }
                 });
@@ -179,6 +177,24 @@ class DAOUser{
         });
     }
 
+    modifyPoints(email, numberOfPoints, callback) {
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("UPDATE User SET points = points + ? WHERE email = ?", 
+                [numberOfPoints, email],
+                (err, result) => {
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null);
+                    }
+                });
+            }
+        });
+    }    
 }
 
 

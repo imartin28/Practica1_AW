@@ -14,33 +14,26 @@
                 <%- include("header") %>
                 <%- include("nav") %>
                 
-                <div class="titulo-pagina">¿Nintendo Switch, PS4 o Xbox One?</div>
+                <div class="titulo-pagina"><%= text_question %></div>
 
                 <div class="panel-listado-preguntas">
-                    <div class= "panel-superior-respuestas">
-                     
+                    <div class= "panel-superior-respuestas">                     
                         <p>¿Qué crees que opina <b>amigo</b>?</p>
                     </div>
                     <div class="listado-respuestas">
-                        <div class="pregunta">
-                             <input type="radio" name="gender"> <p>Nintendo Switch</p>
-                        </div>
-
-                        <div class="pregunta">
-                            <input type="radio" name="gender"> <p>Yo soy mas del ZX Spectrum</p>
-                        </div>
-
-                        <div class="pregunta">
-                            <input type="radio" name="gender"> <p>No me interesan los videojuegos</p>
-                        </div>
-
-                        <div class="pregunta">
-                            <input type="radio" name="gender"> <p>PS4</p>
-                        </div>
-                        <div class="panel-inferior-botones">
-                                <button class="boton-responder-pregunta contenido-centrado"> Responder</button>
-                                <button class="boton-cancelar contenido-centrado"> Cancelar</button>
-                             </div>
+                        <% answers.forEach( answer => { %>
+                            <form method="POST" action="answered_question_for_friend">
+                                <div class="pregunta">
+                                    <input type="hidden" name="id_answer" value="<%= answer.id %>">
+                                    <input class="radio-input-pregunta" type="radio" name="answer" value="<%= answer.id %>"><%= answer.text %>
+                                    <input type="hidden" name="emailFriend" value="<%= emailFriend %>">
+                                    <input type="hidden" name="idAnswerOfTheFriend" value="<%= idAnswerOfTheFriend %>">
+                                </div>
+                        <% }); %>
+                        <div class="panel-inferior-botones-responder-pregunta">
+                            <button type="submit" class="boton-responder-pregunta contenido-centrado"> Responder</button>
+                            <a href="one_question" class="boton-cancelar contenido-centrado"> Cancelar</a>
+                        </form>
                         
                     </div>
                     

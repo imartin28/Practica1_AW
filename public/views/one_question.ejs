@@ -42,11 +42,19 @@
                             <% if(listOfFriendsThatHaveAnswered.length != 0){ %>
                                 <p>Los siguientes amigos han contestado a esta pregunta:</p>
                                 <% listOfFriendsThatHaveAnswered.forEach(friendData => { %>
-                                <div class="respuesta-amigo">
+                                <form method="POST" action="answer_question_for_friend" class="respuesta-amigo">
                                     <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendData.profile_img %>">
                                     <span class="nombre-amigo contenido-centrado"><%= friendData.name %></span>
-                                    <a class="boton-adivinar-respuesta-amigo contenido-centrado"  href="">Adivinar</a>  
-                                </div>
+                                    <input type="hidden" name="friendEmail" value="<%= friendData.email %>">
+                                    <input type="hidden" name="id_answer_of_the_friend" value="<%= friendData.idAnswer %>">
+                                    <%  if (friendData.correct == null) { %>
+                                        <button type="submit" class="boton-adivinar-respuesta-amigo contenido-centrado">Adivinar</a>  
+                                    <% } else if (friendData.correct == 1) { %>
+                                        <p>Has acertado</p>
+                                    <% } else { %>
+                                        <p>Has fallado</p>
+                                    <% } %>
+                                </form>
                                 <% }); %>
                             <% } else { %>
                                 <p> Aun no ha contestado ningun amigo tuyo!</p>

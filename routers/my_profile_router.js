@@ -25,7 +25,7 @@ profile.get("/my_profile", function(request, response, next){
             
             request.session.profile_img = user.profile_img;
             request.session.points = user.points;
-            console.log(age);
+
             response.render("my_profile", {
                 name : user.name, 
                 gender: user.gender, 
@@ -48,9 +48,6 @@ profile.get("/modify_profile", function(request, response, next){
         if (err) {
             next(err);
         } else {
-            console.log(user.birth_date);
-            console.log(JSON.stringify(user.birth_date).slice(1, 11));
- 
 
             response.render("modify_profile", {
                 name : user.name, 

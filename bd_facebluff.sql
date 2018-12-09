@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS Friend (
 CREATE TABLE IF NOT EXISTS Question (
   id_question INT NOT NULL AUTO_INCREMENT,
   text_question VARCHAR(500) NOT NULL,
+  initial_number_of_answers INT NOT NULL,
   CONSTRAINT pk_question PRIMARY KEY (id_question)
 );
 
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS Answer(
   CONSTRAINT fk_answer_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
 );
 
+
 CREATE TABLE IF NOT EXISTS QuestionAnsweredByUser (
   emailUser VARCHAR(200) NOT NULL,
   id_answer INT NOT NULL,
@@ -61,4 +63,16 @@ CREATE TABLE IF NOT EXISTS QuestionAnsweredByUser (
   CONSTRAINT fk_questionAnsweredByUser_user FOREIGN KEY(emailUser) REFERENCES User(email) ON DELETE CASCADE,
   CONSTRAINT fk_questionAnsweredByUser_answer FOREIGN KEY(id_answer) REFERENCES Answer(id_answer) ON DELETE CASCADE,
   CONSTRAINT fk_questionAnsweredByUser_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS QuestionAnsweredForFriend (
+  emailUser VARCHAR(200) NOT NULL,
+  emailFriend VARCHAR(200) NOT NULL,
+  id_question INT NOT NULL,
+  correct VARCHAR(5) NOT NULL,
+  CONSTRAINT pk_questionAnsweredByFriend PRIMARY KEY (emailUser, emailFriend, id_question),
+  CONSTRAINT fk_questionAnsweredByFriend_user FOREIGN KEY(emailUser) REFERENCES User(email) ON DELETE CASCADE,
+  CONSTRAINT fk_questionAnsweredByFriend_user_friend FOREIGN KEY(emailFriend) REFERENCES User(email) ON DELETE CASCADE,
+  CONSTRAINT fk_questionAnsweredByFriend_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
 );

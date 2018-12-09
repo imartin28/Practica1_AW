@@ -31,7 +31,6 @@
                         <% friendRequests.forEach(friendRequest => { %>
                            <form method="POST" action="accept_or_decline_friend_request" class="solicitudDeAmistad">
                               <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendRequest.profile_img %>">                              
-                              
                               <input type="hidden" value="<%= friendRequest.email %>" name="emailDestination">
                               <button type="submit" value="profile_link" name="request_button" class="nombre-amigo contenido-centrado"><%= friendRequest.name %></button>
                               <button type="submit" value="request_accepted" name="request_button" class="boton-aceptar-amistad contenido-centrado">Aceptar</button>
