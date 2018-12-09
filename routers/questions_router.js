@@ -210,7 +210,7 @@ function typeAnswer(typeOfAnswer, request, response, next){
     let idQuestion = request.session.id_question;
 
     if (typeOfAnswer == undefined) {
-        response.redirect("answer_question_for_myself");
+        renderOneQuestion(request, response, next);
     } else if (typeOfAnswer == "other") {
         let textAnswer = request.body.other_answer;
 

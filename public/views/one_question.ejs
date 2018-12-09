@@ -50,9 +50,9 @@
                                     <%  if (friendData.correct == null) { %>
                                         <button type="submit" class="boton-adivinar-respuesta-amigo contenido-centrado">Adivinar</a>  
                                     <% } else if (friendData.correct == 1) { %>
-                                        <p>Has acertado</p>
+                                        <p class="green contenido-centrado">Has acertado</p>
                                     <% } else { %>
-                                        <p>Has fallado</p>
+                                        <p class="red contenido-centrado">Has fallado</p>
                                     <% } %>
                                 </form>
                                 <% }); %>
