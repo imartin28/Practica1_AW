@@ -202,7 +202,7 @@ class DAOUser{
             if (err) {
                 callback(err, null);
             } else {
-                connection.query("SELECT profile_img FROM PhotoGallery WHERE emailUser = ?", 
+                connection.query("SELECT profile_img, description_image FROM PhotoGallery WHERE emailUser = ?", 
                 [userEmail],
                 (err, rows) => {
                     connection.release();
@@ -212,7 +212,12 @@ class DAOUser{
                         let images = [];
 
                         rows.forEach(row =>{
-                            images.push(row.profile_img);
+                            let image = {
+                                image : row.profile_img,
+                                description : row.description_image                     
+
+                            };
+                            images.push(image);
                         });
                         
                         callback(null, images);
@@ -223,13 +228,13 @@ class DAOUser{
     }
 
 
-    insertNewImageinPhotoGallery(emailUser, image, callback){
+    insertNewImageinPhotoGallery(emailUser, image, description_image, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
                 callback(err);
             } else {
-                connection.query("INSERT INTO PhotoGallery (emailUser, profile_img) VALUES (?,?)", 
-                [emailUser, image],
+                connection.query("INSERT INTO PhotoGallery (emailUser, profile_img, description_image) VALUES (?,?, ?)", 
+                [emailUser, image, description_image],
                 (err, rows) => {
                     connection.release();
                     if (err) {

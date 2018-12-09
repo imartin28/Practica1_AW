@@ -38,6 +38,7 @@ profile.get("/my_profile", function(request, response, next){
                         profile_img : user.profile_img,
                         profile_modifiable : true,
                         images : images
+                    
                     });
                 }
 
@@ -102,11 +103,13 @@ profile.post("/upload_image", multerFactory.single("profile_img"), function(requ
    
     let email = request.session.currentUser;
     let image;
+    let description = request.body.description;
+
     if(request.file){
         image = request.file.filename;
     }
 
-    daoUser.insertNewImageinPhotoGallery(email, image, (err) =>{
+    daoUser.insertNewImageinPhotoGallery(email, image, description, (err) =>{
         if(err){
             next(err);
         }else{

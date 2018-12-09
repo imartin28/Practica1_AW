@@ -4,6 +4,7 @@
     
         <% if (profile_modifiable) { %>
             <form method="POST" action="upload_image"  enctype="multipart/form-data" id="cabecera-galeria" class="campo-formulario-modificacion-perfil">   
+                Descripcion:<input type="text" name="description">
                 <input  type="file" class="inputfile" name="profile_img" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png">
                 <button type="submit"> Subir foto</button>
         </form> 
@@ -13,7 +14,8 @@
     
     <% images.forEach(image =>{ %>
         <div class="image-gallery">
-            <img  src="/users/profile_img/<%= image %>">       
+            <img  src="/users/profile_img/<%= image.image %>">  
+            <p> <%= image.description %></p>     
         </div>
 
     <% });%>

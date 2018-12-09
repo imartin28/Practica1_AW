@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS PhotoGallery (
   id_image INT NOT NULL AUTO_INCREMENT,
   emailUser VARCHAR(200) NOT NULL,
   profile_img VARCHAR(200),
+  description_image VARCHAR(500) NOT NULL,
   CONSTRAINT pk_photoGallery PRIMARY KEY (id_image),
   CONSTRAINT fk_photoGallery_User FOREIGN KEY(emailUser) REFERENCES User(email) ON DELETE CASCADE
 
