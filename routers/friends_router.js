@@ -97,17 +97,24 @@ friends.post("/my_friend_profile", function(request, response, next){
         if (err) {
             next(err);
         } else {
-            response.status(200);      
-            let age = utils.calcularEdad(user.birth_date);         
-   
-            response.render("my_profile", {
-                name : user.name, 
-                gender: user.gender, 
-                points: user.points,
-                age : age,
-                profile_img : user.profile_img,
-                profile_modifiable : false
-            });
+            daoUser.readUserImages(email, (err, images) =>{
+                if(err){
+                    next(err);
+                }else{
+                    let age = utils.calcularEdad(user.birth_date);         
+                    
+                    response.render("my_profile", {
+                        name : user.name, 
+                        gender: user.gender, 
+                        points: user.points,
+                        age : age,
+                        profile_img : user.profile_img,
+                        profile_modifiable : false,
+                        images : images
+                    });
+                }
+            });     
+           
         }
     });    
 });

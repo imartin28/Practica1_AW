@@ -20,20 +20,30 @@ profile.get("/my_profile", function(request, response, next){
         if(err){
             next(err);
         }else{ 
-            response.status(200);            
-            let age = utils.calcularEdad(user.birth_date);
-            
-            request.session.profile_img = user.profile_img;
-            request.session.points = user.points;
 
-            response.render("my_profile", {
-                name : user.name, 
-                gender: user.gender, 
-                points: user.points,
-                age : age,
-                profile_img : user.profile_img,
-                profile_modifiable : true
-            });
+            daoUser.readUserImages(email, (err, images) =>{
+                if(err){
+                    next(err);
+                }else{
+                    let age = utils.calcularEdad(user.birth_date);
+            
+                    request.session.profile_img = user.profile_img;
+                    request.session.points = user.points;
+
+                    response.render("my_profile", {
+                        name : user.name, 
+                        gender: user.gender, 
+                        points: user.points,
+                        age : age,
+                        profile_img : user.profile_img,
+                        profile_modifiable : true,
+                        images : images
+                    });
+                }
+
+
+            });        
+            
         }
     });
 });
@@ -86,5 +96,31 @@ profile.post("/modify_profile", multerFactory.single("profile_img"), function(re
     });
 });
 
+
+
+profile.post("/upload_image", multerFactory.single("profile_img"), function(request, response, next){
+   
+    let email = request.session.currentUser;
+    let image;
+    if(request.file){
+        image = request.file.filename;
+    }
+
+    daoUser.insertNewImageinPhotoGallery(email, image, (err) =>{
+        if(err){
+            next(err);
+        }else{
+            daoUser.modifyPoints(email, -100, (err) =>{
+                if(err){
+                    next(err);
+                }else{
+                    response.redirect("my_profile");
+                }
+            });
+            
+        }
+    });
+
+});
 
 module.exports = profile;

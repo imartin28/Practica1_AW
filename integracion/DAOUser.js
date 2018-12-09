@@ -194,7 +194,53 @@ class DAOUser{
                 });
             }
         });
-    }    
+    }  
+    
+    
+    readUserImages(userEmail, callback){
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err, null);
+            } else {
+                connection.query("SELECT profile_img FROM PhotoGallery WHERE emailUser = ?", 
+                [userEmail],
+                (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        let images = [];
+
+                        rows.forEach(row =>{
+                            images.push(row.profile_img);
+                        });
+                        
+                        callback(null, images);
+                    }
+                });
+            }
+        });
+    }
+
+
+    insertNewImageinPhotoGallery(emailUser, image, callback){
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("INSERT INTO PhotoGallery (emailUser, profile_img) VALUES (?,?)", 
+                [emailUser, image],
+                (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null);
+                    }
+                });
+            }
+        });
+    }
 }
 
 

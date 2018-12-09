@@ -76,3 +76,15 @@ CREATE TABLE IF NOT EXISTS QuestionAnsweredForFriend (
   CONSTRAINT fk_questionAnsweredByFriend_user_friend FOREIGN KEY(emailFriend) REFERENCES User(email) ON DELETE CASCADE,
   CONSTRAINT fk_questionAnsweredByFriend_question FOREIGN KEY(id_question) REFERENCES Question(id_question) ON DELETE CASCADE
 );
+
+
+/********* GALERIA DE IMAGENES *********/
+
+CREATE TABLE IF NOT EXISTS PhotoGallery (
+  id_image INT NOT NULL AUTO_INCREMENT,
+  emailUser VARCHAR(200) NOT NULL,
+  profile_img VARCHAR(200),
+  CONSTRAINT pk_photoGallery PRIMARY KEY (id_image),
+  CONSTRAINT fk_photoGallery_User FOREIGN KEY(emailUser) REFERENCES User(email) ON DELETE CASCADE
+
+);
