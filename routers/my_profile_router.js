@@ -17,10 +17,9 @@ const daoUser = new DAOUser(pool);
 profile.get("/my_profile", function(request, response, next){
     let email = request.session.currentUser;
     daoUser.readUser(email, (err, user) => {
-        if(err){
+        if (err) {
             next(err);
-        }else{ 
-
+        } else {
             daoUser.readUserImages(email, (err, images) =>{
                 if(err){
                     next(err);
@@ -38,13 +37,9 @@ profile.get("/my_profile", function(request, response, next){
                         profile_img : user.profile_img,
                         profile_modifiable : true,
                         images : images
-                    
                     });
                 }
-
-
-            });        
-            
+            });          
         }
     });
 });

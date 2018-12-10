@@ -58,9 +58,7 @@ function middlewareError404(request, response, next) {
 function middlewareError500(error, request, response, next) {
     //Código 500: Internal server error
     response.status(500);
-    response.render("error", {
-        nombreError : "500 - Internal server error",
-        mensaje : error.message,
+    response.render("error500", {
         pila : error.stack
     });
 }
