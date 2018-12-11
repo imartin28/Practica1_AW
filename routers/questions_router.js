@@ -17,6 +17,7 @@ const daoQuestion = new DAOQuestion(pool);
 const ficherosEstaticos = path.join(__dirname, "..", "public");
 questions.use(express.static(ficherosEstaticos));
 
+
 questions.get("/create_new_question", function(request, response) {
     response.render("create_new_question", {errores : null});
 });
@@ -129,6 +130,8 @@ questions.post("/answer_question", function(request, response, next) {
     }
 });
 
+
+
 /*  Renderiza la página de una pregunta para responderla por un amigo */
 questions.post("/answer_question_for_friend", function(request, response, next) {
     let idAnswerOfTheFriend = request.body.id_answer_of_the_friend;
@@ -153,6 +156,8 @@ questions.post("/answer_question_for_friend", function(request, response, next) 
     });
 });
 
+
+
 /* Guarda la respuesta en nombre de un amigo en la base de datos y elimina la respuesta previa en caso de haberla */
 questions.post("/answered_question_for_friend", function(request, response, next) {
     let idQuestion = request.session.id_question;
@@ -172,7 +177,15 @@ questions.post("/answered_question_for_friend", function(request, response, next
                     if (err) {
                         next(err);
                     } else {
-                        renderOneQuestion(request, response, next);
+                        daoUser.readUser(userEmail, (err, user) =>{
+                            if(err){
+                                next(err);
+                            } else{
+                                request.session.points = user.points;
+                                renderOneQuestion(request, response, next);
+                            }
+                       });
+                        
                     }
                 });
             } else {
@@ -183,11 +196,13 @@ questions.post("/answered_question_for_friend", function(request, response, next
 });
 
 
+
 /* Lee los datos necesarios de la base de datos para renderizar la vista one_question y si no hay ningún error la renderiza. */
 function renderOneQuestion(request, response, next) {
     let userEmail = request.session.currentUser;
     let idQuestion = request.session.id_question;
     let textQuestion = request.session.text_question;
+    let points =  request.session.points;
     
     daoQuestion.answerOfTheUser(userEmail, idQuestion, (err, textAnswer) => {
         if (err) {
@@ -198,12 +213,14 @@ function renderOneQuestion(request, response, next) {
                 if (err) {
                     next(err);
                 } else {
-                    response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer, listOfFriendsThatHaveAnswered: friends});
+                    response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer, listOfFriendsThatHaveAnswered: friends, points : points});
                 }
             });
         }
     });
 }
+
+
 
 function typeAnswer(typeOfAnswer, request, response, next){
     let userEmail = request.session.currentUser;

@@ -22,6 +22,13 @@ const questions_router = require("./routers/questions_router");
 // Crear un servidor Express.js
 const app = express();
 
+
+const mysql = require("mysql");
+const DAOUser = require("./integracion/DAOUser");
+const pool = mysql.createPool(config.mysqlConfig);
+const daoUser = new DAOUser(pool);
+
+
 const ficherosEstaticos = path.join(__dirname, "public");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "public", "views"));
@@ -39,6 +46,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(middlewareSession);
 app.use(expressValidator());
+
+/*app.use(expressValidator(
+    {
+        customValidators: {
+            emailNoExistente: function(email) {
+                 daoUser.readUser(email, (err, user) => {
+                     if (err) {
+                        next(err);
+                     } else if (user == null) { 
+                        console.log("Validador: true");
+                        return true;                     
+                     } else {
+                        console.log("Validador: false");
+                        return false;
+                     }
+                 });
+            }
+        }
+    }
+));*/
+
+
 app.use(flashMiddleware);
 
 

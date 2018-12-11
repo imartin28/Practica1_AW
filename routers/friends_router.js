@@ -63,7 +63,7 @@ friends.post("/new_friend_request", function(request, response, next) {
     if (buttonPulsed == "profile_link") {
         renderMyProfile(request, response, next, false, emailDestination);
     } else {
-        daoFriend.insertFriendRequest(emailSender, emailDestination, (err) =>{
+        daoFriend.insertFriendRequest(emailSender, emailDestination, (err) => {
             if (err) {
                 next(err);
             } else {

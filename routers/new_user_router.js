@@ -35,7 +35,7 @@ new_user.use(expressValidator({
                  if (err) {
                     next(err);
                  } else if (user == null) { 
-                     console.log("Validador: true");
+                    console.log("Validador: true");
                     return true;                     
                  } else {
                     console.log("Validador: false");
@@ -45,8 +45,8 @@ new_user.use(expressValidator({
         }
     }
 }));
-*/
 
+*/
 
 /* Crea un nuevo usuario y mete en la sesión los datos del nuevo usuario */
 new_user.post("/new_user", multerFactory.single("profile_img"), function(request, response, next) {
@@ -73,6 +73,7 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     request.session.points = user.points;
     
     request.getValidationResult().then(function(result) {
+        console.log(result.mapped());
         if (!result.isEmpty()) {
             response.render("new_user", {errores : result.mapped()});     
         } else {

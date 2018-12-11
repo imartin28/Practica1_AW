@@ -116,9 +116,8 @@ class DAOQuestion{
                                 } else {
                                     callback(null, rows[0].text_answer);
                                 }
-                            });
+                            });   
                         }
-                        
                     }
                 });
             }

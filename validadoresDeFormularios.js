@@ -1,9 +1,10 @@
 "use strict";
 
 function validarFormularioNuevoUsuario(request) {
+    console.log("Validando el formulario");
     request.checkBody("email", "Debe introducir un email").notEmpty();
     request.checkBody("email", "Dirección de correo no válida").isEmail();
-    /* request.check("email", "Dirección de correo ya existente").emailNoExistente(); */
+    //request.checkBody("email", "Dirección de correo ya existente").emailNoExistente(); 
 
     request.checkBody("password", "Debe introducir una contraseña").notEmpty();
     request.checkBody("password", "Introduzca una contraseña correcta").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/);
@@ -28,6 +29,7 @@ function validarFormularioLogin(request){
 
 function validarFormularioSubidaImagenes(request) {
     request.checkBody("description", "La imagen debe tener una descripción").notEmpty();
+
 }
 
 

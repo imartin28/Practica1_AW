@@ -1157,7 +1157,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 
 
-/********** GALERIA IMAGENES **********/
+
 
 
 
@@ -1187,7 +1187,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     grid-template-columns: 1fr 1fr 1fr;
     position: relative;
     top: 500px;
-    margin-top: 30px;
+    
 }
 
 

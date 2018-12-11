@@ -72,6 +72,7 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
     let email = request.session.currentUser;
     let image;
     let description = request.body.description;
+    let points = request.session.points;
 
     if (request.file) {
         image = request.file.filename;
@@ -81,21 +82,25 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
 
     request.getValidationResult().then(function(result) {
         if (result.isEmpty()) {
-            daoUser.insertNewImageinPhotoGallery(email, image, description, (err) =>{
-                if (err) {
-                    next(err);
-                } else {
-                    daoUser.modifyPoints(email, -100, (err) =>{
-                        if (err) {
-                            next(err);
-                        } else {
-                            renderMyProfile(request, response, next, null);
-                        }
-                    });     
-                }
-            });
+            if(points >= 100){
+                daoUser.insertNewImageinPhotoGallery(email, image, description, (err) =>{
+                    if (err) {
+                        next(err);
+                    } else {
+                        daoUser.modifyPoints(email, -100, (err) =>{
+                            if (err) {
+                                next(err);
+                            } else {
+                                renderMyProfile(request, response, next, null, null);
+                            }
+                        });     
+                    }
+                 });
+            }else{
+                renderMyProfile(request, response, next, result.mapped(), "No tiene puntos suficientes");
+            }
         } else {
-            renderMyProfile(request, response, next, result.mapped());
+            renderMyProfile(request, response, next, result.mapped(), null);
         }
     });
 });          
@@ -103,7 +108,7 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
     
 
 
-function renderMyProfile(request, response, next, errores) {
+function renderMyProfile(request, response, next, errores, msg_error) {
     let email = request.session.currentUser;
 
     daoUser.readUser(email, (err, user) => {
@@ -127,7 +132,9 @@ function renderMyProfile(request, response, next, errores) {
                         profile_img : user.profile_img,
                         profile_modifiable : true,
                         images : images,
-                        errores : errores
+                        errores : errores,
+                        msg_error : msg_error
+
                     });  
                 }
             });          

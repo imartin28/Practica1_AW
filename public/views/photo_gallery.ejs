@@ -4,10 +4,14 @@
     
         <% if (profile_modifiable) { %>
             <form method="POST" action="upload_image"  enctype="multipart/form-data" id="cabecera-galeria" class="formulario-subida-imagenes">   
-                <div class="campo-formulario-subida-imagenes">
-                    Descripcion:<input type="text" name="description">
-                    
-                </div>
+               <% if (msg_error) { %>
+                    <div class="red">  <%= msg_error %> </div>
+                <% } %>
+                    <div class="campo-formulario-subida-imagenes">
+                        Descripción: <input type="text" name="description">
+                       
+                    </div>
+
                 <% if (errores != null && errores.description) { %>
                     <span class="red mensajes-error-subida-imagenes"><%= errores.description.msg %></span>
                 <% } %>
