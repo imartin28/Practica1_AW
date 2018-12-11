@@ -7,6 +7,7 @@ const new_user = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
 const utils = require("../utils.js");
+const expressValidator = require("express-validator");
 const multer = require("multer");
 const multerFactory = multer({ dest: path.join(__dirname, ".." ,"profile_imgs")});
 const ficherosEstaticos = path.join(__dirname, "..", "public");
@@ -18,14 +19,39 @@ const daoUser = new DAOUser(pool);
 
 
 new_user.get("/new_user", function(request, response)  {    
-   
     response.render("new_user", {errores : null});
 });
 
 
+
+
+/*
+new_user.use(expressValidator({
+    customValidators: {
+        emailNoExistente: function(email) {
+             daoUser.readUser(email, (err, user) => {
+                 if (err) {
+                    next(err);
+                 } else if (user == null) { 
+                     console.log("Validador: true");
+                    return true;                     
+                 } else {
+                    console.log("Validador: false");
+                    return false;
+                 }
+             });
+        }
+    }
+}));
+*/
+
+
+
 function camposDeFormularioValidos(request) {
+    console.log("validando");
     request.checkBody("email", "Debe introducir un email").notEmpty();
     request.checkBody("email", "Dirección de correo no válida").isEmail();
+    /* request.check("email", "Dirección de correo ya existente").emailNoExistente(); */
 
     request.checkBody("password", "Debe introducir una contraseña").notEmpty();
     request.checkBody("password", "Introduzca una contraseña correcta").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/);
@@ -39,6 +65,9 @@ function camposDeFormularioValidos(request) {
         request.checkBody("birth_date", "Debe introducir una fecha válida").isBefore();
     }
 }
+
+
+
 
 
 /* Crea un nuevo usuario y mete en la sesión los datos del nuevo usuario */
@@ -66,31 +95,16 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     request.session.points = user.points;
     
     request.getValidationResult().then(function(result) {
+        console.log("Resultado:" + result.isEmpty());
         if (!result.isEmpty()) {
             response.render("new_user", {errores : result.mapped()});     
         } else {
-            daoUser.readUser(user.email, (err, userBBDD) => {
+            daoUser.insertUser(user, (err) =>{
                 if (err) {
                     next(err);
-                } else if (userBBDD == null) {
-                    daoUser.insertUser(user, (err) =>{
-                        if (err) {
-                            next(err);
-                        } else {
-                            response.render("my_profile", {
-                                name : user.name, 
-                                gender: user.gender, 
-                                points: user.points,
-                                age : age,
-                                profile_img : user.profile_img,   
-                                userEmail : user.email,
-                                profile_modifiable : true         
-                            });
-                        }                 
-                    });
-                } else { 
-                    console.log("Error, ya existe el usuario");
-                }
+                } else {
+                    response.redirect("my_profile");
+                }                 
             }); 
         }
     });

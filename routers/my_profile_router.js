@@ -1,4 +1,5 @@
 "use strict";
+
 const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
@@ -21,9 +22,9 @@ profile.get("/my_profile", function(request, response, next){
             next(err);
         } else {
             daoUser.readUserImages(email, (err, images) =>{
-                if(err){
+                if (err) {
                     next(err);
-                }else{
+                } else {
                     let age = utils.calcularEdad(user.birth_date);
             
                     request.session.profile_img = user.profile_img;
@@ -79,14 +80,14 @@ profile.post("/modify_profile", multerFactory.single("profile_img"), function(re
         birth_date: request.body.birth_date
     };
 
-    if(request.file){
+    if (request.file) {
         user.profile_img = request.file.filename;
     }
 
-    daoUser.updateUser(user, (err) =>{
-        if(err){
+    daoUser.updateUser(user, (err) => {
+        if (err) {
             next(err);
-        }else{
+        } else {
             response.redirect("my_profile");
         }
     });
@@ -95,7 +96,6 @@ profile.post("/modify_profile", multerFactory.single("profile_img"), function(re
 
 
 profile.post("/upload_image", multerFactory.single("profile_img"), function(request, response, next){
-   
     let email = request.session.currentUser;
     let image;
     let description = request.body.description;
@@ -105,20 +105,18 @@ profile.post("/upload_image", multerFactory.single("profile_img"), function(requ
     }
 
     daoUser.insertNewImageinPhotoGallery(email, image, description, (err) =>{
-        if(err){
+        if (err) {
             next(err);
-        }else{
+        } else {
             daoUser.modifyPoints(email, -100, (err) =>{
-                if(err){
+                if (err) {
                     next(err);
-                }else{
+                } else {
                     response.redirect("my_profile");
                 }
-            });
-            
+            });     
         }
     });
-
 });
 
 module.exports = profile;

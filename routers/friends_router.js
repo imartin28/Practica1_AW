@@ -38,7 +38,8 @@ friends.get("/friends", function(request, response, next) {
 friends.post("/search", function(request, response, next) {
     let searchText = request.body.searchText.trim();
     let currentUser = request.session.currentUser;
-    
+    request.session.searchText = searchText;
+
     if (searchText.length == 0) {
         response.redirect("friends");
     } else {
@@ -46,7 +47,7 @@ friends.post("/search", function(request, response, next) {
             if (err) {
                 next(err);
             } else {
-                response.render("search", {searchText : searchText, users : users});
+                response.render("search", {searchText : searchText, users : users });
             }
         });  
     }
@@ -60,28 +61,23 @@ friends.post("/new_friend_request", function(request, response, next) {
     let buttonPulsed = request.body.request_friendship_button;
     
     if (buttonPulsed == "profile_link") {
-        daoUser.readUser(emailDestination, (err, user) => {
-            if (err) {
-                next(err);
-            } else {           
-                let age = utils.calcularEdad(user.birth_date);         
-       
-                response.render("my_profile", {
-                    name : user.name, 
-                    gender: user.gender, 
-                    points: user.points,
-                    age : age,
-                    profile_img : user.profile_img,
-                    profile_modifiable : false
-                });
-            }
-        });
+        renderMyProfile(request, response, next, false, emailDestination);
     } else {
         daoFriend.insertFriendRequest(emailSender, emailDestination, (err) =>{
             if (err) {
                 next(err);
             } else {
-                response.redirect("friends");
+                let searchText = request.session.searchText;
+                let emailUser = request.session.currentUser;
+
+                daoUser.searchUsersWithText(searchText, emailUser, (err, users) => {
+                    if (err) {
+                        next(err);
+                    } else {
+                        response.setFlash("Se ha enviado la petición de amistad");
+                        response.render("search", {searchText : searchText, users : users});
+                    }
+                });
             }
         });
     }
@@ -92,31 +88,7 @@ friends.post("/new_friend_request", function(request, response, next) {
  amigos como en las solicitudes de aceptar o rechazar  */
 friends.post("/my_friend_profile", function(request, response, next){
     let email = request.body.emailDestination;
-   
-    daoUser.readUser(email, (err, user) => {
-        if (err) {
-            next(err);
-        } else {
-            daoUser.readUserImages(email, (err, images) =>{
-                if(err){
-                    next(err);
-                }else{
-                    let age = utils.calcularEdad(user.birth_date);         
-                    
-                    response.render("my_profile", {
-                        name : user.name, 
-                        gender: user.gender, 
-                        points: user.points,
-                        age : age,
-                        profile_img : user.profile_img,
-                        profile_modifiable : false,
-                        images : images
-                    });
-                }
-            });     
-           
-        }
-    });    
+    renderMyProfile(request, response, next, false, email);
 });
 
 /* Gestiona una petición de amistad aceptada, rechazada y enlaza al perfil del amigo */
@@ -126,22 +98,7 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
     let buttonPulsed = request.body.request_button;
     
     if (buttonPulsed == "profile_link") {
-        daoUser.readUser(emailFriend, (err, user) => {
-            if (err) {
-                next(err);
-            } else {           
-                let age = utils.calcularEdad(user.birth_date);         
-       
-                response.render("my_profile", {
-                    name : user.name, 
-                    gender: user.gender, 
-                    points: user.points,
-                    age : age,
-                    profile_img : user.profile_img,
-                    profile_modifiable : false
-                });
-            }
-        });
+        renderMyProfile(request, response, next, false, emailFriend);
     } else if (buttonPulsed == "request_accepted") {
         daoFriend.requestAccepted(currentUserEmail, emailFriend, (err) =>{
             if(err){
@@ -161,6 +118,35 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
     }
 
 });
+
+
+function renderMyProfile(request, response, next, profileModifiable, email) {
+    daoUser.readUser(email, (err, user) => {
+        if (err) {
+            next(err);
+        } else {
+            daoUser.readUserImages(email, (err, images) =>{
+                if (err) {
+                    next(err);
+                } else {
+                    let age = utils.calcularEdad(user.birth_date);         
+
+                    response.render("my_profile", {
+                        name : user.name, 
+                        gender: user.gender, 
+                        points: user.points,
+                        age : age,
+                        profile_img : user.profile_img,
+                        profile_modifiable : profileModifiable,
+                        images : images
+                    });
+                }
+            });     
+           
+        }
+    });    
+}
+
 
 
 module.exports = friends;

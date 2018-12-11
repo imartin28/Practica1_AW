@@ -5,7 +5,6 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="/css/style.css" rel="stylesheet" media="screen"/>
-       <!-- <link rel="icon" type="image/png" href="imagenes/favicon.png"/> -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	</head>
@@ -22,14 +21,24 @@
                 <h1>Iniciar sesión</h1>
                             
                 <form method="POST" action="login">
-                    <input class="input-inicio-sesion" type="text" name="email" placeholder="Email" required="required" />
-                    <input class="input-inicio-sesion" type="password" name="password" placeholder="Contraseña" required="required" />
+
+                    <input class="input-inicio-sesion" type="text" name="email" placeholder="Email"/>
+                   
+                    <% if (errores != null && errores.email) { %>
+                        <span class="red"><%= errores.email.msg %></span>
+                    <% } %> 
+
+                    <input class="input-inicio-sesion" type="password" name="password" placeholder="Contraseña"/>
+                    <% if (errores != null && errores.password) { %>
+                        <span class="red"><%= errores.password.msg %></span>
+                    <% } %>  
+
                     <button type="submit" class="botonAcceder">Acceder</button>
                 </form>
-                <% if (mensajeDeError != null) { %>
-                    <h4 class="mensajes-error-login"><%= mensajeDeError %></h4>
-                <% } %>
 
+              
+
+                
                 <div class="registro">
                     <span>¿No tienes una cuenta?</span>
                     <a href="/users/new_user">Crear nueva cuenta</a>

@@ -10,9 +10,18 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 
 
+
+
+function camposLoginValidos(request){
+    request.checkBody("email", "Debe introducir un email").notEmpty();
+    request.checkBody("email", "Dirección de correo no válida").isEmail();
+
+    request.checkBody("password", "Debe introducir una contraseña").notEmpty();
+}
+
 /* Muestra página principal de login */
 login.get("/login", function(request, response) {
-    response.render("login", {mensajeDeError : null});
+    response.render("login", {errores : null});
 });
 
 
@@ -22,14 +31,23 @@ login.post("/login", function(request, response, next) {
     let email = request.body.email;
     let password = request.body.password;   
 
-    daoUser.loginUser(email, password, (err, estaLogueado) => {
-        if(err){
-            next(err);
-        } else if (estaLogueado) {
-            request.session.currentUser = email;
-            response.redirect("my_profile");
+    camposLoginValidos(request);
+
+
+    request.getValidationResult().then(function(result) {
+        if (!result.isEmpty()) {
+            response.render("login", {errores : result.mapped()});     
         } else {
-            response.render("login", {mensajeDeError : "Dirección de correo y/o contraseña no válidos"});
+            daoUser.loginUser(email, password, (err, estaLogueado) => {
+                if(err){
+                    next(err);
+                } else if (estaLogueado) {
+                    request.session.currentUser = email;
+                    response.redirect("my_profile");
+                } else {
+                    response.render("login", {errores : result.mapped()});
+                }
+            });
         }
     });
 });

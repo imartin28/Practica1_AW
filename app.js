@@ -17,7 +17,6 @@ const new_user_router = require("./routers/new_user_router");
 const friends_router = require("./routers/friends_router");
 const questions_router = require("./routers/questions_router");
 
-
 // Crear un servidor Express.js
 const app = express();
 
@@ -38,6 +37,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(middlewareSession);
 app.use(expressValidator());
+app.use(flashMiddleware);
+
+
 
 //Routers
 app.use("/users", login_router);
@@ -45,6 +47,7 @@ app.use("/users", new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);
 app.use("/users", middlewareControlDeAcceso, middlewareDatosPreguntas, questions_router);
+
 app.use(middlewareError404);
 app.use(middlewareError500);
 
@@ -86,6 +89,21 @@ function middlewareDatosPreguntas(request, response, next){
 
     next();
 }
+
+
+function flashMiddleware(request, response, next){
+    response.setFlash = function(msg) {
+        request.session.flashMsg = msg;
+    };
+
+    response.locals.getAndClearFlash = function() {
+        let msg = request.session.flashMsg;
+        delete request.session.flashMsg;
+        return msg;
+    };
+    next();
+}
+
 // Arrancar el servidor
 app.listen(config.port, function(err) {
     if (err) {
@@ -95,3 +113,5 @@ app.listen(config.port, function(err) {
         console.log(`Servidor arrancado en el puerto ${config.port}`);
     }
  });
+
+
