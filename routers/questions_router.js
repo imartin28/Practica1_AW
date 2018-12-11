@@ -6,6 +6,7 @@ const questions = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
 const DAOQuestion = require("../integracion/DAOQuestion");
+const DAONotifications = require("../integracion/DAONotifications");
 const path = require("path");
 const utils = require("../utils");
 
@@ -13,6 +14,7 @@ const utils = require("../utils");
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 const daoQuestion = new DAOQuestion(pool);
+const daoNotifications = new DAONotifications(pool);
 
 const ficherosEstaticos = path.join(__dirname, "..", "public");
 questions.use(express.static(ficherosEstaticos));
@@ -149,7 +151,7 @@ questions.post("/answer_question_for_friend", function(request, response, next) 
                 } else {
                     answers.push({id : idAnswerOfTheFriend, text : textAnswer});
                     utils.shuffle(answers);
-                    response.render("answer_question_for_friend", {text_question : textQuestion, answers : answers, emailFriend : emailFriend, idAnswerOfTheFriend : idAnswerOfTheFriend});
+                    response.render("answer_question_for_friend", {text_question : textQuestion, answers : answers, emailFriend : emailFriend, idAnswerOfTheFriend : idAnswerOfTheFriend, textAnswerOfTheFriend : textAnswer});
                 }
             });
         }
@@ -168,29 +170,35 @@ questions.post("/answered_question_for_friend", function(request, response, next
     let idAnswerOfTheFriend = request.body.idAnswerOfTheFriend[0];
     let isCorrect = idAnswerUser == idAnswerOfTheFriend;
 
+    let textAnswerOfTheFriend = request.body.textAnswerOfTheFriend[0];
+    let textAnswerOfTheUser = request.session.textAnswer;
+    
     daoQuestion.insertAnswerForFriend(userEmail, emailFriend, idQuestion, isCorrect, (err) => {
         if (err) {
             next(err);
         } else {
-            if (isCorrect) {
-                daoUser.modifyPoints(userEmail, 50, (err) => {
-                    if (err) {
-                        next(err);
-                    } else {
-                        daoUser.readUser(userEmail, (err, user) =>{
-                            if(err){
-                                next(err);
-                            } else{
-                                request.session.points = user.points;
-                                renderOneQuestion(request, response, next);
-                            }
-                       });
-                        
-                    }
-                });
-            } else {
-                renderOneQuestion(request, response, next);
-            }
+            daoNotifications.insertNotification(emailFriend, userEmail, textAnswerOfTheFriend, textAnswerOfTheUser, textQuestion, (err) =>{
+                if (isCorrect) {    
+                    daoUser.modifyPoints(userEmail, 50, (err) => {
+                        if (err) {
+                            next(err);
+                        } else {
+                            daoUser.readUser(userEmail, (err, user) =>{
+                                if (err) {
+                                    next(err);
+                                } else {
+                                    request.session.points = user.points;
+                                    renderOneQuestion(request, response, next);
+                                }
+                           });
+                            
+                        }
+                    });
+                } else {
+                    renderOneQuestion(request, response, next);
+                }
+            });
+            
         }
     });
 });

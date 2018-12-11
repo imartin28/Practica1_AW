@@ -1,0 +1,128 @@
+
+ul {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    margin: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: none;
+}
+
+
+ul li {
+    list-style: none;
+    z-index: 10;
+    border-bottom: 1px solid rgba(0,0,0,1);
+    padding: 8px 0;
+    display: flex;
+}
+
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+
+ul li .icon {
+    width: 24px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    margin-right: 15px;
+}
+
+ul li .text {
+    color:black;
+    position: relative;
+    font-family: sans-serif;
+    top: 3px;
+    cursor: pointer;
+    font-size:15px;
+}
+
+ul li:hover .text {
+    font-weight: bold;
+    color: #995cfa;
+}
+
+.box {
+    position: absolute;
+    top: 100px;
+    left: 400px;
+    transform: translate(-50%,-50%);
+}
+
+.notification {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+.notification:hover {
+    width: 500px;
+    height: 60px;
+    text-align: left;
+    padding: 0 15px;
+    background: #995cfa;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.notification {
+    color: #111010;
+    line-height: 60px;
+    font-size: 30px;
+}
+
+
+.notification:hover {
+    color: #fff;
+}
+
+.notification .num {
+    position: absolute;
+    top: 0;
+    right:0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #995cfa;
+    color: #fff;
+    line-height: 25px;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+
+.notification:hover .num {
+    position: relative;
+    background: transparent;
+    color: #fff;
+    font-size: 24px;
+    top: -4px;
+}
+
+
+.notification:hover .num:after {
+    content: ' Notificaciones';
+}
+
+
+.notification:hover ul {
+    display: block;
+}
+
+

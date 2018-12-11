@@ -6,6 +6,7 @@ const path = require("path");
 const profile = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
+const DAONotifications = require("../integracion/DAONotifications");
 const utils = require("../utils.js");
 const multer = require("multer");
 const multerFactory = multer({ dest: path.join(__dirname, "..", "profile_imgs")});
@@ -14,11 +15,21 @@ const validadorFormularios = require("../validadoresDeFormularios");
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
+const daoNotifications = new DAONotifications(pool);
 
 
 /* Muestra el perfil del usuario actual */
-profile.get("/my_profile", function(request, response, next){
-    renderMyProfile(request, response, next);
+profile.get("/my_profile", function(request, response, next) {
+    let email = request.session.currentUser;
+    daoNotifications.readNotifications(email, (err, notifications) =>{
+        if (err) {
+            next(err);
+        }else{
+            console.log(notifications);
+            renderMyProfile(request, response, next, notifications);
+        }
+    });
+
 });
 
 
@@ -91,16 +102,16 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
                             if (err) {
                                 next(err);
                             } else {
-                                renderMyProfile(request, response, next, null, null);
+                                renderMyProfile(request, response, next, [], null, null);
                             }
                         });     
                     }
                  });
             }else{
-                renderMyProfile(request, response, next, result.mapped(), "No tiene puntos suficientes");
+                renderMyProfile(request, response, next, [], result.mapped(), "No tiene puntos suficientes");
             }
         } else {
-            renderMyProfile(request, response, next, result.mapped(), null);
+            renderMyProfile(request, response, next, [], result.mapped(), null);
         }
     });
 });          
@@ -108,7 +119,7 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
     
 
 
-function renderMyProfile(request, response, next, errores, msg_error) {
+function renderMyProfile(request, response, next, notifications, errores, msg_error, ) {
     let email = request.session.currentUser;
 
     daoUser.readUser(email, (err, user) => {
@@ -133,7 +144,8 @@ function renderMyProfile(request, response, next, errores, msg_error) {
                         profile_modifiable : true,
                         images : images,
                         errores : errores,
-                        msg_error : msg_error
+                        msg_error : msg_error,
+                        notifications: notifications
 
                     });  
                 }

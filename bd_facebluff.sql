@@ -89,3 +89,19 @@ CREATE TABLE IF NOT EXISTS PhotoGallery (
   CONSTRAINT fk_photoGallery_User FOREIGN KEY(emailUser) REFERENCES User(email) ON DELETE CASCADE
 
 );
+
+
+/********* NOTIFICACIONES *********/
+
+CREATE TABLE IF NOT EXISTS Notifications (
+  id_notification INT NOT NULL AUTO_INCREMENT,
+  emailUser_answered_first VARCHAR(200) NOT NULL,
+  emailUser_guessing VARCHAR(200) NOT NULL,  
+  text_answer_user_answered_first VARCHAR(200) NOT NULL,
+  text_answer_user_guessing VARCHAR(200) NOT NULL,  
+  text_question VARCHAR(200) NOT NULL,
+  CONSTRAINT pk_notifications PRIMARY KEY (id_notification),
+  CONSTRAINT fk_Notifications_User_First FOREIGN KEY(emailUser_answered_first) REFERENCES User(email) ON DELETE CASCADE,
+  CONSTRAINT fk_Notifications_User_Guessing FOREIGN KEY(emailUser_guessing) REFERENCES User(email) ON DELETE CASCADE
+
+);

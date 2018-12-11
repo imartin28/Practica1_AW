@@ -20,7 +20,7 @@ class DAOUser{
                     case "Otro" : gender = "Otro"; break;
                 }
                 
-                console.log(user.birth_date);
+                
                 connection.query("INSERT INTO USER VALUES (?,?,?,?,?,?,0)",
                 [user.email, user.password, user.name, gender, user.birth_date, user.profile_img],
                 (err, resultado)=>{
