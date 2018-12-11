@@ -5,10 +5,17 @@
         <% if (profile_modifiable) { %>
             <form method="POST" action="upload_image"  enctype="multipart/form-data" id="cabecera-galeria" class="formulario-subida-imagenes">   
                 <div class="campo-formulario-subida-imagenes">
-                    Descripcion:     <input type="text" name="description">
+                    Descripcion:<input type="text" name="description">
+                    
                 </div>
+                <% if (errores != null && errores.description) { %>
+                    <span class="red mensajes-error-subida-imagenes"><%= errores.description.msg %></span>
+                <% } %>
 
-                <input  type="file" class="inputfile" name="profile_img" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png">
+                <input  type="file" class="inputfile" name="gallery_image" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png">
+                <% if (errores != null && errores.gallery_image) { %>
+                    <span class="red mensajes-error-subida-imagenes"><%= errores.gallery_image.msg %></span>
+                <% } %>
                 <button type="submit" class="boton-subir-foto"> Subir foto</button>
             </form> 
         <% } %> 
@@ -21,6 +28,4 @@
             </div>
         <% });%>
     </div>
-        
-  
 </div>

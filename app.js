@@ -1,4 +1,5 @@
 "use strict";
+
 const config = require("./config");
 const path = require("path");
 const express = require("express");
@@ -10,6 +11,7 @@ const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore(config.mysqlConfig);
 const expressValidator = require("express-validator");
+
 //Routers
 const login_router = require("./routers/login_router");
 const my_profile_router = require("./routers/my_profile_router");
@@ -40,7 +42,6 @@ app.use(expressValidator());
 app.use(flashMiddleware);
 
 
-
 //Routers
 app.use("/users", login_router);
 app.use("/users", new_user_router);
@@ -52,11 +53,11 @@ app.use(middlewareError404);
 app.use(middlewareError500);
 
 
-
 function middlewareError404(request, response, next) {
     response.status(404);
     response.render("error404");
 }
+
 
 function middlewareError500(error, request, response, next) {
     //Código 500: Internal server error
@@ -65,6 +66,7 @@ function middlewareError500(error, request, response, next) {
         pila : error.stack
     });
 }
+
 
 function middlewareControlDeAcceso(request,  response, next) {
     let email = request.session.currentUser;
@@ -103,6 +105,7 @@ function flashMiddleware(request, response, next){
     };
     next();
 }
+
 
 // Arrancar el servidor
 app.listen(config.port, function(err) {

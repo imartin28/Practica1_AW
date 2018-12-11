@@ -4,7 +4,7 @@ const mysql = require("mysql");
 const login = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
-
+const validadorFormularios = require("../validadoresDeFormularios");
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
@@ -12,12 +12,7 @@ const daoUser = new DAOUser(pool);
 
 
 
-function camposLoginValidos(request){
-    request.checkBody("email", "Debe introducir un email").notEmpty();
-    request.checkBody("email", "Dirección de correo no válida").isEmail();
 
-    request.checkBody("password", "Debe introducir una contraseña").notEmpty();
-}
 
 /* Muestra página principal de login */
 login.get("/login", function(request, response) {
@@ -31,7 +26,7 @@ login.post("/login", function(request, response, next) {
     let email = request.body.email;
     let password = request.body.password;   
 
-    camposLoginValidos(request);
+    validadorFormularios.validarFormularioLogin(request);
 
 
     request.getValidationResult().then(function(result) {

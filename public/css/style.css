@@ -140,7 +140,6 @@ button {
     color: red;
     position: relative;   
     font-size:12px;
-    
 }
 
 .green {
@@ -172,9 +171,14 @@ button {
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
-.mensajes-error-login {
-    color: red;
+
+.formulario-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+
 
 .panelNuevoUsuario {
     margin: auto;
@@ -1248,6 +1252,13 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 .boton-subir-foto:hover {
     color:black;
     cursor: pointer;
+}
+
+.mensajes-error-subida-imagenes {
+    position: relative;
+    left: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 
