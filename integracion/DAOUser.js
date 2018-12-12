@@ -41,16 +41,24 @@ class DAOUser{
     loginUser(email, password, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
-                callback(err, false);
+                callback(err, null);
             } else {
                 connection.query("SELECT email, points, profile_img FROM USER WHERE EMAIL = ? AND PASSWORD = ?",
-                [email, password], (err, resultado) => {
+                [email, password], (err, rows) => {
                     connection.release();
                     if (err) {
-                        callback(err, false);
+                        callback(err, null);
                     } else {
-                        let estaLogueado =  resultado.length > 0;
-                        callback(null, estaLogueado);
+                        let user = null;
+
+                        rows.forEach(row => {
+                            user = {
+                                email : row.email,
+                                points : row.points,
+                                profile_img : row.profile_img
+                            };
+                        });
+                        callback(null, user);
                     }
                 });
             }

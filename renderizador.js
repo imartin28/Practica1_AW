@@ -64,7 +64,6 @@ function renderMyProfile(request, response, next, notifications, errores, msg_er
                     // Si el usuario accede desde la página de login se deben borrar las notificaciones. 
                     // Así al volver a recargar el perfil ya no se mostrarán las notificaciones.
                     if (userIsLoggingIn) {
-                        console.log("Renderizando mi perfil");
                         daoNotifications.deleteNotifications(email, (err) => {
                             if (err) {
                                 next(err);
@@ -79,7 +78,10 @@ function renderMyProfile(request, response, next, notifications, errores, msg_er
                                     images : images,
                                     errores : errores,
                                     msg_error : msg_error,
-                                    notifications: notifications
+                                    notifications: notifications,
+                                    userEmail : request.session.currentUser,
+                                    userPoints : request.session.points,
+                                    userProfile_img : request.session.profile_img
                                 });  
                             }
                         });

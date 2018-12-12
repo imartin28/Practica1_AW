@@ -33,8 +33,10 @@ login.post("/login", function(request, response, next) {
                     next(err);
                 } else if (user) {
                     request.session.currentUser = email;
-                    response.redirect("my_profile");
-                    //renderizador.renderMyProfile(request, response, next, [], null, null, true, email, true);
+                    request.session.points = user.points;
+                    request.session.profile_img = user.profile_img;
+                    
+                    renderizador.renderMyProfile(request, response, next, [], null, null, true, email, true);
                 } else {
                     response.render("login", {errores : result.mapped()});
                 }
