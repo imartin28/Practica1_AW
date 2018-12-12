@@ -23,13 +23,14 @@
                 <button type="submit" class="boton-subir-foto"> Subir foto</button>
             </form> 
         <% } %> 
-          
-    <div class="galeria-imagenes">
-        <% images.forEach(image =>{ %>
-            <div class="imagen-de-la-galeria tooltip">
-                <img  src="/users/profile_img/<%= image.image %>">  
-                <span class="tooltiptext"> <%= image.description %></span>     
-            </div>
-        <% });%>
-    </div>
+   
+        <div class="galeria-imagenes">
+            <% images.forEach(image =>{ %>
+                <div class="imagen-de-la-galeria tooltip">
+                    <img  src="/users/profile_img/<%= image.image %>">  
+                    <span class="tooltiptext"> <%= image.description %></span>     
+                </div>
+            <% });%>
+        </div>
+    
 </div>

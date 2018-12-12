@@ -1186,17 +1186,18 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     position: relative;
-    top: 500px;
-    
+    /*margin-top: 500px;*/
+   /* border: 1px solid black;*/
 }
 
 
 .imagen-de-la-galeria {
     width: 150px;
     height: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    margin: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom:30px;
+   /* margin: 20px;*/
 }
 
 
@@ -1208,17 +1209,19 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 #cabecera-galeria {
     grid-column: 1 / span 3; 
-    position: fixed;
-    top: 50px;
+   
+    /*top: 50px;*/
 }
 
 .formulario-subida-imagenes {
-    display: flex;
+    border-bottom: 1px solid black;
+    display: fixed;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid grey;
+    /*border-bottom: 1px solid grey;*/
 }
 
 
@@ -1236,14 +1239,18 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 .campo-formulario-subida-imagenes {
     margin-bottom: 20px;
-    margin-bottom: 10px;
+    margin-top: 120px;
+    margin-left:40px;
+   /* display: flex;
+    justify-content: center;*/
+    /*border:1px solid blue;*/
 }
 
 .boton-subir-foto {
     width: 220px;
     color: white;
     height: 30px;
-    margin-top: 5%;
+   /* margin-top: 5%;*/
     border-radius: 8px;
     background: #A55BBE;
     border: 2px solid #A55BBE;
@@ -1257,9 +1264,11 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 .mensajes-error-subida-imagenes {
     position: relative;
     left: 20px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     font-size: 15px;
 }
+
+
 
 
 /***** Tooltip que muestra la descripción de una imagen al poner el ratón sobre ella  ******/
