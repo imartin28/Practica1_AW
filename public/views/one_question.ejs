@@ -13,7 +13,9 @@
                 <%- include("header") %>
                 <%- include("nav") %>
                 
-                <div class="titulo-pagina"><%= text_question %></div>
+                <div id="titulo-pagina-one-question" class="titulo-pagina"><%= text_question %></div>
+
+                <%- include("flash") %>
 
                 <div class="panel-respuestas-amigos">
                     <% if (textAnswer == null) { %>

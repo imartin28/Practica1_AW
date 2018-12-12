@@ -38,9 +38,9 @@ login.post("/login", function(request, response, next) {
                     request.session.points = user.points;
                     request.session.profile_img = user.profile_img;
                     daoNotifications.readNotifications(email, (err, notifications) =>{
-                        if(err){
+                        if (err) {
                             next(err);
-                        }else{
+                        } else {
                             renderizador.renderMyProfile(request, response, next, notifications, null, null, true, email, true);
                         }
                     });

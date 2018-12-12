@@ -10,8 +10,7 @@
                        
                     </div>
 
-                
-
+            
                 <input  type="file" class="inputfile" name="gallery_image" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png">
                 <% if (errores != null && errores.gallery_image) { %>
                     <span class="red mensajes-error-subida-imagenes"><%= errores.gallery_image.msg %></span>
@@ -32,7 +31,7 @@
                         </div>
                     <% });%>
                 </div>
-        <% }else{ %> 
+        <% } else { %> 
          <div class= "formulario-subida-imagenes"></div>
             <div class="galeria-imagenes">
                 <% images.forEach(image =>{ %>
@@ -43,5 +42,4 @@
                 <% });%>
             </div>
             <% } %>
-    
 </div>

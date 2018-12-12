@@ -91,7 +91,7 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
     }
     
     validadorFormularios.validarFormularioSubidaImagenes(request);
-
+    
     request.getValidationResult().then(function(result) {
         if (result.isEmpty()) {
             if(points >= 100){

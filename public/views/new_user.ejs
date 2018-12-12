@@ -27,9 +27,15 @@
                         <input class="input-nuevo-usuario" type="text" name="email" placeholder="example@facebluff.com">
                     </div>
 
+                    
                     <% if (errores != null && errores.email) { %>
                         <span class="mensajes-error-nuevo-usuario"><%= errores.email.msg %></span>
-                    <% } %>                  
+                    <% } %>          
+                    
+
+                    <% if (mensajeDeError != null) { %>
+                        <span class="mensajes-error-nuevo-usuario"><%= mensajeDeError %></span>
+                    <% } %>          
 
                     <div class="campo-formulario-nuevo-usuario">
                         <label class="textoRegistro">Contraseña: </label>                    

@@ -234,9 +234,10 @@ function typeAnswer(typeOfAnswer, request, response, next){
     let userEmail = request.session.currentUser;
     let idQuestion = request.session.id_question;
 
-    if (typeOfAnswer == undefined) {
+    
+    if (typeOfAnswer == undefined) { // Si no se ha selccionado niguna respuesta
         renderizador.renderOneQuestion(request, response, next);
-    } else if (typeOfAnswer == "other") {
+    } else if (typeOfAnswer == "other") { // Si se ha selccionado la respuesta otra
         let textAnswer = request.body.other_answer;
 
         daoQuestion.insertOtherAnswer(textAnswer, idQuestion, (err, idAnswer) => {
@@ -248,15 +249,16 @@ function typeAnswer(typeOfAnswer, request, response, next){
                         next(err);
                     } else {
                         request.session.textAnswer = textAnswer;
+                        response.setFlash("Nueva respuesta almacenada correctamente");
                         renderizador.renderOneQuestion(request, response, next);
                     }
                 });
             }
         });
     
-    } else {
+    } else { // Si se ha seleccionado una de las respuestas disponibles distintas de otra
         let idAnswer = request.body.answer;
-    
+
         daoQuestion.answerQuestionForMyself(idQuestion, idAnswer, userEmail, (err) => {
             if (err) {
                 next(err);
@@ -266,6 +268,7 @@ function typeAnswer(typeOfAnswer, request, response, next){
                         next(err);
                     } else {
                         request.session.textAnswer = textAnswer;
+                        response.setFlash("Respuesta almacenada correctamente");
                         renderizador.renderOneQuestion(request, response, next);
                     }
                 });

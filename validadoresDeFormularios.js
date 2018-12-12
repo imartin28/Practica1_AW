@@ -1,7 +1,6 @@
 "use strict";
 
 function validarFormularioNuevoUsuario(request) {
-    console.log("Validando el formulario");
     request.checkBody("email", "Debe introducir un email").notEmpty();
     request.checkBody("email", "Dirección de correo no válida").isEmail();
     //request.checkBody("email", "Dirección de correo ya existente").emailNoExistente(); 
@@ -29,7 +28,6 @@ function validarFormularioLogin(request){
 
 function validarFormularioSubidaImagenes(request) {
     request.checkBody("description", "La imagen debe tener una descripción").notEmpty();
-
 }
 
 
