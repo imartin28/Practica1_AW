@@ -303,8 +303,8 @@ class DAOQuestion{
                         callback(err, null);
                     } else {
                         let numberOfAnswers = rows[0].initial_number_of_answers - 1;
-                        connection.query("SELECT * FROM Answer WHERE id_answer != ? ORDER BY RAND() LIMIT ? ",
-                        [idAnswerOfTheFriend, numberOfAnswers],
+                        connection.query("SELECT * FROM Answer WHERE id_answer != ? AND id_question = ? ORDER BY RAND() LIMIT ? ",
+                        [idAnswerOfTheFriend, idQuestion, numberOfAnswers],
                     (err, rows)=>{
                         connection.release();
                         if (err) {

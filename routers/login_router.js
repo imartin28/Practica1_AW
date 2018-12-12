@@ -4,11 +4,13 @@ const mysql = require("mysql");
 const login = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
+const DAONotifications = require("../integracion/DAONotifications");
 const validadorFormularios = require("../validadoresDeFormularios");
 const renderizador = require("../renderizador");
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
+const daoNotifications = new DAONotifications(pool);
 
 
 /* Muestra página principal de login */
@@ -35,8 +37,14 @@ login.post("/login", function(request, response, next) {
                     request.session.currentUser = email;
                     request.session.points = user.points;
                     request.session.profile_img = user.profile_img;
+                    daoNotifications.readNotifications(email, (err, notifications) =>{
+                        if(err){
+                            next(err);
+                        }else{
+                            renderizador.renderMyProfile(request, response, next, notifications, null, null, true, email, true);
+                        }
+                    });
                     
-                    renderizador.renderMyProfile(request, response, next, [], null, null, true, email, true);
                 } else {
                     response.render("login", {errores : result.mapped()});
                 }
@@ -48,8 +56,17 @@ login.post("/login", function(request, response, next) {
 
 /* Cierra la sesión */
 login.get("/logout", function(request, response) {
+    let email = request.session.currentUser;
     request.session.destroy();
-    response.redirect("/");
+    daoNotifications.deleteNotifications(email, (err) =>{
+        if(err){
+            next(err);
+        }else{
+            response.redirect("/");
+        }
+    });
+    
+
 }); 
 
 

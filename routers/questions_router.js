@@ -185,33 +185,41 @@ questions.post("/answered_question_for_friend", function(request, response, next
     let isCorrect = idAnswerUser == idAnswerOfTheFriend;
 
     let textAnswerOfTheFriend = request.body.textAnswerOfTheFriend[0];
-    let textAnswerOfTheUser = request.session.textAnswer;
-    
+
     daoQuestion.insertAnswerForFriend(userEmail, emailFriend, idQuestion, isCorrect, (err) => {
         if (err) {
             next(err);
         } else {
-            daoNotifications.insertNotification(emailFriend, userEmail, textAnswerOfTheFriend, textAnswerOfTheUser, textQuestion, (err) =>{
-                if (isCorrect) {    
-                    daoUser.modifyPoints(userEmail, 50, (err) => {
-                        if (err) {
+            daoQuestion.readOneAnswer(idAnswerUser, (err, textAnswer)=>{
+                if(err){
+                    next(err);
+                }else{
+                    daoNotifications.insertNotification(emailFriend, userEmail, textAnswerOfTheFriend, textAnswer, textQuestion, (err) =>{
+                        if(err){
                             next(err);
-                        } else {
-                            daoUser.readUser(userEmail, (err, user) =>{
-                                if (err) {
-                                    next(err);
-                                } else {
-                                    request.session.points = user.points;
-                                    renderizador.renderOneQuestion(request, response, next);
-                                }
-                           });
-                            
-                        }
-                    });
-                } else {
-                    renderizador.renderOneQuestion(request, response, next);
+                        }else if (isCorrect) {    
+                             daoUser.modifyPoints(userEmail, 50, (err) => {                        
+                                 if (err) {
+                                     next(err);
+                                 } else {
+                                     daoUser.readUser(userEmail, (err, user) =>{
+                                         if (err) {
+                                             next(err);
+                                         } else {
+                                             request.session.points = user.points;
+                                             renderizador.renderOneQuestion(request, response, next);
+                                         }
+                                    });
+                                     
+                                 }
+                             });
+                         } else {
+                             renderizador.renderOneQuestion(request, response, next);
+                         }
+                     });
                 }
             });
+            
             
         }
     });

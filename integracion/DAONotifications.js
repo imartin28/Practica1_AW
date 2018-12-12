@@ -8,17 +8,22 @@ class DAONotifications{
 
 
     insertNotification(emailUserAnswered, emailUserGuessing, textAnswerFirst, textAnswerGuessing, textQuestion, callback ){
+      
         this.pool.getConnection((err, connection) =>{
+        
             if (err) {
                 callback(err);
             } else {
+                
                 connection.query("INSERT INTO NOTIFICATIONS (emailUser_answered_first, emailUser_guessing, text_answer_user_answered_first, text_answer_user_guessing, text_question) VALUES (?,?,?,?,?)",
                 [emailUserAnswered, emailUserGuessing, textAnswerFirst, textAnswerGuessing, textQuestion],
                 (err, resultado)=>{
-                    connection.release();
+                    connection.release();                   
                     if (err) {
+                        
                         callback(err);
                     } else {
+                        
                         callback(null);
                     }
                 });
