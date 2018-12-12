@@ -332,7 +332,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 /* -------- PAGINA PERFIL USUARIO ---------*/
 
 
-
 .fondo{
     opacity: 0.8;  
     background-color: rgb(201, 198, 198);
@@ -342,6 +341,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     min-height: 460px;
     margin: auto;
     margin-top: 10%;
+    margin-bottom: 10%;
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
     background: #fff;
     border-radius: 12px;
@@ -497,6 +497,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     width: 900px;
     position: relative;
   }
+
+  
 
 .solicitudesDeAmistad {
     display: flex;
@@ -683,9 +685,17 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     transition: opacity 400ms ease-out;
 }
 
+
+
+/****** PAGINA BUSQUEDA DE AMIGOS ******/
+
+#titulo-pagina-resultados-busqueda {
+    margin-bottom: 30px;
+}
+
   /* LISTADO ALEATORIO DE PREGUNTAS */
 
-  .panel-listado-preguntas {
+.panel-listado-preguntas {
     min-height: 460px;
     margin: auto;
     margin-top: 5%;
@@ -698,6 +708,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     padding-bottom: 50px;
 }
 
+
+
 .listado-preguntas {
     margin-top:15px;
     display: flex;
@@ -706,6 +718,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     align-items: center;
 
 }
+
+
 
 .pregunta-aleatoria {
     border: 1px solid rgb(85, 85, 85);
@@ -717,6 +731,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     text-align: center;
 }
 
+
+
 .pregunta-aleatoria:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -725,13 +741,16 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
       
 }
 
-  .panel-boton-crear-pregunta {    
+
+.panel-boton-crear-pregunta {    
     display: flex;
     justify-content: flex-end;
     border-bottom: 2px solid grey;
     padding-bottom: 20px;   
 
-  }
+}
+
+
 
 .boton-crear-pregunta {
     width: 200px;
@@ -760,11 +779,39 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     font-size: 15px;  
 }
 
+
 .boton-crear-pregunta:hover, .boton-cancelar-crear-pregunta:hover {
     color:black;
     cursor: pointer;
 }
 
+
+.boton-enunciado-pregunta {
+    width: 100%;
+    border: none;
+}
+
+
+.boton-enunciado-pregunta:hover {
+    cursor: pointer;
+}
+
+
+.boton-enunciado-pregunta:focus {
+    outline: none;
+}
+
+
+/******  ONE_QUESTION  ******/
+
+#nombre-amigo-one-question {
+    text-decoration: none;
+}
+
+#nombre-amigo-one-question:hover {
+    cursor: auto;
+    transform: none;
+}
 
  /* RESPONDER PREGUNTA POR UN AMIGO */
 
@@ -1271,6 +1318,11 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
 
 
+#titulo-pagina-galeria-imagenes {
+    margin-top: -80px;
+}
+
+
 
 /***** Tooltip que muestra la descripción de una imagen al poner el ratón sobre ella  ******/
 
@@ -1325,6 +1377,17 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
 
   /*****  MENSAJES FLASH  *****/
 
-  .flash {
-      
-  }
+.flash {
+    background: rgb(204, 152, 221);
+    border: 1px solid rgb(204, 152, 221);
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+   /* box-shadow: 0px 1px 25px 0px #A55BBE, 0px 0px 0px 4px #A55BBE; */
+}

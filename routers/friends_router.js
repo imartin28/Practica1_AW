@@ -100,6 +100,7 @@ friends.post("/my_friend_profile", function(request, response, next){
     renderizador.renderMyProfile(request, response, next, [], null, null, false, email);
 });
 
+
 /* Gestiona una petición de amistad aceptada, rechazada y enlaza al perfil del amigo */
 friends.post("/accept_or_decline_friend_request", function(request, response, next) {
     let emailFriend = request.body.emailDestination;
@@ -113,6 +114,7 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
             if (err) {
                 next(err);
             } else {
+                response.setFlash("Solicitud de amistad aceptada");
                 response.redirect("friends");
             }
         });
@@ -121,6 +123,7 @@ friends.post("/accept_or_decline_friend_request", function(request, response, ne
             if (err) {
                 next(err);
             } else {
+                response.setFlash("Solicitud de amistad rechazada");
                 response.redirect("friends");
             }
         });

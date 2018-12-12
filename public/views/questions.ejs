@@ -6,8 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="/css/style.css" rel="stylesheet" media="screen"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     </head>
+
     <body class="fondo">
             <div>
                 <%- include("header") %>
@@ -20,14 +20,14 @@
                         <a href="create_new_question" class="boton-crear-pregunta contenido-centrado"> Crear nueva pregunta</a>
                     </div>
                     <div class="listado-preguntas">
-                        <%  if(questions.length != 0){ %>
+                        <%  if (questions.length != 0) { %>
                             <% questions.forEach(question =>{ %>
                                 <form method="POST" action="one_question" class="pregunta-aleatoria">
                                     <input type="hidden" value="<%= question.id %>" name="id_question">
-                                    <button type="submit" name="text_question" value="<%= question.text %>"><%= question.text %></button>
+                                    <button type="submit" class="boton-enunciado-pregunta" name="text_question" value="<%= question.text %>"><%= question.text %></button>
                                 </form>
                             <% }); %>    
-                        <% }else{ %>
+                        <% } else { %>
                             <p>No hay preguntas!</p>
                         <% } %>
                     </div>
