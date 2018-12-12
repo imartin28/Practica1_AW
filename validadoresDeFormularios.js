@@ -33,9 +33,15 @@ function validarFormularioSubidaImagenes(request) {
 }
 
 
+function validarFormularioCrearNuevaPregunta(request) {
+    request.checkBody("tituloPregunta", "Debe introducir un titulo.").notEmpty();
+    request.checkBody("respuestas", "Debe introducir al menos una respuesta").notEmpty();
+}
+
 
 module.exports = {
     validarFormularioNuevoUsuario : validarFormularioNuevoUsuario,
     validarFormularioLogin : validarFormularioLogin,
-    validarFormularioSubidaImagenes : validarFormularioSubidaImagenes
+    validarFormularioSubidaImagenes : validarFormularioSubidaImagenes,
+    validarFormularioCrearNuevaPregunta : validarFormularioCrearNuevaPregunta
 }

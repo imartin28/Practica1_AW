@@ -6,13 +6,10 @@
                     <span class="num"> </span>
                     <ul>
                         <%  notifications.forEach(notification => { %>
-                            <li>
-                                    <span class="icon"><i class="fas fa-user"></i></span>
-                                    <span class="text">Tu amigo <%= notification.emailUserGuessing %> ha respondido a la pregunta <%= notification.textQuestion %>. Su respuesta ha sido <%= notification.textAnswerGuessing %>, tu respuesta es <%= notification.textAnswerFirst %></span>
+                            <li>    
+                                <span class="text">Tu amigo/a <%= notification.emailUserGuessing %> ha respondido a la pregunta <%= notification.textQuestion %>. Su respuesta ha sido <%= notification.textAnswerGuessing %>, tu respuesta es <%= notification.textAnswerFirst %></span>
                             </li>
                         <% }); %>
-                        
-                       
                     </ul>
                 </div>
             </div>

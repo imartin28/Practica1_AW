@@ -9,6 +9,9 @@ const DAOQuestion = require("../integracion/DAOQuestion");
 const DAONotifications = require("../integracion/DAONotifications");
 const path = require("path");
 const utils = require("../utils");
+const validadorFormularios = require("../validadoresDeFormularios");
+const renderizador = require("../renderizador");
+
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
@@ -25,12 +28,6 @@ questions.get("/create_new_question", function(request, response) {
 });
 
 
-function camposDeFormularioValidos(request) {
-    request.checkBody("tituloPregunta", "Debe introducir un titulo.").notEmpty();
-    request.checkBody("respuestas", "Debe introducir al menos una respuesta").notEmpty();
-}
-
-
 
 questions.post("/create_new_question", function(request, response, next) {
     let array_answers = request.body.respuestas.split("\n");
@@ -41,7 +38,7 @@ questions.post("/create_new_question", function(request, response, next) {
         initialNumberOfAnswers : array_answers.length
     }
 
-    camposDeFormularioValidos(request);
+    validadorFormularios.validarFormularioCrearNuevaPregunta(request);
 
     request.getValidationResult().then(function(result) {
         if (!result.isEmpty()) {
@@ -61,9 +58,9 @@ questions.post("/create_new_question", function(request, response, next) {
 
 questions.get("/questions", function(request, response, next) {
     daoQuestion.readFiveRandomQuestions((err, questions)=>{
-        if(err){
+        if (err) {
             next(err);
-        }else{
+        } else {
             response.render("questions", {questions : questions});
         }
     });    
@@ -77,11 +74,12 @@ questions.post("/one_question", function(request, response, next) {
     request.session.id_question = idQuestion;
     request.session.text_question = textQuestion;
     
-    renderOneQuestion(request, response, next);
+    renderizador.renderOneQuestion(request, response, next);
 });
 
+
 questions.get("/one_question", function(request, response, next) {
-    renderOneQuestion(request, response, next);
+    renderizador.renderOneQuestion(request, response, next);
 });
 
 
@@ -188,14 +186,14 @@ questions.post("/answered_question_for_friend", function(request, response, next
                                     next(err);
                                 } else {
                                     request.session.points = user.points;
-                                    renderOneQuestion(request, response, next);
+                                    renderizador.renderOneQuestion(request, response, next);
                                 }
                            });
                             
                         }
                     });
                 } else {
-                    renderOneQuestion(request, response, next);
+                    renderizador.renderOneQuestion(request, response, next);
                 }
             });
             
@@ -205,28 +203,6 @@ questions.post("/answered_question_for_friend", function(request, response, next
 
 
 
-/* Lee los datos necesarios de la base de datos para renderizar la vista one_question y si no hay ningún error la renderiza. */
-function renderOneQuestion(request, response, next) {
-    let userEmail = request.session.currentUser;
-    let idQuestion = request.session.id_question;
-    let textQuestion = request.session.text_question;
-    let points =  request.session.points;
-    
-    daoQuestion.answerOfTheUser(userEmail, idQuestion, (err, textAnswer) => {
-        if (err) {
-            next(err);
-        } else {
-            request.session.textAnswer = textAnswer;
-            daoQuestion.friendsAnswerQuestion(userEmail, idQuestion, (err, friends) => {
-                if (err) {
-                    next(err);
-                } else {
-                    response.render("one_question", {text_question : textQuestion, id_question : idQuestion, textAnswer : textAnswer, listOfFriendsThatHaveAnswered: friends, points : points});
-                }
-            });
-        }
-    });
-}
 
 
 
@@ -235,7 +211,7 @@ function typeAnswer(typeOfAnswer, request, response, next){
     let idQuestion = request.session.id_question;
 
     if (typeOfAnswer == undefined) {
-        renderOneQuestion(request, response, next);
+        renderizador.renderOneQuestion(request, response, next);
     } else if (typeOfAnswer == "other") {
         let textAnswer = request.body.other_answer;
 
@@ -248,7 +224,7 @@ function typeAnswer(typeOfAnswer, request, response, next){
                         next(err);
                     } else {
                         request.session.textAnswer = textAnswer;
-                        renderOneQuestion(request, response, next);
+                        renderizador.renderOneQuestion(request, response, next);
                     }
                 });
             }
@@ -262,11 +238,11 @@ function typeAnswer(typeOfAnswer, request, response, next){
                 next(err);
             } else {
                 daoQuestion.readOneAnswer(idAnswer, (err, textAnswer) =>{
-                    if(err){
+                    if (err) {
                         next(err);
-                    }else{
+                    } else {
                         request.session.textAnswer = textAnswer;
-                        renderOneQuestion(request, response, next);
+                        renderizador.renderOneQuestion(request, response, next);
                     }
                 });
             }

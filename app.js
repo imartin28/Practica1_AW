@@ -104,8 +104,8 @@ function middlewareControlDeAcceso(request,  response, next) {
 
     if (email != null) {
         response.locals.userEmail = email;
-        response.locals.profile_img = profile_img;
-        response.locals.points = points;
+        response.locals.userProfile_img = profile_img;
+        response.locals.userPoints = points;
         next();
     } else {
         response.redirect("login");
@@ -140,8 +140,7 @@ function flashMiddleware(request, response, next){
 app.listen(config.port, function(err) {
     if (err) {
         console.log("ERROR al iniciar el servidor");
-    }
-    else {
+    } else {
         console.log(`Servidor arrancado en el puerto ${config.port}`);
     }
  });

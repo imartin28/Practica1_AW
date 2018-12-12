@@ -6,21 +6,19 @@ class DAONotifications{
         this.pool = pool;
     }
 
-    
+
     insertNotification(emailUserAnswered, emailUserGuessing, textAnswerFirst, textAnswerGuessing, textQuestion, callback ){
         this.pool.getConnection((err, connection) =>{
-            if(err){
+            if (err) {
                 callback(err);
-            }
-            else{
+            } else {
                 connection.query("INSERT INTO NOTIFICATIONS (emailUser_answered_first, emailUser_guessing, text_answer_user_answered_first, text_answer_user_guessing, text_question) VALUES (?,?,?,?,?)",
                 [emailUserAnswered, emailUserGuessing, textAnswerFirst, textAnswerGuessing, textQuestion],
                 (err, resultado)=>{
                     connection.release();
-                    if(err){
+                    if (err) {
                         callback(err);
-                    }
-                    else{
+                    } else {
                         callback(null);
                     }
                 });
@@ -33,20 +31,17 @@ class DAONotifications{
 
     readNotifications(emailUser, callback){
         this.pool.getConnection((err, connection) =>{
-            if(err){
+            if (err) {
                 callback(err, null);
-            }
-            else{
+            } else {
                 connection.query("SELECT * FROM NOTIFICATIONS WHERE emailUser_answered_first = ?",
                 [emailUser],
                 (err, rows)=>{
                     connection.release();
-                    if(err){
+                    if (err) {
                         callback(err, null);
-                    }
-                    else{
+                    } else {
                         let notifications = [];
-                        console.log(rows);
                         rows.forEach(row => {
                             let notification = {
                                 emailUserAnswered : row.emailUser_answered_first,
@@ -62,7 +57,25 @@ class DAONotifications{
                     }
                 });
             }
-        
+        });
+    }
+
+    deleteNotifications(email, callback) {
+        this.pool.getConnection((err, connection) =>{
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("DELETE FROM NOTIFICATIONS WHERE emailUser_answered_first = ?",
+                [email],
+                (err, result)=>{
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null);
+                    }
+                });
+            }
         });
     }
 }

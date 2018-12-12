@@ -11,6 +11,7 @@ const utils = require("../utils.js");
 const multer = require("multer");
 const multerFactory = multer({ dest: path.join(__dirname, "..", "profile_imgs")});
 const validadorFormularios = require("../validadoresDeFormularios");
+const renderizador = require("../renderizador");
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
@@ -21,12 +22,12 @@ const daoNotifications = new DAONotifications(pool);
 /* Muestra el perfil del usuario actual */
 profile.get("/my_profile", function(request, response, next) {
     let email = request.session.currentUser;
-    daoNotifications.readNotifications(email, (err, notifications) =>{
+
+    daoNotifications.readNotifications(email, (err, notifications) => {
         if (err) {
             next(err);
-        }else{
-            console.log(notifications);
-            renderMyProfile(request, response, next, notifications);
+        } else {
+            renderizador.renderMyProfile(request, response, next, notifications, null, null, true, email);
         }
     });
 
@@ -102,56 +103,20 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
                             if (err) {
                                 next(err);
                             } else {
-                                renderMyProfile(request, response, next, [], null, null);
+                                renderizador.renderMyProfile(request, response, next, [], null, null, true, email);
                             }
                         });     
                     }
                  });
             }else{
-                renderMyProfile(request, response, next, [], result.mapped(), "No tiene puntos suficientes");
+                renderizador.renderMyProfile(request, response, next, [], result.mapped(), "No tienes puntos suficientes", true, email);
             }
         } else {
-            renderMyProfile(request, response, next, [], result.mapped(), null);
+            renderizador.renderMyProfile(request, response, next, [], result.mapped(), null, true, email);
         }
     });
 });          
 
-    
 
-
-function renderMyProfile(request, response, next, notifications, errores, msg_error, ) {
-    let email = request.session.currentUser;
-
-    daoUser.readUser(email, (err, user) => {
-        if (err) {
-            next(err);
-        } else {
-            daoUser.readUserImages(email, (err, images) =>{
-                if (err) {
-                    next(err);
-                } else {
-                    let age = utils.calcularEdad(user.birth_date);
-            
-                    request.session.profile_img = user.profile_img;
-                    request.session.points = user.points;
-
-                    response.render("my_profile", {
-                        name : user.name, 
-                        gender: user.gender, 
-                        points: user.points,
-                        age : age,
-                        profile_img : user.profile_img,
-                        profile_modifiable : true,
-                        images : images,
-                        errores : errores,
-                        msg_error : msg_error,
-                        notifications: notifications
-
-                    });  
-                }
-            });          
-        }
-    });
-}
 
 module.exports = profile;
