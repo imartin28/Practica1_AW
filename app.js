@@ -101,7 +101,8 @@ function middlewareControlDeAcceso(request,  response, next) {
     let email = request.session.currentUser;
     let profile_img = request.session.profile_img;
     let points = request.session.points;
-
+    console.log("En el middleware de control de acceso");
+    
     if (email != null) {
         response.locals.userEmail = email;
         response.locals.userProfile_img = profile_img;

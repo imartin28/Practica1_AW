@@ -55,9 +55,9 @@
                         </div>  
                     </div>
                 </div> 
-                
-                <%- include("photo_gallery") %>
-                   
+                <% if (images.length >= 1) { %>
+                    <%- include("photo_gallery") %>
+                <%  } %>
             </div>        
     </body>
  </html>

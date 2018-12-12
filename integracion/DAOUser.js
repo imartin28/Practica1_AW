@@ -40,17 +40,15 @@ class DAOUser{
 
     loginUser(email, password, callback){
         this.pool.getConnection((err, connection) =>{
-            if(err){
+            if (err) {
                 callback(err, false);
-            }
-            else{
-                connection.query("SELECT EMAIL FROM USER WHERE EMAIL = ? AND PASSWORD = ?",
+            } else {
+                connection.query("SELECT email, points, profile_img FROM USER WHERE EMAIL = ? AND PASSWORD = ?",
                 [email, password], (err, resultado) => {
                     connection.release();
-                    if(err){
+                    if (err) {
                         callback(err, false);
-                    }
-                    else{
+                    } else {
                         let estaLogueado =  resultado.length > 0;
                         callback(null, estaLogueado);
                     }

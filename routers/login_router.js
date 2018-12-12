@@ -24,17 +24,17 @@ login.post("/login", function(request, response, next) {
 
     validadorFormularios.validarFormularioLogin(request);
 
-
     request.getValidationResult().then(function(result) {
         if (!result.isEmpty()) {
             response.render("login", {errores : result.mapped()});     
         } else {
-            daoUser.loginUser(email, password, (err, estaLogueado) => {
+            daoUser.loginUser(email, password, (err, user) => {
                 if (err) {
                     next(err);
-                } else if (estaLogueado) {
+                } else if (user) {
                     request.session.currentUser = email;
-                    renderizador.renderMyProfile(request, response, next, [], null, null, true, email, true);
+                    response.redirect("my_profile");
+                    //renderizador.renderMyProfile(request, response, next, [], null, null, true, email, true);
                 } else {
                     response.render("login", {errores : result.mapped()});
                 }

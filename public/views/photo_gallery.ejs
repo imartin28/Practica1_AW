@@ -1,7 +1,7 @@
 
-
+      <div class="titulo-pagina">GALERIA DE IMAGENES</div>
 <div class="panel-galeria animated slideInDown">
-    
+  
         <% if (profile_modifiable) { %>
             <form method="POST" action="upload_image"  enctype="multipart/form-data" id="cabecera-galeria" class="formulario-subida-imagenes">   
                
@@ -24,15 +24,24 @@
                     <div class="red">  <%= msg_error %> </div>
                 <% } %>
             </form> 
-        <% } %> 
-   
-        <div class="galeria-imagenes">
-            <% images.forEach(image =>{ %>
-                <div class="imagen-de-la-galeria tooltip">
-                    <img  src="/users/profile_img/<%= image.image %>">  
-                    <span class="tooltiptext"> <%= image.description %></span>     
+            <div class="galeria-imagenes">
+                    <% images.forEach(image =>{ %>
+                        <div class="imagen-de-la-galeria tooltip">
+                            <img  src="/users/profile_img/<%= image.image %>">  
+                            <span class="tooltiptext"> <%= image.description %></span>     
+                        </div>
+                    <% });%>
                 </div>
-            <% });%>
-        </div>
+        <% }else{ %> 
+         <div class= "formulario-subida-imagenes"></div>
+            <div class="galeria-imagenes">
+                <% images.forEach(image =>{ %>
+                    <div class="imagen-de-la-galeria tooltip">
+                        <img  src="/users/profile_img/<%= image.image %>">  
+                        <span class="tooltiptext"> <%= image.description %></span>     
+                    </div>
+                <% });%>
+            </div>
+            <% } %>
     
 </div>
