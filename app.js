@@ -72,7 +72,7 @@ app.use(flashMiddleware);
 
 
 //Routers
-app.use("/users", login_router);
+app.use(login_router);
 app.use("/users", new_user_router);
 app.use("/users", middlewareControlDeAcceso, my_profile_router);
 app.use("/users", middlewareControlDeAcceso, friends_router);

@@ -12,7 +12,7 @@ const daoUser = new DAOUser(pool);
 
 
 /* Muestra página principal de login */
-login.get("/login", function(request, response) {
+login.get("/", function(request, response) {
     response.render("login", {errores : null});
 });
 
@@ -49,7 +49,7 @@ login.post("/login", function(request, response, next) {
 /* Cierra la sesión */
 login.get("/logout", function(request, response) {
     request.session.destroy();
-    response.redirect("login");
+    response.redirect("/");
 }); 
 
 
