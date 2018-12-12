@@ -50,10 +50,10 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
     request.session.points = user.points;
 
     request.getValidationResult().then(function(result) {
-        daoUser.readUser(user.email, (err, user) => {
+        daoUser.readUser(user.email, (err, userBBDD) => {
             if (err) {
                 next(err);
-            } else if (user == null && result.isEmpty()) {
+            } else if (userBBDD == null && result.isEmpty()) {
                 daoUser.insertUser(user, (err) =>{
                     if (err) {
                         next(err);
@@ -61,7 +61,7 @@ new_user.post("/new_user", multerFactory.single("profile_img"), function(request
                         response.redirect("my_profile");
                     }                 
                 }); 
-            } else if (user != null) {
+            } else if (userBBDD != null) {
                 response.render("new_user", {errores : result.mapped(), mensajeDeError : "Dirección de correo ya existente"});
             } else {
                 response.render("new_user", {errores : result.mapped(), mensajeDeError : null});
