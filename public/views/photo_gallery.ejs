@@ -4,23 +4,25 @@
     
         <% if (profile_modifiable) { %>
             <form method="POST" action="upload_image"  enctype="multipart/form-data" id="cabecera-galeria" class="formulario-subida-imagenes">   
-               <% if (msg_error) { %>
-                    <div class="red">  <%= msg_error %> </div>
-                <% } %>
+               
                     <div class="campo-formulario-subida-imagenes">
                         Descripción: <input type="text" name="description">
                        
                     </div>
 
-                <% if (errores != null && errores.description) { %>
-                    <span class="red mensajes-error-subida-imagenes"><%= errores.description.msg %></span>
-                <% } %>
+                
 
                 <input  type="file" class="inputfile" name="gallery_image" placeholder="Seleccionar archivo" accept=".jpg, .jpeg, .png">
                 <% if (errores != null && errores.gallery_image) { %>
                     <span class="red mensajes-error-subida-imagenes"><%= errores.gallery_image.msg %></span>
                 <% } %>
                 <button type="submit" class="boton-subir-foto"> Subir foto</button>
+                <% if (errores != null && errores.description) { %>
+                    <div class="red "><%= errores.description.msg %></div>
+                <% } %>
+                <% if (msg_error) { %>
+                    <div class="red">  <%= msg_error %> </div>
+                <% } %>
             </form> 
         <% } %> 
    
