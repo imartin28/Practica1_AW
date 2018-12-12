@@ -1,26 +1,26 @@
 
 ul {
-    position: absolute;
-    left: 0;
-    top: 60px;
-    margin: 0;
-    width: 100%;
+    position: relative;
+    right: 15px;
+    
+    
+    width: 470px;
     background: #fff;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 0 15px;
+   
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     display: none;
+    z-index: 10;
 }
 
 
-ul li {
-    list-style: none;
-    z-index: 10;
+ul li {    
     border-bottom: 1px solid rgba(0,0,0,1);
     padding: 8px 0;
     display: flex;
+    z-index: 10;
 }
 
 
@@ -42,7 +42,6 @@ ul li .icon {
 ul li .text {
     color:black;
     position: relative;
-    font-family: sans-serif;
     top: 3px;
     cursor: pointer;
     font-size:15px;
@@ -50,14 +49,16 @@ ul li .text {
 
 ul li:hover .text {
     font-weight: bold;
-    color: #995cfa;
+    color: #A55BBE;
+    
 }
 
 .box {
-    position: absolute;
-    top: 100px;
+    
+    top: -70px;
     left: 400px;
-    transform: translate(-50%,-50%);
+    position: relative;
+   
 }
 
 .notification {
@@ -68,6 +69,9 @@ ul li:hover .text {
     box-sizing: border-box;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    color: #111010;
+    line-height: 60px;
+    font-size: 30px;
 }
 
 
@@ -76,21 +80,12 @@ ul li:hover .text {
     height: 60px;
     text-align: left;
     padding: 0 15px;
-    background: #995cfa;
+    background: #A55BBE;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-}
-
-.notification {
-    color: #111010;
-    line-height: 60px;
-    font-size: 30px;
-}
-
-
-.notification:hover {
     color: #fff;
 }
+
 
 .notification .num {
     position: absolute;
@@ -99,10 +94,9 @@ ul li:hover .text {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #995cfa;
+    background: #A55BBE;
     color: #fff;
     line-height: 25px;
-    font-family: sans-serif;
     text-align: center;
 }
 
@@ -113,7 +107,10 @@ ul li:hover .text {
     color: #fff;
     font-size: 24px;
     top: -4px;
+   
 }
+
+
 
 
 .notification:hover .num:after {
