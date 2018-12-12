@@ -6,6 +6,7 @@ const friends = express.Router();
 const config = require("../config");
 const DAOUser = require("../integracion/DAOUser");
 const DAOFriend = require("../integracion/DAOFriend");
+const DAONotifications = require("../integracion/DAONotifications");
 const utils = require("../utils");
 const renderizador = require("../renderizador");
 
@@ -13,6 +14,7 @@ const renderizador = require("../renderizador");
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 const daoFriend = new DAOFriend(pool);
+const daoNotifications = new DAONotifications(pool);
 
 
 /* Atiende la petición get para mostrar la página friends.ejs, que contiene tanto las peticiones de amistad como los amigos */
@@ -27,7 +29,13 @@ friends.get("/friends", function(request, response, next) {
                 if (err) {
                     next(err);
                 } else {                   
-                    response.render("friends", {friendRequests : friendRequests, friends : friends});
+                    daoNotifications.deleteNotifications(email, (err) => {
+                        if (err) {
+                            next(err);
+                        } else {
+                            response.render("friends", {friendRequests : friendRequests, friends : friends});
+                        }
+                    });
                 } 
             }); 
         }

@@ -45,6 +45,7 @@
                                     <img class="fotoPerfilAmigo" src="/users/profile_img/<%= friendData.profile_img %>">
                                     <span class="nombre-amigo contenido-centrado"><%= friendData.name %></span>
                                     <input type="hidden" name="friendEmail" value="<%= friendData.email %>">
+                                    <input type="hidden" name="friendName" value="<%= friendData.name %>">
                                     <input type="hidden" name="id_answer_of_the_friend" value="<%= friendData.idAnswer %>">
                                     <%  if (friendData.correct == null) { %>
                                         <button type="submit" class="boton-adivinar-respuesta-amigo contenido-centrado">Adivinar</a>  

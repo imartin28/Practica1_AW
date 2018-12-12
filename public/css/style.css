@@ -746,10 +746,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     font-size: 15px;   
 }
 
-.boton-crear-pregunta:hover {
-    color:black;
-    cursor: pointer;
-}
 
 .boton-cancelar-crear-pregunta {
     width: 200px;
@@ -762,6 +758,11 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
     margin-right: 6%;
     margin-top: 2%;
     font-size: 15px;  
+}
+
+.boton-crear-pregunta:hover, .boton-cancelar-crear-pregunta:hover {
+    color:black;
+    cursor: pointer;
 }
 
 
@@ -1318,4 +1319,12 @@ input[type=text]:focus, input[type=password]:focus, input[type=date]:focus { /* 
   .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+  }
+
+
+
+  /*****  MENSAJES FLASH  *****/
+
+  .flash {
+      
   }

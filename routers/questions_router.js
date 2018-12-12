@@ -57,11 +57,20 @@ questions.post("/create_new_question", function(request, response, next) {
 
 
 questions.get("/questions", function(request, response, next) {
+    let email = request.session.currentUser;
+
     daoQuestion.readFiveRandomQuestions((err, questions)=>{
         if (err) {
             next(err);
         } else {
-            response.render("questions", {questions : questions});
+            daoNotifications.deleteNotifications(email, (err) => {
+                if (err) {
+                    next(err);
+                } else {
+                    response.render("questions", {questions : questions});
+                }
+            });
+            
         }
     });    
 });
@@ -138,6 +147,7 @@ questions.post("/answer_question_for_friend", function(request, response, next) 
     let idQuestion = request.session.id_question;
     let textQuestion = request.session.text_question;
     let emailFriend = request.body.friendEmail;
+    let nameOfTheFriend = request.body.friendName;
 
     daoQuestion.readOneAnswer(idAnswerOfTheFriend, (err, textAnswer) => {
         if (err) {
@@ -149,7 +159,13 @@ questions.post("/answer_question_for_friend", function(request, response, next) 
                 } else {
                     answers.push({id : idAnswerOfTheFriend, text : textAnswer});
                     utils.shuffle(answers);
-                    response.render("answer_question_for_friend", {text_question : textQuestion, answers : answers, emailFriend : emailFriend, idAnswerOfTheFriend : idAnswerOfTheFriend, textAnswerOfTheFriend : textAnswer});
+                    response.render("answer_question_for_friend", {
+                        text_question : textQuestion, 
+                        answers : answers, 
+                        emailFriend : emailFriend, 
+                        nameOfTheFriend : nameOfTheFriend,
+                        idAnswerOfTheFriend : idAnswerOfTheFriend, 
+                        textAnswerOfTheFriend : textAnswer});
                 }
             });
         }
