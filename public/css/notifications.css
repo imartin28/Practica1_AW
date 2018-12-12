@@ -57,6 +57,7 @@ ul li:hover .text {
     
     top: -70px;
     left: 400px;
+    width: 20px;
     position: relative;
    
 }
