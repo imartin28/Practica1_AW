@@ -7,7 +7,7 @@
                     <ul>
                         <%  notifications.forEach(notification => { %>
                             <li>    
-                                <span class="text">Tu amigo/a <%= notification.emailUserGuessing %> ha respondido a la pregunta <%= notification.textQuestion %>. Su respuesta ha sido <%= notification.textAnswerGuessing %>, tu respuesta es <%= notification.textAnswerFirst %></span>
+                                <span class="text">Tu amigo/a <strong><%= notification.nameFriend %></strong> ha respondido a la pregunta <strong><%= notification.textQuestion %></strong>. Su respuesta ha sido <strong><%= notification.textAnswerGuessing %></strong>, tu respuesta es <strong><%= notification.textAnswerFirst %></strong>.</span>
                             </li>
                         <% }); %>
                     </ul>

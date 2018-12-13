@@ -39,7 +39,7 @@ class DAONotifications{
             if (err) {
                 callback(err, null);
             } else {
-                connection.query("SELECT * FROM NOTIFICATIONS WHERE emailUser_answered_first = ?",
+                connection.query("SELECT * FROM NOTIFICATIONS, USER WHERE emailUser_guessing = email AND emailUser_answered_first = ?",
                 [emailUser],
                 (err, rows)=>{
                     connection.release();
@@ -53,7 +53,8 @@ class DAONotifications{
                                 emailUserGuessing : row.emailUser_guessing,
                                 textAnswerFirst : row.text_answer_user_answered_first,
                                 textAnswerGuessing : row.text_answer_user_guessing,
-                                textQuestion : row.text_question
+                                textQuestion : row.text_question,
+                                nameFriend : row.name
                             }
                             notifications.push(notification);
                         });
