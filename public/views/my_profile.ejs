@@ -19,7 +19,7 @@
                 <%- include("notifications") %>
 
                 <% if (profile_modifiable) { %>
-                    <div id="titulo-pagina-perfil" class="titulo-pagina">TU PERFIL</div>
+                    <div id="titulo-pagina-perfil" class="titulo-pagina">Tu perfil</div>
                     <%- include("flash") %>
                 <% } else { %>
                     <div class="titulo-pagina">Perfil de <%= name %></div>
@@ -30,7 +30,7 @@
                     </div>   
 
                     <% if (profile_modifiable) { %>
-                        <a href="modify_profile"><i class="material-icons boton-modificar-perfil">edit</i></a>      
+                        <a href="/users/modify_profile"><i class="material-icons boton-modificar-perfil">edit</i></a>      
                     <% } %>                 
                     
                     <div class="perfil-contenido">
