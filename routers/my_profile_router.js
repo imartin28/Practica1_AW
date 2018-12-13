@@ -49,7 +49,8 @@ profile.get("/modify_profile", function(request, response, next){
                 gender: user.gender, 
                 points: user.points,
                 birth_date : JSON.stringify(user.birth_date).slice(1, 11), //Primero se convierte a string y después se recorta para quedarse solo con año, mes y día
-                profile_img : user.profile_img
+                profile_img : user.profile_img,
+                errores : null
             });
         }
     });   
@@ -64,20 +65,42 @@ profile.post("/modify_profile", multerFactory.single("profile_img"), function(re
         password : request.body.password,
         name : request.body.name,
         gender : request.body.gender,
-        birth_date: request.body.birth_date
+        birth_date: request.body.birth_date,
+        profile_img: request.session.profile_img
     };
+ 
+    validadorFormularios.validarFormularioModificarUsuario(request);
 
     if (request.file) {
         user.profile_img = request.file.filename;
     }
-
-    daoUser.updateUser(user, (err) => {
-        if (err) {
-            next(err);
-        } else {
-            response.redirect("my_profile");
+    request.getValidationResult().then(function(result) { 
+        if(result.isEmpty()){
+            daoUser.updateUser(user, (err) => {
+                if (err) {
+                    next(err);
+                } else {
+                    
+                    renderizador.renderMyProfile(request, response, next, [], null, null, true, user.email);
+                }
+            });
+        }else{
+           
+            response.render("modify_profile", {
+                name : user.name, 
+                password : user.password,
+                gender: user.gender, 
+                points: user.points,
+                birth_date : JSON.stringify(user.birth_date).slice(1, 11), //Primero se convierte a string y después se recorta para quedarse solo con año, mes y día
+                profile_img : user.profile_img,
+                
+                errores : result.mapped()
+            });
+           
         }
+        
     });
+   
 });
 
 profile.post("/upload_image", multerFactory.single("gallery_image"), function(request, response, next) {

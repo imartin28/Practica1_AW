@@ -32,10 +32,18 @@
                             <input class="input-modificar-perfil" type="text" name="password" value="<%= password %>">  
                         </div>
 
+                        <% if (errores != null && errores.password) { %>
+                            <span class="mensajes-error-nuevo-usuario"><%= errores.password.msg %></span>
+                        <% } %> 
+
                         <div class="campo-formulario-modificacion-perfil">
                             <label class="label-formulario-modificacion-perfil">Nombre Completo: </label>                   
                             <input class="input-modificar-perfil" type="text" name="name" value="<%= name %>">
                         </div>
+
+                        <% if (errores != null && errores.name) { %>
+                            <span class="mensajes-error-nuevo-usuario"><%= errores.name.msg %></span>
+                        <% } %>  
 
                         <div class="campo-formulario-modificacion-perfil">
                                 <div class="label-genero-modificar-perfil">
@@ -83,11 +91,16 @@
                             <% } %>
                             </div>
                         </div>
+                       
 
                         <div class="campo-formulario-modificacion-perfil">
                             <label class="label-formulario-modificacion-perfil">Fecha de Nacimiento: </label>   
                             <input class="input-modificar-perfil" type="date" name="birth_date" value="<%= birth_date %>" >
                         </div>
+
+                        <% if (errores != null && errores.birth_date) { %>
+                            <span class="mensajes-error-nuevo-usuario"><%= errores.birth_date.msg %></span>
+                        <% } %> 
 
                         <div class="campo-formulario-modificacion-perfil">
                             <label class="label-formulario-modificacion-perfil">Imagen de Perfil: </label> 

@@ -55,9 +55,13 @@
                         </div>  
                     </div>
                 </div> 
-                <% if (images.length >= 1) { %>
-                    <%- include("photo_gallery") %>
-                <%  } %>
+                <% if (profile_modifiable) { %>                   
+                        <%- include("photo_gallery") %>                  
+                <%  }else{  %>
+                    <% if (images.length >= 1) { %>
+                        <%- include("photo_gallery") %>
+                    <%  } %>
+                 <%  } %>
             </div>        
     </body>
  </html>
