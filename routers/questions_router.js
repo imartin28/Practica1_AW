@@ -48,6 +48,7 @@ questions.post("/create_new_question", function(request, response, next) {
                 if (err) {
                     next(err);
                 } else {
+                    response.setFlash("Pregunta creada correctamente");
                     response.redirect("questions");
                 }
             });
@@ -235,7 +236,8 @@ function typeAnswer(typeOfAnswer, request, response, next){
     let idQuestion = request.session.id_question;
 
     
-    if (typeOfAnswer == undefined) { // Si no se ha selccionado niguna respuesta
+    if (typeOfAnswer == undefined) { // Si no se ha seleccionado ninguna respuesta
+        response.setFlash("No se ha seleccionado ninguna respuesta");
         renderizador.renderOneQuestion(request, response, next);
     } else if (typeOfAnswer == "other") { // Si se ha selccionado la respuesta otra
         let textAnswer = request.body.other_answer;

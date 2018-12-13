@@ -83,7 +83,7 @@ friends.post("/new_friend_request", function(request, response, next) {
                     if (err) {
                         next(err);
                     } else {
-                        response.setFlash("Se ha enviado la petición de amistad");
+                        response.setFlash("Petición de amistad enviada");
                         response.render("search", {searchText : searchText, users : users});
                     }
                 });

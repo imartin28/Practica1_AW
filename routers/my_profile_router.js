@@ -112,11 +112,12 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
     if (request.file) {
         image = request.file.filename;
     }
-    
+   
     validadorFormularios.validarFormularioSubidaImagenes(request);
-    
+  
+
     request.getValidationResult().then(function(result) {
-        if (result.isEmpty()) {
+        if (result.isEmpty() && image != undefined) {
             if(points >= 100){
                 daoUser.insertNewImageinPhotoGallery(email, image, description, (err) =>{
                     if (err) {
@@ -134,7 +135,13 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
             }else{
                 renderizador.renderMyProfile(request, response, next, [], result.mapped(), "No tienes puntos suficientes", true, email);
             }
-        } else {
+        } else if(result.isEmpty() && image == undefined) {
+            renderizador.renderMyProfile(request, response, next, [], null, "No ha seleccionado ninguna imagen", true, email);
+        
+        } else if (!result.isEmpty() && image == undefined){            
+            renderizador.renderMyProfile(request, response, next, [], result.mapped(), "No ha seleccionado ninguna imagen", true, email);
+       
+        }else {
             renderizador.renderMyProfile(request, response, next, [], result.mapped(), null, true, email);
         }
     });
