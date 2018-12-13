@@ -15,7 +15,7 @@ const daoNotifications = new DAONotifications(pool);
 
 /* Muestra página principal de login */
 login.get("/", function(request, response) {
-    response.render("login", {errores : null});
+    response.render("login", {errores : null, mensajeDeError : null});
 });
 
 
@@ -28,7 +28,7 @@ login.post("/login", function(request, response, next) {
 
     request.getValidationResult().then(function(result) {
         if (!result.isEmpty()) {
-            response.render("login", {errores : result.mapped()});     
+            response.render("login", {errores : result.mapped(), mensajeDeError : null});     
         } else {
             daoUser.loginUser(email, password, (err, user) => {
                 if (err) {
@@ -46,7 +46,7 @@ login.post("/login", function(request, response, next) {
                     });
                     
                 } else {
-                    response.render("login", {errores : result.mapped()});
+                    response.render("login", {errores : result.mapped(), mensajeDeError:"Email y/o contraseña no valida"});
                 }
             });
         }

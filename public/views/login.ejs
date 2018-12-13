@@ -33,8 +33,12 @@
                         <span class="red"><%= errores.password.msg %></span>
                     <% } %>  
 
+
                     <button type="submit" class="botonAcceder">Acceder</button>
                 </form>
+                <% if (mensajeDeError != null) { %>
+                    <span class="red"><%= mensajeDeError %></span>
+                <% } %>   
 
               
 
