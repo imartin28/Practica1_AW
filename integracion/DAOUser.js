@@ -6,7 +6,7 @@ class DAOUser{
         this.pool = pool;
     }
 
-    
+    /* Inserta un unevo usuario en la base de datos */    
     insertUser(user, callback) {
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -37,7 +37,7 @@ class DAOUser{
         });
     }
 
-
+    /* Devuelve el usuario si existe un usuario con ese email y ese password, en caso contrario devuelve null */
     loginUser(email, password, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -65,28 +65,7 @@ class DAOUser{
         });
     }
 
-
-    modifyUser(user, callback){
-        this.pool.getConnection((err, connection) =>{
-            if(err){
-                callback(err);
-            }
-            else{
-                connection.query("UPDATE USER SET PASSWORD = ?, NAME = ?,GENDER = ?, BIRTH_DATE = ? ,PROFILE_IMG = ? WHERE EMAIL = ?",
-                [user.password, user.name, user.gender, user.birth_date, user.profile_img, user.email],
-                (err, resultado) =>{
-                    connection.release();
-                    if(err){
-                        callback(err);
-                    }
-                    else{
-                        callback(null);
-                    }
-                });
-            }
-        });
-    }
-
+    /* Busca usuarios cuyo nombre tenga el texto pasado como parámetro */
     searchUsersWithText(searchText, currentUser, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -119,7 +98,7 @@ class DAOUser{
     }
 
 
-
+    /* Lee el usuario cuyo email coincida con el email pasado como parámetro */
     readUser(email, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -153,7 +132,7 @@ class DAOUser{
         });
     }
 
-
+    /* Actualiza el usuario pasado como parámetro */
     updateUser(user, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -183,6 +162,7 @@ class DAOUser{
         });
     }
 
+    /* Actualiza el numero de puntos de un usuario sumandole los puntos pasados como parámetro */
     modifyPoints(email, numberOfPoints, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -202,7 +182,7 @@ class DAOUser{
         });
     }  
     
-    
+    /* Lee todas las imágenes del usuario pasado como parámetro */
     readUserImages(userEmail, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -233,7 +213,7 @@ class DAOUser{
         });
     }
 
-
+    /* Inserta una nueva imagen en la galería de fotos de un usuario */
     insertNewImageinPhotoGallery(emailUser, image, description_image, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {

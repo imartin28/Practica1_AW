@@ -6,7 +6,7 @@ class DAOFriend{
         this.pool = pool;
     }
 
-    
+    /* Inserta una nueva solicitud de amistad */
     insertFriendRequest(emailSender, emailDestination, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -31,7 +31,7 @@ class DAOFriend{
     }
 
 
-    
+    /* Lee de la base de datos todas las solicitudes de miastad al usuario pasado como parámetro */
     getAllFriendRequestsTo(emailCurrentUser, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -64,6 +64,7 @@ class DAOFriend{
     }
 
 
+    /* Lee todos los amigos del usuario pasado como parámetro */
     getAllFriends(emailCurrentUser, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -97,7 +98,7 @@ class DAOFriend{
 
 
 
-
+    /* Cuando se acepta una solicitud de amistad la borra de FriendRequest e inserta a los usuarios en la tabla Friend */
     requestAccepted(emailCurrentUser, emailSender, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -121,6 +122,7 @@ class DAOFriend{
         });
     }
 
+    /* Cuando se rechaza una solicitud de amistad la borra de FriendRequest */
     requestRejected(emailCurrentUser, emailSender, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {

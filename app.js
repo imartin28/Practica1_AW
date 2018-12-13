@@ -107,7 +107,7 @@ function middlewareControlDeAcceso(request,  response, next) {
         response.locals.userPoints = points;
         next();
     } else {
-        response.redirect("login");
+        response.redirect("/");
     }     
 }
 

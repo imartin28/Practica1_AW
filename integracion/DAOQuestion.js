@@ -6,6 +6,7 @@ class DAOQuestion{
         this.pool = pool;
     }
 
+    /* Lee 5 preguntas aleatorias */
     readFiveRandomQuestions(callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -36,6 +37,7 @@ class DAOQuestion{
         });
     }
 
+    /* Lee todas las respuestas asociadas a la pregunta pasada como parámetro */
     readAnswers(idQuestion, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -66,6 +68,7 @@ class DAOQuestion{
     }
 
 
+    /* Lee la respuesta cuyo id es pasado como parámetro */
     readOneAnswer(idAnswer, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -90,6 +93,7 @@ class DAOQuestion{
         });
     }
 
+    /* Lee la respuesta de un usuario a una pregunta */
     answerOfTheUser(userEmail, idQuestion, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -125,6 +129,7 @@ class DAOQuestion{
     };
 
 
+    /* Inserta una nueva pregunta en la base de datos */
     insertQuestion(question, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -160,6 +165,7 @@ class DAOQuestion{
         });
     }
 
+    /* Inserta una nueva respuesta en la base de datos respondida por el usuario para sí mismo */
     answerQuestionForMyself(idQuestion, idAnswer, userEmail, callback) {
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -180,6 +186,7 @@ class DAOQuestion{
         });
     }   
 
+    /* Inserta una nueva respuesta asociada a una pregunta pasada como parámetro */
     insertOtherAnswer(answerText, idQuestion, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -200,7 +207,7 @@ class DAOQuestion{
     }
 
 
-
+    /* Borra una respuesta de un usuario a una pregunta */
     deleteAnswer(emailUser, idQuestion, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -222,6 +229,7 @@ class DAOQuestion{
     }
 
 
+    /* Lee todos los amigos del usuario pasado como parámetro que han respondido a una pregunta pasada como parámetro */
     friendsAnswerQuestion(emailUser, idQuestion, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -254,42 +262,8 @@ class DAOQuestion{
         });
     }
 
-
-    checkIsCorrectOrFailed(emailUser, friends, idQuestion, callback) {
-        this.pool.getConnection((err, connection) =>{
-            if (err) {
-                callback(err, null);
-            } else {
-                friends.forEach(friend => {
-
-                });
-                connection.query("SELECT correct FROM QuestionAnsweredForFriend WHERE emailUser = ? AND id_question = ? AND emailFriend = ?",
-                [emailUser, idQuestion, friend.email], 
-                (err, rows) => {
-                    connection.release();
-                    if (err) {
-                        callback(err, null);
-                    } else {       
-                        let friends = [];
-                        
-                        rows.forEach(row => {
-                            let friend = {
-                                email : row.email,
-                                name : row.name,
-                                profile_img : row.profile_img,
-                                idAnswer : row.id_answer
-                            };
-                            friends.push(friend);
-                        });
-
-                        callback(null, friends);
-                    }
-                });
-            }
-        });
-    }
-
-
+    /* Lee el numero inicial de respuestas - 1 respuestas de la pregunta pasada como parámetro. Además
+       ninguna de las respuestas devueltas será la pasada como parámetro */
     readRandomAnswers(idAnswerOfTheFriend, idQuestion, callback){
         this.pool.getConnection((err, connection) =>{
             if(err){
@@ -328,7 +302,7 @@ class DAOQuestion{
         });
     }
 
-
+    /* Inserta una respuesta respondida por un amigo */
     insertAnswerForFriend(emailUser, emailFriend, idQuestion, isCorrect, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {

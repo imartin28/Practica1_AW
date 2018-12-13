@@ -6,7 +6,7 @@ class DAONotifications{
         this.pool = pool;
     }
 
-
+    /* Inserta una nueva notificación */
     insertNotification(emailUserAnswered, emailUserGuessing, textAnswerFirst, textAnswerGuessing, textQuestion, callback ){
       
         this.pool.getConnection((err, connection) =>{
@@ -33,7 +33,7 @@ class DAONotifications{
     }
 
 
-
+    /* Lee todas las notificaciones del usuario pasado como parámetro */
     readNotifications(emailUser, callback){
         this.pool.getConnection((err, connection) =>{
             if (err) {
@@ -66,6 +66,7 @@ class DAONotifications{
         });
     }
 
+    /* Borra todas las notificaciones del usuario pasado como parámetro */
     deleteNotifications(email, callback) {
         this.pool.getConnection((err, connection) =>{
             if (err) {
