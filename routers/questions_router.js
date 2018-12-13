@@ -208,6 +208,7 @@ questions.post("/answered_question_for_friend", function(request, response, next
                                              next(err);
                                          } else {
                                              request.session.points = user.points;
+                                             response.setFlash("Respuesta acertada. Se suman 50 puntos.");
                                              renderizador.renderOneQuestion(request, response, next);
                                          }
                                     });
