@@ -127,6 +127,7 @@ profile.post("/upload_image", multerFactory.single("gallery_image"), function(re
                             if (err) {
                                 next(err);
                             } else {
+                                response.setFlash("Imagen subida, se han restado 100 puntos");                                
                                 renderizador.renderMyProfile(request, response, next, [], null, null, true, email);
                             }
                         });     

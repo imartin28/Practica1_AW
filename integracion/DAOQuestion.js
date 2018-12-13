@@ -227,7 +227,7 @@ class DAOQuestion{
             if (err) {
                 callback(err, null);
             } else {
-                connection.query("SELECT name, profile_img, email, id_answer, correct FROM User U, QuestionAnsweredByUser Q LEFT JOIN QuestionAnsweredForFriend QA ON Q.emailUser = QA.emailFriend WHERE Q.emailUser = email AND Q.id_question = ? AND (email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ? ) OR email IN (SELECT emailFriend1 FROM Friend WHERE emailFriend2 = ?))",
+                connection.query("SELECT name, profile_img, email, id_answer, correct FROM User U, QuestionAnsweredByUser Q LEFT JOIN QuestionAnsweredForFriend QA ON Q.emailUser = QA.emailFriend AND Q.id_question = QA.id_question WHERE Q.emailUser = email AND Q.id_question = ? AND (email IN (SELECT emailFriend2 FROM Friend WHERE emailFriend1 = ? ) OR email IN (SELECT emailFriend1 FROM Friend WHERE emailFriend2 = ?))",
                 [idQuestion, emailUser, emailUser], 
                 (err, rows) => {
                     connection.release();

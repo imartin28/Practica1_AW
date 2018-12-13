@@ -19,7 +19,8 @@
                 <%- include("notifications") %>
 
                 <% if (profile_modifiable) { %>
-                    <div class="titulo-pagina">TU PERFIL</div>
+                    <div id="titulo-pagina-perfil" class="titulo-pagina">TU PERFIL</div>
+                    <%- include("flash") %>
                 <% } else { %>
                     <div class="titulo-pagina">Perfil de <%= name %></div>
                 <% } %> 
